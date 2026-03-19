@@ -28,7 +28,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import io.horizontalsystems.bankwallet.R
 import io.horizontalsystems.bankwallet.R.drawable.close_e_filled_24
 import io.horizontalsystems.bankwallet.R.drawable.shield_check_filled_24
@@ -51,12 +50,10 @@ import io.horizontalsystems.bankwallet.modules.confirm.ConfirmTransactionScreen
 import io.horizontalsystems.bankwallet.modules.confirm.ErrorBottomSheet
 import io.horizontalsystems.bankwallet.modules.evmfee.ButtonsGroupWithShade
 import io.horizontalsystems.bankwallet.modules.evmfee.Cautions
-import io.horizontalsystems.bankwallet.uiv3.components.AlertCard
-import io.horizontalsystems.bankwallet.uiv3.components.AlertFormat
-import io.horizontalsystems.bankwallet.uiv3.components.AlertType
 import io.horizontalsystems.bankwallet.modules.multiswap.settings.SwapSettingsRecipientFragment
 import io.horizontalsystems.bankwallet.modules.multiswap.settings.SwapSettingsSlippageFragment
 import io.horizontalsystems.bankwallet.modules.multiswap.ui.DataFieldFee
+import io.horizontalsystems.bankwallet.modules.nav3.NavController
 import io.horizontalsystems.bankwallet.modules.premium.DefenseSystemFeatureDialog.Input
 import io.horizontalsystems.bankwallet.modules.premium.PremiumFeature
 import io.horizontalsystems.bankwallet.ui.compose.ComposeAppTheme
@@ -68,6 +65,9 @@ import io.horizontalsystems.bankwallet.ui.compose.components.HsImageCircle
 import io.horizontalsystems.bankwallet.ui.compose.components.MenuItem
 import io.horizontalsystems.bankwallet.ui.compose.components.VSpacer
 import io.horizontalsystems.bankwallet.ui.helpers.TextHelper
+import io.horizontalsystems.bankwallet.uiv3.components.AlertCard
+import io.horizontalsystems.bankwallet.uiv3.components.AlertFormat
+import io.horizontalsystems.bankwallet.uiv3.components.AlertType
 import io.horizontalsystems.bankwallet.uiv3.components.HSScaffold
 import io.horizontalsystems.bankwallet.uiv3.components.cards.CardsErrorMessageDefault
 import io.horizontalsystems.bankwallet.uiv3.components.cell.CellMiddleInfo

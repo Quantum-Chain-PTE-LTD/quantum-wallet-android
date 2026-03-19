@@ -1,5 +1,6 @@
 package io.horizontalsystems.bankwallet.modules.multiswap
 
+import android.os.Parcelable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
@@ -48,13 +48,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import io.horizontalsystems.bankwallet.R
-import android.os.Parcelable
 import io.horizontalsystems.bankwallet.core.BaseComposeFragment
 import io.horizontalsystems.bankwallet.core.badge
 import io.horizontalsystems.bankwallet.core.getInput
-import kotlinx.parcelize.Parcelize
 import io.horizontalsystems.bankwallet.core.slideFromBottom
 import io.horizontalsystems.bankwallet.core.slideFromBottomForResult
 import io.horizontalsystems.bankwallet.core.slideFromRight
@@ -65,6 +62,7 @@ import io.horizontalsystems.bankwallet.core.stats.stat
 import io.horizontalsystems.bankwallet.entities.CoinValue
 import io.horizontalsystems.bankwallet.entities.Currency
 import io.horizontalsystems.bankwallet.modules.multiswap.swapterms.SwapTermsFragment
+import io.horizontalsystems.bankwallet.modules.nav3.NavController
 import io.horizontalsystems.bankwallet.ui.compose.ColoredTextStyle
 import io.horizontalsystems.bankwallet.ui.compose.ComposeAppTheme
 import io.horizontalsystems.bankwallet.ui.compose.Keyboard
@@ -100,6 +98,7 @@ import io.horizontalsystems.bankwallet.uiv3.components.controls.ButtonStyle
 import io.horizontalsystems.bankwallet.uiv3.components.controls.ButtonVariant
 import io.horizontalsystems.bankwallet.uiv3.components.controls.HSIconButton
 import io.horizontalsystems.marketkit.models.Token
+import kotlinx.parcelize.Parcelize
 import java.math.BigDecimal
 import java.net.UnknownHostException
 
