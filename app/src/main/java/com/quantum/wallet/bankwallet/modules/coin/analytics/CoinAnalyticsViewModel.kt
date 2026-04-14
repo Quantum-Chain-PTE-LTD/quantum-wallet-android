@@ -9,7 +9,6 @@ import com.quantum.wallet.bankwallet.core.brandColor
 import com.quantum.wallet.bankwallet.core.imageUrl
 import com.quantum.wallet.bankwallet.core.order
 import com.quantum.wallet.bankwallet.core.providers.Translator
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.entities.Currency
 import com.quantum.wallet.bankwallet.entities.DataState
 import com.quantum.wallet.bankwallet.entities.ViewState
@@ -41,8 +40,6 @@ import io.horizontalsystems.marketkit.models.Analytics
 import io.horizontalsystems.marketkit.models.BlockchainIssues
 import io.horizontalsystems.marketkit.models.ChartPoint
 import io.horizontalsystems.marketkit.models.Coin
-import com.quantum.wallet.subscriptions.core.TokenInsights
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -64,7 +61,6 @@ class CoinAnalyticsViewModel(
     private var viewState: ViewState = ViewState.Loading
     private var analyticsViewItem: AnalyticsViewItem? = null
     private var isRefreshing = false
-    private var showPreviewBlocks = !UserSubscriptionManager.isActionAllowed(TokenInsights)
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -77,7 +73,7 @@ class CoinAnalyticsViewModel(
 
                     is DataState.Success -> {
                         viewState = ViewState.Success
-                        analyticsViewItem = viewItem(it.data, showPreviewBlocks)
+                        analyticsViewItem = viewItem(it.data)
                         emitState()
                     }
 
@@ -91,12 +87,6 @@ class CoinAnalyticsViewModel(
 
         viewModelScope.launch(Dispatchers.IO) {
             service.start()
-        }
-
-        viewModelScope.launch(Dispatchers.IO) {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-                showPreviewBlocks = !UserSubscriptionManager.isActionAllowed(TokenInsights)
-            }
         }
     }
 
@@ -119,9 +109,9 @@ class CoinAnalyticsViewModel(
         }
     }
 
-    private fun viewItem(item: CoinAnalyticsService.AnalyticData, showPreviewBlocks: Boolean): AnalyticsViewItem {
+    private fun viewItem(item: CoinAnalyticsService.AnalyticData): AnalyticsViewItem {
         if (item.analytics != null) {
-            val viewItems = getViewItems(item.analytics, showPreviewBlocks)
+            val viewItems = getViewItems(item.analytics)
             if (viewItems.isNotEmpty()) {
                 return AnalyticsViewItem.Analytics(viewItems)
             }
@@ -130,7 +120,7 @@ class CoinAnalyticsViewModel(
         return AnalyticsViewItem.NoData
     }
 
-    private fun getViewItems(analytics: Analytics, showPreviewBlocks: Boolean): List<BlockViewItem> {
+    private fun getViewItems(analytics: Analytics): List<BlockViewItem> {
         val blocks = mutableListOf<BlockViewItem>()
 
         analytics.technicalAdvice?.let { technicalAdvice ->
@@ -139,7 +129,7 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.TechnicalAdvice_Title,
                     info = AnalyticInfo.TechnicalIndicatorsInfo,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     analyticChart = ChartViewItem(
                         AnalyticChart.TechAdvice(
                             CoinAnalyticsModule.TechAdviceData(
@@ -150,7 +140,6 @@ class CoinAnalyticsViewModel(
                         coin.uid,
                     ),
                     footerItems = emptyList(),
-                    statTrigger = StatPremiumTrigger.TradingAssistant,
                 )
             )
         }
@@ -178,7 +167,6 @@ class CoinAnalyticsViewModel(
                     valuePeriod = getValuePeriod(false),
                     analyticChart = getChartViewItem(data.chartPoints(), ChartViewType.Bar, ProChartModule.ChartType.CexVolume),
                     footerItems = footerItems,
-                    statTrigger = null
                 )
             )
         }
@@ -209,7 +197,6 @@ class CoinAnalyticsViewModel(
                     valuePeriod = getValuePeriod(true),
                     analyticChart = getChartViewItem(data.chartPoints(), ChartViewType.Line, ProChartModule.ChartType.Tvl),
                     footerItems = footerItems,
-                    statTrigger = null
                 )
             )
         }
@@ -232,12 +219,11 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_DexVolume,
                     info = AnalyticInfo.DexVolumeInfo,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = getFormattedSum(data.points.map { it.volume }, currency),
                     valuePeriod = getValuePeriod(false),
                     analyticChart = getChartViewItem(data.chartPoints(), ChartViewType.Bar, ProChartModule.ChartType.DexVolume),
                     footerItems = footerItems,
-                    statTrigger = StatPremiumTrigger.DexVolume
                 )
             )
         }
@@ -260,12 +246,11 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_DexLiquidity,
                     info = AnalyticInfo.DexLiquidityInfo,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = getFormattedValue(data.points.last().volume, currency),
                     valuePeriod = getValuePeriod(true),
                     analyticChart = getChartViewItem(data.chartPoints(), ChartViewType.Line, ProChartModule.ChartType.DexLiquidity),
                     footerItems = footerItems,
-                    statTrigger = StatPremiumTrigger.DexLiquidity
                 )
             )
         }
@@ -294,12 +279,11 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_ActiveAddresses,
                     info = AnalyticInfo.AddressesInfo,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = chartValue,
                     valuePeriod = getValuePeriod(true),
                     analyticChart = getChartViewItem(data.chartPoints(), ChartViewType.Line, ProChartModule.ChartType.AddressesCount),
                     footerItems = footerItems,
-                    statTrigger = StatPremiumTrigger.ActiveAddresses
                 )
             )
         }
@@ -327,12 +311,11 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_TransactionCount,
                     info = AnalyticInfo.TransactionCountInfo,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = getFormattedSum(data.points.map { it.count.toBigDecimal() }),
                     valuePeriod = getValuePeriod(false),
                     analyticChart = getChartViewItem(data.chartPoints(), ChartViewType.Bar, ProChartModule.ChartType.TxCount),
                     footerItems = footerItems,
-                    statTrigger = StatPremiumTrigger.TransactionCount
                 )
             )
         }
@@ -390,12 +373,11 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_Holders,
                     info = AnalyticInfo.HoldersInfo,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = getFormattedSum(listOf(total)),
                     valuePeriod = getValuePeriod(true),
                     analyticChart = ChartViewItem(AnalyticChart.StackedBars(chartSlices), coin.uid),
                     footerItems = footerItems,
-                    statTrigger = StatPremiumTrigger.Holders
                 )
             )
         }
@@ -404,7 +386,7 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_ProjectFee,
                     info = null,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = data.value30d?.let { getFormattedSum(listOf(it), currency) },
                     valuePeriod = getValuePeriod(false),
                     analyticChart = null,
@@ -416,7 +398,6 @@ class CoinAnalyticsViewModel(
                             action = ActionType.OpenRank(RankType.FeeRank)
                         ),
                     ),
-                    statTrigger = StatPremiumTrigger.ProjectFee
                 )
             )
         }
@@ -425,7 +406,7 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_ProjectRevenue,
                     info = null,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     value = data.value30d?.let { getFormattedSum(listOf(it), currency) },
                     valuePeriod = getValuePeriod(false),
                     analyticChart = null,
@@ -437,7 +418,6 @@ class CoinAnalyticsViewModel(
                             action = ActionType.OpenRank(RankType.RevenueRank)
                         ),
                     ),
-                    statTrigger = StatPremiumTrigger.ProjectRevenue
                 )
             )
         }
@@ -492,11 +472,10 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = R.string.CoinAnalytics_SmartContractAnalysis,
                     info = null,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     analyticChart = null,
                     footerItems = detectorFooterItems,
                     sectionDescription = Translator.getString(R.string.CoinAnalytics_PoweredByDeFi),
-                    statTrigger = StatPremiumTrigger.IssueBlockchains
                 )
             )
         }
@@ -553,12 +532,11 @@ class CoinAnalyticsViewModel(
                 BlockViewItem(
                     title = null,
                     info = null,
-                    showAsPreview = showPreviewBlocks,
+                    showAsPreview = false,
                     analyticChart = null,
                     footerItems = footerItems,
                     sectionTitle = R.string.CoinAnalytics_OtherData,
                     showFooterDivider = false,
-                    statTrigger = StatPremiumTrigger.Other
                 )
             )
         }

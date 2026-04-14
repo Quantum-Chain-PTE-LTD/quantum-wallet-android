@@ -43,9 +43,6 @@ app/src/main/java/com/quantum/wallet/bankwallet/
 ├── ui/                     # Legacy Compose components
 └── uiv3/                   # New Compose components (prefer this)
 
-subscriptions-core/         # Subscription/paid features (IPaidAction)
-subscriptions-google-play/  # Google Play billing
-subscriptions-fdroid/       # F-Droid flavor
 ```
 
 ## Architecture Patterns
@@ -150,15 +147,7 @@ Supported chains: EVM (Ethereum, BSC, etc.), Bitcoin, Solana, Tron, TON, Zcash, 
 
 ## Subscription/Paid Features
 
-```kotlin
-// Check if action is allowed
-UserSubscriptionManager.isActionAllowed(SwapProtection)
-
-// Paid actions defined in IPaidAction
-object SwapProtection : IPaidAction
-object SecureSend : IPaidAction
-// etc.
-```
+Subscription modules have been removed. All formerly paid features (swap protection, secure send, etc.) are now unconditionally available. The `subscriptions-core`, `subscriptions-dev`, `subscriptions-fdroid`, and `subscriptions-google-play` modules no longer exist.
 
 ## Conventions
 

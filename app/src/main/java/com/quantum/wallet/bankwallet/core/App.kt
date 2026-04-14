@@ -51,7 +51,6 @@ import com.quantum.wallet.bankwallet.core.managers.NftAdapterManager
 import com.quantum.wallet.bankwallet.core.managers.NftMetadataManager
 import com.quantum.wallet.bankwallet.core.managers.NftMetadataSyncer
 import com.quantum.wallet.bankwallet.core.managers.NumberFormatter
-import com.quantum.wallet.bankwallet.core.managers.PaidActionSettingsManager
 import com.quantum.wallet.bankwallet.core.managers.PriceManager
 import com.quantum.wallet.bankwallet.core.managers.RateAppManager
 import com.quantum.wallet.bankwallet.core.managers.RecentAddressManager
@@ -126,7 +125,6 @@ import com.quantum.wallet.core.security.EncryptionManager
 import com.quantum.wallet.core.security.KeyStoreManager
 import io.horizontalsystems.ethereumkit.core.EthereumKit
 import io.horizontalsystems.hdwalletkit.Mnemonic
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -219,10 +217,8 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         lateinit var recentAddressManager: RecentAddressManager
         lateinit var roiManager: RoiManager
         lateinit var appIconService: AppIconService
-        lateinit var paidActionSettingsManager: PaidActionSettingsManager
         lateinit var swapRecordManager: SwapRecordManager
         lateinit var swapSyncService: SwapSyncService
-        var trialExpired: Boolean = false
     }
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -249,8 +245,6 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
             thirdKeyboardStorage = this
             marketStorage = this
         }
-
-        paidActionSettingsManager = PaidActionSettingsManager(localStorage)
 
         val appConfig = AppConfigProvider(localStorage)
         appConfigProvider = appConfig
@@ -643,17 +637,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
 
             evmLabelManager.sync()
             contactsRepository.initialize()
-            trialExpired = !UserSubscriptionManager.hasFreeTrial()
             appIconService.validateAndFixCurrentIcon()
-        }
-
-        coroutineScope.launch {
-            backgroundManager.stateFlow.collect { state ->
-                when (state) {
-                    BackgroundManagerState.EnterForeground -> UserSubscriptionManager.onResume()
-                    BackgroundManagerState.EnterBackground -> UserSubscriptionManager.pause()
-                }
-            }
         }
 
         coroutineScope.launch(Dispatchers.IO) {

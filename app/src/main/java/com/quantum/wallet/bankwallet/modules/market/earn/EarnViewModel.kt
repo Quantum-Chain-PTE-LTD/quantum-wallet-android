@@ -19,8 +19,6 @@ import com.quantum.wallet.bankwallet.ui.compose.WithTranslatableTitle
 import io.horizontalsystems.marketkit.models.Apy
 import io.horizontalsystems.marketkit.models.Blockchain
 import io.horizontalsystems.marketkit.models.Vault
-import com.quantum.wallet.subscriptions.core.TokenInsights
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -54,9 +52,6 @@ class MarketEarnViewModel(
     private var sortingBy: VaultSorting = VaultSorting.APY
     private var marketDataJob: Job? = null
     private var filterBy: EarnModule.FilterBy = EarnModule.FilterBy.AllAssets
-    private val hasPremium: Boolean
-        get() = UserSubscriptionManager.isActionAllowed(TokenInsights)
-
     private var baseCurrency = currencyManager.baseCurrency
 
     // Cached processed items - only recalculate when filters/sorting change
@@ -74,12 +69,6 @@ class MarketEarnViewModel(
     )
 
     init {
-        viewModelScope.launch {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-                resetMenu()
-                fetchVaults(forceRefresh = true)
-            }
-        }
         viewModelScope.launch {
             currencyManager.baseCurrencyUpdatedFlow.collect {
                 baseCurrency = currencyManager.baseCurrency
@@ -183,18 +172,14 @@ class MarketEarnViewModel(
     override fun createState(): EarnModule.UiState {
         val processedViewItems = getProcessedViewItems()
 
-        val (vaults, blurredVaults) = getVaultsAndBlurredItems(processedViewItems)
-
         return EarnModule.UiState(
             isRefreshing = isRefreshing,
             viewState = viewState,
-            items = vaults,
-            blurredItems = blurredVaults,
+            items = processedViewItems,
             filterBy = filterBy,
             apyPeriod = apyPeriod,
             sortingBy = sortingBy,
             sortingByTitle = getSortingByTitle(sortingBy),
-            noPremium = !hasPremium,
             blockchains = blockchains,
             chainSelectorMenuTitle = getChainsMenuTitle(selectedBlockchains),
             selectedBlockchains = selectedBlockchains,
@@ -207,20 +192,6 @@ class MarketEarnViewModel(
             VaultSorting.TVL -> "TVL"
         }
     }
-
-    private fun getVaultsAndBlurredItems(processedViewItems: List<EarnModule.VaultViewItem>) =
-        if (hasPremium) {
-            processedViewItems to emptyList()
-        } else {
-            if (processedViewItems.size > TOTAL_ITEMS_NO_PREMIUM) {
-                val visible = processedViewItems.take(VISIBLE_ITEMS_NO_PREMIUM)
-                val blurred =
-                    processedViewItems.drop(VISIBLE_ITEMS_NO_PREMIUM).take(BLURRED_ITEMS_NO_PREMIUM)
-                visible to blurred
-            } else {
-                processedViewItems to emptyList()
-            }
-        }
 
     private fun getChainsMenuTitle(selectedBlockchains: List<Blockchain>): String {
         return when (selectedBlockchains.size) {
@@ -344,12 +315,10 @@ object EarnModule {
         val isRefreshing: Boolean,
         val viewState: ViewState = ViewState.Loading,
         val items: List<VaultViewItem> = listOf(),
-        val blurredItems: List<VaultViewItem> = listOf(),
         val filterBy: FilterBy,
         val apyPeriod: ApyPeriod,
         val sortingBy: VaultSorting,
         val sortingByTitle: String,
-        val noPremium: Boolean,
         val chainSelectorMenuTitle: String,
         val selectedBlockchains: List<Blockchain>,
         val blockchains: List<Blockchain>,

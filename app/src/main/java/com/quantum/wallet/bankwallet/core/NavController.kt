@@ -10,12 +10,8 @@ import androidx.navigation.NavOptions
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.modules.pin.ConfirmPinFragment
 import com.quantum.wallet.bankwallet.modules.pin.SetPinFragment
-import com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog
-import com.quantum.wallet.bankwallet.modules.premium.PremiumFeature
 import com.quantum.wallet.bankwallet.modules.settings.terms.TermsFragment
 import com.quantum.wallet.core.parcelable
-import com.quantum.wallet.subscriptions.core.IPaidAction
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import java.util.UUID
 
 fun NavController.slideFromRight(@IdRes resId: Int, input: Parcelable? = null, xxx: NavOptions.Builder.() -> Unit = { }) {
@@ -58,18 +54,6 @@ fun NavController.authorizedAction(action: () -> Unit) {
         }
     } else {
         action.invoke()
-    }
-}
-
-fun NavController.paidAction(paidAction: IPaidAction, block: () -> Unit) {
-    if (UserSubscriptionManager.isActionAllowed(paidAction)) {
-        block.invoke()
-    } else {
-        val premiumFeature = PremiumFeature.getFeature(paidAction)
-        slideFromBottom(
-            R.id.defenseSystemFeatureDialog,
-            DefenseSystemFeatureDialog.Input(premiumFeature)
-        )
     }
 }
 

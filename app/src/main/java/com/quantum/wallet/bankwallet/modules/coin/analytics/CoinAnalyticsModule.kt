@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.App
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.entities.ViewState
 import com.quantum.wallet.bankwallet.modules.coin.audits.CoinAuditsModule
 import com.quantum.wallet.bankwallet.modules.coin.detectors.IssueParcelable
@@ -56,7 +55,6 @@ object CoinAnalyticsModule {
         val sectionTitle: Int? = null,
         val sectionDescription: String? = null,
         val showFooterDivider: Boolean = true,
-        val statTrigger: StatPremiumTrigger?,
     )
 
 

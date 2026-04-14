@@ -13,7 +13,6 @@ import io.horizontalsystems.marketkit.models.AnalyticsPreview
 import io.horizontalsystems.marketkit.models.Blockchain
 import io.horizontalsystems.marketkit.models.BlockchainType
 import io.horizontalsystems.marketkit.models.FullCoin
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.rx2.await
@@ -41,9 +40,6 @@ class CoinAnalyticsService(
 
     suspend fun start() {
         fetch()
-        UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-            fetch()
-        }
     }
 
     suspend fun refresh() {

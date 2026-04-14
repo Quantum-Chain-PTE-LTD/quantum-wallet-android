@@ -3,16 +3,10 @@ package com.quantum.wallet.bankwallet.modules.settings.security.passcode
 import androidx.lifecycle.viewModelScope
 import com.quantum.wallet.bankwallet.core.ILocalStorage
 import com.quantum.wallet.bankwallet.core.ViewModelUiState
-import com.quantum.wallet.bankwallet.core.address.AddressCheckType
 import com.quantum.wallet.bankwallet.core.managers.BalanceHiddenManager
-import com.quantum.wallet.bankwallet.core.managers.PaidActionSettingsManager
 import com.quantum.wallet.bankwallet.core.managers.SpamManager
 import com.quantum.wallet.core.IPinComponent
 import com.quantum.wallet.core.ISystemInfoManager
-import com.quantum.wallet.subscriptions.core.IPaidAction
-import com.quantum.wallet.subscriptions.core.SecureSend
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 
 class SecuritySettingsViewModel(
@@ -20,7 +14,6 @@ class SecuritySettingsViewModel(
     private val pinComponent: IPinComponent,
     private val balanceHiddenManager: BalanceHiddenManager,
     private val localStorage: ILocalStorage,
-    private val paidActionSettingsManager: PaidActionSettingsManager,
     private val spamManager: SpamManager,
 ) : ViewModelUiState<SecuritySettingsUiState>() {
     val biometricSettingsVisible = systemInfoManager.biometricAuthSupported
@@ -28,7 +21,6 @@ class SecuritySettingsViewModel(
     private var pinEnabled = pinComponent.isPinSet
     private var duressPinEnabled = pinComponent.isDuressPinSet()
     private var balanceAutoHideEnabled = balanceHiddenManager.balanceAutoHidden
-    private var defenseSystemActions = listOf<DefenseSystemAction>()
     private var hideSuspiciousTxs = spamManager.hideSuspiciousTx
 
     init {
@@ -39,39 +31,6 @@ class SecuritySettingsViewModel(
                 emitState()
             }
         }
-
-        viewModelScope.launch {
-            paidActionSettingsManager.enabledActionsFlow.collect {
-                refreshDefenseSystemActions()
-            }
-        }
-
-        viewModelScope.launch {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-                refreshDefenseSystemActions()
-            }
-        }
-
-        viewModelScope.launch {
-            localStorage.enabledPaidActionsFlow.drop(1).collect {
-                refreshDefenseSystemActions()
-            }
-        }
-    }
-
-    private fun refreshDefenseSystemActions() {
-        val enabledPaidActions = localStorage.enabledPaidActions
-        val anyDetectionEnabled = AddressCheckType.entries.any { it.name in enabledPaidActions }
-
-        defenseSystemActions = paidActionSettingsManager.toggleableActions.map { action ->
-            val enabled = when (action) {
-                SecureSend -> anyDetectionEnabled && UserSubscriptionManager.isActionAllowed(action)
-                else -> paidActionSettingsManager.isActionActive(action)
-            }
-            DefenseSystemAction(action, enabled)
-        }
-
-        emitState()
     }
 
     override fun createState() = SecuritySettingsUiState(
@@ -81,7 +40,6 @@ class SecuritySettingsViewModel(
         balanceAutoHideEnabled = balanceAutoHideEnabled,
         hideSuspiciousTxs = hideSuspiciousTxs,
         autoLockIntervalName = localStorage.autoLockInterval.title,
-        defenseSystemActions = defenseSystemActions,
     )
 
     fun enableBiometrics() {
@@ -112,11 +70,7 @@ class SecuritySettingsViewModel(
     }
 
     fun update() {
-        refreshDefenseSystemActions()
-    }
-
-    fun setActionEnabled(action: IPaidAction, enabled: Boolean) {
-        paidActionSettingsManager.setActionEnabled(action, enabled)
+        emitState()
     }
 
     fun hideSuspiciousTxs(hidden: Boolean) {
@@ -133,7 +87,4 @@ data class SecuritySettingsUiState(
     val balanceAutoHideEnabled: Boolean,
     val hideSuspiciousTxs: Boolean,
     val autoLockIntervalName: Int,
-    val defenseSystemActions: List<DefenseSystemAction>
 )
-
-data class DefenseSystemAction(val action: IPaidAction, val enabled: Boolean)

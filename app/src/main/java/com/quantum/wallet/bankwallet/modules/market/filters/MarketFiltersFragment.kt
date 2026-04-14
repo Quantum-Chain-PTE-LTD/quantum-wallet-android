@@ -31,12 +31,10 @@ import androidx.navigation.NavController
 import androidx.navigation.navGraphViewModels
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.BaseComposeFragment
-import com.quantum.wallet.bankwallet.core.paidAction
 import com.quantum.wallet.bankwallet.core.slideFromBottom
 import com.quantum.wallet.bankwallet.core.slideFromRight
 import com.quantum.wallet.bankwallet.core.stats.StatEvent
 import com.quantum.wallet.bankwallet.core.stats.StatPage
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.modules.evmfee.ButtonsGroupWithShade
 import com.quantum.wallet.bankwallet.modules.market.filters.MarketFiltersModule.FilterDropdown.CoinSet
@@ -64,7 +62,6 @@ import com.quantum.wallet.bankwallet.ui.compose.components.subhead2_grey
 import com.quantum.wallet.bankwallet.uiv3.components.HSScaffold
 import com.quantum.wallet.bankwallet.uiv3.components.bottomsheet.BottomSheetContent
 import com.quantum.wallet.core.helpers.HudHelper
-import com.quantum.wallet.subscriptions.core.AdvancedSearch
 import kotlinx.coroutines.launch
 
 class MarketFiltersFragment : BaseComposeFragment() {
@@ -307,13 +304,7 @@ fun AdvancedSearchContent(
             title = R.string.Market_Filter_Sectors,
             value = if (uiState.sectors.size == 1 && uiState.sectors[0].item == null) null else uiState.sectors.size.toString(),
             onDropdownClick = {
-                navController.paidAction(AdvancedSearch) {
-                    navController.slideFromBottom(R.id.sectorsSelectorFragment)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.Sectors)
-                )
+                                    navController.slideFromBottom(R.id.sectorsSelectorFragment)
             }
         )
     }
@@ -326,26 +317,14 @@ fun AdvancedSearchContent(
             value = uiState.priceChange.title,
             valueColor = uiState.priceChange.item?.color ?: TextColor.Grey,
             onDropdownClick = {
-                navController.paidAction(AdvancedSearch) {
-                    showBottomSheet(PriceChange)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.PriceChange)
-                )
+                                    showBottomSheet(PriceChange)
             }
         )
         AdvancedSearchDropdown(
             title = R.string.Market_Filter_PricePeriod,
             value = uiState.period.title,
             onDropdownClick = {
-                navController.paidAction(AdvancedSearch) {
-                    showBottomSheet(PricePeriod)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.PricePeriod)
-                )
+                                    showBottomSheet(PricePeriod)
             }
 
         )
@@ -353,26 +332,14 @@ fun AdvancedSearchContent(
             title = R.string.Market_Filter_TradingSignals,
             value = uiState.filterTradingSignal.title,
             onDropdownClick = {
-                navController.paidAction(AdvancedSearch) {
-                    showBottomSheet(TradingSignals)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.TradingSignal)
-                )
+                                    showBottomSheet(TradingSignals)
             }
         )
         AdvancedSearchDropdown(
             title = R.string.Market_Filter_PriceCloseTo,
             value = uiState.priceCloseTo?.titleResId?.let { stringResource(it) },
             onDropdownClick = {
-                navController.paidAction(AdvancedSearch) {
-                    showBottomSheet(PriceCloseTo)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.PriceCloseTo)
-                )
+                                    showBottomSheet(PriceCloseTo)
             }
         )
     }
@@ -384,65 +351,35 @@ fun AdvancedSearchContent(
             title = R.string.Market_Filter_OutperformedBtc,
             enabled = uiState.outperformedBtcOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateOutperformedBtcOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.OutperformedBtc)
-                )
+                                    viewModel.updateOutperformedBtcOn(it)
             }
         )
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_OutperformedEth,
             enabled = uiState.outperformedEthOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateOutperformedEthOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.OutperformedEth)
-                )
+                                    viewModel.updateOutperformedEthOn(it)
             }
         )
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_OutperformedBnb,
             enabled = uiState.outperformedBnbOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateOutperformedBnbOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.OutperformedBnb)
-                )
+                                    viewModel.updateOutperformedBnbOn(it)
             }
         )
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_OutperformedSnp,
             enabled = uiState.outperformedSnpOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateOutperformedSnpOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.OutperformedSp500)
-                )
+                                    viewModel.updateOutperformedSnpOn(it)
             }
         )
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_OutperformedGold,
             enabled = uiState.outperformedGoldOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateOutperformedGoldOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.OutperformedGold)
-                )
+                                    viewModel.updateOutperformedGoldOn(it)
             }
         )
     }
@@ -455,13 +392,7 @@ fun AdvancedSearchContent(
             subtitle = R.string.Market_Filter_SolidCex_Description,
             enabled = uiState.solidCexOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateSolidCexOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.GoodCexVolume)
-                )
+                                    viewModel.updateSolidCexOn(it)
             }
         )
         AdvancedSearchSwitch(
@@ -469,13 +400,7 @@ fun AdvancedSearchContent(
             subtitle = R.string.Market_Filter_SolidDex_Description,
             enabled = uiState.solidDexOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateSolidDexOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.GoodDexVolume)
-                )
+                                    viewModel.updateSolidDexOn(it)
             }
         )
         AdvancedSearchSwitch(
@@ -483,26 +408,14 @@ fun AdvancedSearchContent(
             subtitle = R.string.Market_Filter_GoodDistribution_Description,
             enabled = uiState.goodDistributionOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateGoodDistributionOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.GoodDistribution)
-                )
+                                    viewModel.updateGoodDistributionOn(it)
             }
         )
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_ListedOnTopExchanges,
             enabled = uiState.listedOnTopExchangesOn,
             onChecked = {
-                navController.paidAction(AdvancedSearch) {
-                    viewModel.updateListedOnTopExchangesOn(it)
-                }
-                stat(
-                    page = StatPage.AdvancedSearch,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.ListedOnTopExchanges)
-                )
+                                    viewModel.updateListedOnTopExchangesOn(it)
             }
         )
     }

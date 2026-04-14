@@ -118,9 +118,6 @@
         android:id="@+id/languageSettingsFragment"
         android:name="com.quantum.wallet.bankwallet.modules.settings.language.LanguageSettingsFragment" />
     <fragment
-        android:id="@+id/subscriptionFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.settings.subscription.SubscriptionFragment" />
-    <fragment
         android:id="@+id/termsFragment"
         android:name="com.quantum.wallet.bankwallet.modules.settings.terms.TermsFragment" />
     <fragment
@@ -367,9 +364,6 @@
         android:id="@+id/кeyAccountInfoFragment"
         android:name="com.quantum.wallet.bankwallet.modules.manageaccount.showextendedkey.KeyAccountInfoFragment" />
     <fragment
-        android:id="@+id/buySubscriptionFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.usersubscription.BuySubscriptionHavHostFragment" />
-    <fragment
         android:id="@+id/swapTermsFragment"
         android:name="com.quantum.wallet.bankwallet.modules.multiswap.swapterms.SwapTermsFragment" />
     <dialog
@@ -406,17 +400,8 @@
         android:id="@+id/addressRiskyBottomSheetAlert"
         android:name="com.quantum.wallet.bankwallet.modules.send.AddressRiskyBottomSheetAlert" />
     <dialog
-        android:id="@+id/defenseSystemFeatureDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog" />
-    <dialog
         android:id="@+id/wcSessionBottomSheetDialog"
         android:name="com.quantum.wallet.bankwallet.modules.walletconnect.session.WCSessionBottomSheet" />
-    <dialog
-        android:id="@+id/premiumSubscribedDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.usersubscription.ui.PremiumSubscribedDialog" />
-    <dialog
-        android:id="@+id/buySubscriptionDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.usersubscription.PremiumFeaturesDialog" />
     <dialog
         android:id="@+id/errorBottomSheet"
         android:name="com.quantum.wallet.bankwallet.modules.confirm.ErrorBottomSheet" />
@@ -455,9 +440,6 @@
     <dialog
         android:id="@+id/wcAccountTypeNotSupportedDialog"
         android:name="com.quantum.wallet.bankwallet.modules.walletconnect.WCAccountTypeNotSupportedDialog" />
-    <dialog
-        android:id="@+id/selectSubscriptionPlanDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.usersubscription.SelectPlanDialog" />
     <fragment
         android:id="@+id/activateTokenFragment"
         android:name="com.quantum.wallet.bankwallet.modules.activatetoken.ActivateTokenFragment" />

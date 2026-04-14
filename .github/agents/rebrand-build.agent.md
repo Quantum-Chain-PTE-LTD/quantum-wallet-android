@@ -33,10 +33,6 @@ Update the `namespace` property in each module's `build.gradle.kts`:
 | `core/build.gradle.kts` | `io.horizontalsystems.core` | `com.quantum.wallet.core` |
 | `components/icons/build.gradle.kts` | `io.horizontalsystems.icons` | `com.quantum.wallet.icons` |
 | `components/chartview/build.gradle.kts` | `io.horizontalsystems.chartview` | `com.quantum.wallet.chartview` |
-| `subscriptions-core/build.gradle.kts` | `io.horizontalsystems.subscriptions.core` | `com.quantum.wallet.subscriptions.core` |
-| `subscriptions-dev/build.gradle.kts` | `io.horizontalsystems.subscriptions.dev` | `com.quantum.wallet.subscriptions.dev` |
-| `subscriptions-fdroid/build.gradle.kts` | `io.horizontalsystems.subscriptions.fdroid` | `com.quantum.wallet.subscriptions.fdroid` |
-| `subscriptions-google-play/build.gradle.kts` | `io.horizontalsystems.subscriptions.googleplay` | `com.quantum.wallet.subscriptions.googleplay` |
 
 ### Step 3 — app/build.gradle.kts applicationId
 

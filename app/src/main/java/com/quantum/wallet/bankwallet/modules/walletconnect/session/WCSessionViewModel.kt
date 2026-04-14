@@ -8,7 +8,6 @@ import com.quantum.wallet.bankwallet.core.App
 import com.quantum.wallet.bankwallet.core.INetworkManager
 import com.quantum.wallet.bankwallet.core.ViewModelUiState
 import com.quantum.wallet.bankwallet.core.managers.ConnectivityManager
-import com.quantum.wallet.bankwallet.core.managers.PaidActionSettingsManager
 import com.quantum.wallet.bankwallet.core.managers.ServiceWCWhitelist
 import com.quantum.wallet.bankwallet.core.providers.AppConfigProvider
 import com.quantum.wallet.bankwallet.core.providers.Translator
@@ -26,8 +25,6 @@ import com.quantum.wallet.bankwallet.modules.walletconnect.session.WCSessionServ
 import com.quantum.wallet.bankwallet.modules.walletconnect.session.WCSessionServiceState.WaitingForApproveSession
 import com.quantum.wallet.core.SingleLiveEvent
 import io.horizontalsystems.marketkit.models.BlockchainType
-import com.quantum.wallet.subscriptions.core.ScamProtection
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.URL
@@ -43,7 +40,6 @@ class WCSessionViewModel(
     private val wcManager: WCManager,
     private val networkManager: INetworkManager,
     appConfigProvider: AppConfigProvider,
-    private val paidActionSettingsManager: PaidActionSettingsManager
 ) : ViewModelUiState<WCSessionUiState>() {
 
     val marketApiBaseUrl = appConfigProvider.marketApiBaseUrl
@@ -64,10 +60,8 @@ class WCSessionViewModel(
     private var connected: Boolean = topic != null
     private var whiteListState: WCWhiteListState? = null
     private var whiteListCache: List<ServiceWCWhitelist.WCWhiteList>? = null
-    private var hasSubscription = false
     private var closeDialog = false
-    private var scamProtectionEnabled = paidActionSettingsManager.isActionEnabled(ScamProtection)
-    private var scamProtectionActionAllowed = UserSubscriptionManager.isActionAllowed(ScamProtection)
+    private var scamProtectionEnabled = true
 
     override fun createState() = WCSessionUiState(
         peerMeta = peerMeta,
@@ -81,8 +75,6 @@ class WCSessionViewModel(
         pendingRequests = pendingRequests,
         blockchainTypes = blockchainTypes,
         whiteListState = whiteListState,
-        hasSubscription = hasSubscription,
-        scamProtectionActionAllowed = scamProtectionActionAllowed,
         closeDialog = closeDialog
     )
 
@@ -182,14 +174,6 @@ class WCSessionViewModel(
                 whiteListState = WCWhiteListState.InProgress
                 whiteListCache = getWCWhiteList()
                 checkWhiteListStatus()
-            }
-        }
-
-        viewModelScope.launch {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-                hasSubscription = it != null
-                scamProtectionActionAllowed = UserSubscriptionManager.isActionAllowed(ScamProtection)
-                emitState()
             }
         }
 

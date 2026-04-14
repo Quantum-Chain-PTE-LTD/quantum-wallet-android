@@ -195,7 +195,6 @@ sealed class StatEvent {
     data class OpenTokenPage(val token: Token?, val assetId: String? = null) : StatEvent()
     data class OpenTokenInfo(val token: Token) : StatEvent()
     data class Open(val page: StatPage) : StatEvent()
-    data class OpenPremium(val from: StatPremiumTrigger) : StatEvent()
 
     data class HideBalanceButtons(val shown: Boolean): StatEvent()
     data class SelectTheme(val type: String): StatEvent()
@@ -210,7 +209,6 @@ sealed class StatEvent {
     data class EnableUiStats(val enabled: Boolean): StatEvent()
 
     object Subscribe: StatEvent()
-    data class SubscribePremium(val trigger: StatPremiumTrigger) : StatEvent()
     data class SwitchBaseCurrency(val code: String) : StatEvent()
     data class SwitchBtcSource(val chainUid: String, val type: BtcRestoreMode) : StatEvent()
     data class SwitchEvmSource(val chainUid: String, val type: String) : StatEvent()
@@ -295,7 +293,6 @@ sealed class StatEvent {
             is Open -> "open_page"
 
             is OpenTokenInfo -> "open_token_info"
-            is OpenPremium -> "open_premium_from"
 
             is HideBalanceButtons -> "hide_balance_buttons"
             is SelectTheme -> "select_theme"
@@ -310,7 +307,6 @@ sealed class StatEvent {
             is EnableUiStats -> "enable_ui_stats"
 
             is Subscribe -> "subscribe"
-            is SubscribePremium -> "subscribe_premium_from"
             is SwapSelectTokenIn -> "swap_select_token_in"
             is SwapSelectTokenOut -> "swap_select_token_out"
             is SwapSelectProvider -> "swap_select_provider"
@@ -504,8 +500,6 @@ sealed class StatEvent {
 
             is Share -> mapOf(StatParam.Entity to entity.key)
 
-            is OpenPremium -> mapOf(StatParam.Trigger to from.value) + trialExpired
-
             else -> null
         }
 
@@ -642,43 +636,3 @@ enum class StatResendType(val key: String) {
     Cancel("cancel")
 }
 
-enum class StatPremiumTrigger(val value: String) {
-    TradingAssistant("trading_assistant"),
-    DexVolume("dex_volume"),
-    DexLiquidity("dex_liquidity"),
-    TransactionCount("transaction_count"),
-    ActiveAddresses("active_addresses"),
-    Holders("holders"),
-    ProjectFee("project_fee"),
-    ProjectRevenue("project_revenue"),
-    IssueBlockchains("issue_blockchains"),
-    Other("other"),
-    Banner("banner"),
-    GetPremium("get_premium"),
-    DuressMode("duress_mode"),
-    VipSupport("vip_support"),
-    AddressChecker("address_checker"),
-    Sectors("sectors"),
-    PriceChange("price_change"),
-    PricePeriod("price_period"),
-    TradingSignal("trading_signal"),
-    PriceCloseTo("price_close_to"),
-    OutperformedBtc("outperformed_btc"),
-    OutperformedEth("outperformed_eth"),
-    OutperformedBnb("outperformed_bnb"),
-    OutperformedGold("outperformed_gold"),
-    OutperformedSp500("outperformed_sp500"),
-    GoodCexVolume("good_cex_volume"),
-    GoodDexVolume("good_dex_volume"),
-    GoodDistribution("good_distribution"),
-    ListedOnTopExchanges("listed_on_top_exchanges")
-}
-
-private val trialExpired: Map<StatParam, String>
-    get() {
-        return if (App.trialExpired) {
-            mapOf(StatParam.Status to "trial_expired")
-        } else {
-            emptyMap()
-        }
-    }

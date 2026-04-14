@@ -227,7 +227,6 @@ class SwapConfirmViewModel(
         swapDefenseSystemMessage = swapDefenseState.systemMessage,
         mevProtectionEnabled = swapDefenseState.mevProtectionEnabled,
         supportsMevProtection = sendTransactionService.supportsMevProtection,
-        mevProtectionActionAllowed = swapDefenseState.mevProtectionActionAllowed,
         recipient = recipient,
         slippage = slippage,
         estimatedTime = estimatedTime,
@@ -382,7 +381,7 @@ class SwapConfirmViewModel(
                 sendTransactionService,
                 TimerService(),
                 PriceImpactService(PriceImpactLevel.Normal),
-                SwapDefenseSystemService(sendTransactionService.supportsMevProtection, App.paidActionSettingsManager),
+                SwapDefenseSystemService(sendTransactionService.supportsMevProtection),
                 App.backgroundManager
             )
         }
@@ -414,7 +413,6 @@ data class SwapConfirmUiState(
     val swapDefenseSystemMessage: DefenseSystemMessage?,
     val mevProtectionEnabled: Boolean,
     val supportsMevProtection: Boolean,
-    val mevProtectionActionAllowed: Boolean,
     val recipient: Address?,
     val slippage: BigDecimal?,
     val estimatedTime: Long?,

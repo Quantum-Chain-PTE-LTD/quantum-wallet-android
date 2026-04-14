@@ -13,8 +13,6 @@ import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
 import com.quantum.wallet.bankwallet.modules.walletconnect.WCSessionManager
 import com.quantum.wallet.core.IPinComponent
 import com.quantum.wallet.core.ISystemInfoManager
-import com.quantum.wallet.subscriptions.core.AdvancedSearch
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactive.asFlow
 
@@ -68,8 +66,6 @@ class MainSettingsViewModel(
     private var wcCounterType: CounterType? = null
     private var wcSessionsCount = walletConnectSessionCount
     private var wcPendingRequestCount = 0
-    private var showPremiumBanner = !UserSubscriptionManager.isActionAllowed(AdvancedSearch)
-    private var hasSubscription = false
 
     init {
         viewModelScope.launch {
@@ -101,14 +97,6 @@ class MainSettingsViewModel(
                 syncCounter()
             }
         }
-
-        viewModelScope.launch {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-                showPremiumBanner = !UserSubscriptionManager.isActionAllowed(AdvancedSearch)
-                hasSubscription = it != null
-                emitState()
-            }
-        }
         syncCounter()
     }
 
@@ -123,8 +111,6 @@ class MainSettingsViewModel(
             securityCenterShowAlert = !isPinSet,
             aboutAppShowAlert = !termsManager.allTermsAccepted,
             wcCounterType = wcCounterType,
-            showPremiumBanner = showPremiumBanner,
-            hasSubscription = hasSubscription,
         )
     }
 
@@ -150,6 +136,4 @@ data class MainSettingUiState(
     val securityCenterShowAlert: Boolean,
     val aboutAppShowAlert: Boolean,
     val wcCounterType: CounterType?,
-    val showPremiumBanner: Boolean,
-    val hasSubscription: Boolean,
 )

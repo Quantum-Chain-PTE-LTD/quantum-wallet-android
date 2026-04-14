@@ -16,7 +16,7 @@ Key points:
 - **Reactive**: Kotlin Coroutines + StateFlow. Do NOT use RxJava in new code.
 - **DI**: Manual via `App` companion object
 - **Pattern**: MVVM with `ViewModelUiState<T>` base class and `ServiceState<T>` for business logic
-- **Modules**: `:app`, `:core`, `:components:icons`, `:components:chartview`, `:subscriptions-core`, `:subscriptions-google-play`, `:subscriptions-fdroid`, `:subscriptions-dev`
+- **Modules**: `:app`, `:core`, `:components:icons`, `:components:chartview`
 
 ## Rebranding Context
 
@@ -30,10 +30,6 @@ This project is being rebranded from "Unstoppable Wallet" by Horizontal Systems 
 | `io.horizontalsystems.core` | `com.quantum.wallet.core` |
 | `io.horizontalsystems.chartview` | `com.quantum.wallet.chartview` |
 | `io.horizontalsystems.icons` | `com.quantum.wallet.icons` |
-| `io.horizontalsystems.subscriptions.core` | `com.quantum.wallet.subscriptions.core` |
-| `io.horizontalsystems.subscriptions.dev` | `com.quantum.wallet.subscriptions.dev` |
-| `io.horizontalsystems.subscriptions.fdroid` | `com.quantum.wallet.subscriptions.fdroid` |
-| `io.horizontalsystems.subscriptions.googleplay` | `com.quantum.wallet.subscriptions.googleplay` |
 
 ### Brand Mapping
 

@@ -16,7 +16,6 @@ import io.horizontalsystems.marketkit.models.NftTopCollection
 import io.horizontalsystems.marketkit.models.Stock
 import io.horizontalsystems.marketkit.models.TokenQuery
 import io.horizontalsystems.marketkit.models.Vault
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import io.reactivex.Observable
 import io.reactivex.Single
 import retrofit2.HttpException
@@ -29,7 +28,6 @@ class MarketKitWrapper(
     hsApiKey: String,
     newsApiKey: String,
 ) {
-    val userSubscriptionManager = UserSubscriptionManager
 
     private val marketKit: MarketKit by lazy {
         MarketKit.getInstance(
@@ -40,20 +38,8 @@ class MarketKitWrapper(
         )
     }
 
-    private fun <T> requestWithAuthToken(f: (String) -> Single<T>) =
-        userSubscriptionManager.authToken?.let { authToken ->
-            f.invoke(authToken).onErrorResumeNext { error ->
-                if (error is HttpException && (error.code() == 401 || error.code() == 403)) {
-                    userSubscriptionManager.authToken = null
-
-                    Single.error(InvalidAuthTokenException())
-                } else {
-                    Single.error(error)
-                }
-            }
-        } ?: run {
-            Single.error(NoAuthTokenException())
-        }
+    private fun <T> requestWithAuthToken(f: (String) -> Single<T>): Single<T> =
+        Single.error(NoAuthTokenException())
 
     // Coins
 
