@@ -77,7 +77,7 @@ private fun SecureSendConfigScreen(navController: NavController) {
         },
         content = {
             BottomSheetHeaderV3(
-                title = stringResource(R.string.Premium_UpgradeFeature_SecureSend)
+                title = stringResource(R.string.Settings_SecureSend)
             )
 
             BottomSheetTextBlock(stringResource(R.string.SecureSend_Config_Subtitle))

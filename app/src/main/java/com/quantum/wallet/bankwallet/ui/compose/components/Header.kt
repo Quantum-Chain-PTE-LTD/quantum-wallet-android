@@ -1,7 +1,6 @@
 package com.quantum.wallet.bankwallet.ui.compose.components
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -121,30 +120,6 @@ fun HeaderSorting(
                 .horizontalScroll(rememberScrollState()),
             verticalAlignment = Alignment.CenterVertically,
             content = content
-        )
-    }
-}
-
-@Composable
-fun PremiumHeader(
-    @StringRes  title: Int = R.string.Premium_Title,
-) {
-    Row(
-        modifier = Modifier
-            .padding(horizontal = 32.dp)
-            .height(44.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Image(
-            modifier = Modifier
-                .padding(end = 10.dp)
-                .size(16.dp),
-            painter = painterResource(R.drawable.premium_filled_24_gradient),
-            contentDescription = null,
-        )
-        subhead1_jacob(
-            text = stringResource(title),
-            maxLines = 1
         )
     }
 }

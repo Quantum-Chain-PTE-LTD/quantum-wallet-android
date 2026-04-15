@@ -56,12 +56,11 @@ import com.quantum.wallet.bankwallet.ui.compose.components.BadgeText
 import com.quantum.wallet.bankwallet.ui.compose.components.CellSingleLineLawrenceSection
 import com.quantum.wallet.bankwallet.ui.compose.components.CellUniversalLawrenceSection
 import com.quantum.wallet.bankwallet.ui.compose.components.HsDivider
-import com.quantum.wallet.bankwallet.ui.compose.components.PremiumHeader
 import com.quantum.wallet.bankwallet.ui.compose.components.RowUniversal
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
 import com.quantum.wallet.bankwallet.ui.compose.components.body_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.caption_grey
-import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionPremiumUniversalLawrence
+import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionUniversalLawrence
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_grey
 import com.quantum.wallet.bankwallet.ui.helpers.LinkHelper
 
@@ -285,15 +284,9 @@ private fun SettingSections(
         }
     )
 
-    VSpacer(4.dp)
+    VSpacer(24.dp)
 
-    if (isFDroidBuild) {
-        PremiumHeader(R.string.Premium_TitleForDroid)
-    } else {
-        PremiumHeader()
-    }
-
-    SectionPremiumUniversalLawrence {
+    SectionUniversalLawrence {
         HsSettingCell(
             title = if(isFDroidBuild) R.string.Settings_Support else R.string.Settings_VipSupport,
             icon = R.drawable.ic_support_yellow_24,

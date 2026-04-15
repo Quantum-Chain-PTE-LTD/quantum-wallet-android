@@ -1069,20 +1069,10 @@
 
     <string name="Period_Days">%s days</string>
 
-    <string name="Premium_TitleForDroid">Premium (Free for F-Droid)</string>
-
-    <string name="Premium_Title">Premium</string>
-    <string name="Premium_Upgrade">Upgrade</string>
-
-    <string name="Premium_UpgradeFeature_RobberyProtection">Robbery Protection</string>
-    <string name="Premium_UpgradeFeature_SecureSend">Secure Send</string>
-
-    <string name="Premium_UpgradeFeature_RobberyProtection_Description">Safeguards your funds if you’re forced to unlock the app.</string>
-
-
-    <string name="Premium_DefenseSystem">Defense System</string>
-
-
+    <string name="Settings_DefenseSystem">Defense System</string>
+    <string name="Settings_RobberyProtection">Robbery Protection</string>
+    <string name="Settings_RobberyProtection_Description">Safeguards your funds if you\'re forced to unlock the app.</string>
+    <string name="Settings_SecureSend">Secure Send</string>
 
     <string name="Appearance_SendScreen">SEND SCREEN</string>
     <string name="Appearance_MarketsTab">MARKETS TAB</string>

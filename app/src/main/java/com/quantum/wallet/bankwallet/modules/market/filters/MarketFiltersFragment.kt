@@ -49,14 +49,12 @@ import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
 import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryYellowWithSpinner
 import com.quantum.wallet.bankwallet.ui.compose.components.HsSwitch
 import com.quantum.wallet.bankwallet.ui.compose.components.MenuItem
-import com.quantum.wallet.bankwallet.ui.compose.components.PremiumHeader
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
 import com.quantum.wallet.bankwallet.ui.compose.components.body_grey
 import com.quantum.wallet.bankwallet.ui.compose.components.body_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.body_lucian
 import com.quantum.wallet.bankwallet.ui.compose.components.body_remus
 import com.quantum.wallet.bankwallet.ui.compose.components.cell.CellUniversal
-import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionPremiumUniversalLawrence
 import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionUniversalLawrence
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead2_grey
 import com.quantum.wallet.bankwallet.uiv3.components.HSScaffold
@@ -297,9 +295,7 @@ fun AdvancedSearchContent(
 
     VSpacer(24.dp)
 
-    PremiumHeader()
-
-    SectionPremiumUniversalLawrence {
+    SectionUniversalLawrence {
         AdvancedSearchDropdown(
             title = R.string.Market_Filter_Sectors,
             value = if (uiState.sectors.size == 1 && uiState.sectors[0].item == null) null else uiState.sectors.size.toString(),
@@ -311,7 +307,7 @@ fun AdvancedSearchContent(
 
     VSpacer(24.dp)
 
-    SectionPremiumUniversalLawrence {
+    SectionUniversalLawrence {
         AdvancedSearchDropdown(
             title = R.string.Market_Filter_PriceChange,
             value = uiState.priceChange.title,
@@ -346,7 +342,7 @@ fun AdvancedSearchContent(
 
     VSpacer(24.dp)
 
-    SectionPremiumUniversalLawrence {
+    SectionUniversalLawrence {
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_OutperformedBtc,
             enabled = uiState.outperformedBtcOn,
@@ -386,7 +382,7 @@ fun AdvancedSearchContent(
 
     VSpacer(24.dp)
 
-    SectionPremiumUniversalLawrence {
+    SectionUniversalLawrence {
         AdvancedSearchSwitch(
             title = R.string.Market_Filter_SolidCex,
             subtitle = R.string.Market_Filter_SolidCex_Description,

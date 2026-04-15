@@ -152,7 +152,7 @@ private fun SecurityCenterScreen(
 
             SectionHeader(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                title = stringResource(R.string.Premium_DefenseSystem),
+                title = stringResource(R.string.Settings_DefenseSystem),
                 icon = R.drawable.defense_gradient_filled_24
             )
 
@@ -165,8 +165,8 @@ private fun SecurityCenterScreen(
                 CellPrimary(
                     middle = {
                         CellMiddleInfo(
-                            title = stringResource(R.string.Premium_UpgradeFeature_RobberyProtection).hs,
-                            subtitle = stringResource(R.string.Premium_UpgradeFeature_RobberyProtection_Description).hs
+                            title = stringResource(R.string.Settings_RobberyProtection).hs,
+                            subtitle = stringResource(R.string.Settings_RobberyProtection_Description).hs
                         )
                     },
                     right = {

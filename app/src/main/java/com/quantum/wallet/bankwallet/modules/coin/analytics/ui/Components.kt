@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -44,7 +43,6 @@ import com.quantum.wallet.bankwallet.ui.compose.components.StackBarSlice
 import com.quantum.wallet.bankwallet.ui.compose.components.StackedBarChart
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
 import com.quantum.wallet.bankwallet.ui.compose.components.headline1_bran
-import com.quantum.wallet.bankwallet.ui.compose.components.microSB_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_grey
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead2_grey
@@ -53,7 +51,6 @@ import com.quantum.wallet.chartview.ChartMinimal
 @Composable
 fun AnalyticsBlockHeader(
     title: String,
-    isPreview: Boolean = false,
     onInfoClick: (() -> Unit)? = null
 ) {
     Row(
@@ -77,32 +74,6 @@ fun AnalyticsBlockHeader(
                 )
             }
         }
-        if (isPreview) {
-            Spacer(Modifier.weight(1f))
-            PremiumBadge()
-        }
-    }
-}
-
-@Composable
-private fun PremiumBadge() {
-    val yellowGradient = Brush.linearGradient(
-        colors = listOf(
-            Color(0xFFFFD000),
-            Color(0xFFFFA800),
-        ),
-    )
-    Box(
-        modifier = Modifier
-            .background(
-                yellowGradient,
-                shape = RoundedCornerShape(8.dp)
-            )
-            .padding(horizontal = 6.dp, vertical = 2.dp)
-    ) {
-        microSB_leah(
-            text = stringResource(R.string.Premium_Title),
-        )
     }
 }
 
@@ -355,7 +326,6 @@ private fun Preview_HoldersBlockLocked() {
             titleRow = {
                 AnalyticsBlockHeader(
                     title = "Holders",
-                    isPreview = true,
                     onInfoClick = {}
                 )
             },
@@ -401,7 +371,6 @@ private fun Preview_AnalyticsBarChartDisabled() {
             titleRow = {
                 AnalyticsBlockHeader(
                     title = "Dex Volume",
-                    isPreview = true,
                     onInfoClick = {}
                 )
             },
@@ -434,7 +403,6 @@ private fun Preview_AnalyticsLineChartDisabled() {
             titleRow = {
                 AnalyticsBlockHeader(
                     title = "Dex Volume",
-                    isPreview = true,
                     onInfoClick = {}
                 )
             },
@@ -473,7 +441,6 @@ private fun Preview_HoldersBlock() {
             titleRow = {
                 AnalyticsBlockHeader(
                     title = "Defi Cap",
-                    isPreview = true,
                     onInfoClick = {}
                 )
             },
@@ -513,7 +480,6 @@ private fun Preview_AnalyticsRatingScale() {
             titleRow = {
                 AnalyticsBlockHeader(
                     title = "Dex Volume",
-                    isPreview = true,
                     onInfoClick = {}
                 )
             },

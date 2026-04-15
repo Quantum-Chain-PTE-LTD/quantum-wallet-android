@@ -149,7 +149,6 @@ private fun AnalyticsBlock(
             block.title?.let {
                 AnalyticsBlockHeader(
                     title = stringResource(it),
-                    isPreview = false,
                     onInfoClick = block.info?.let { info ->
                         {
                             navController.slideFromRight(R.id.coinAnalyticsInfoFragment, info)
@@ -282,7 +281,6 @@ private fun AnalyticsPreviewBlock(
             block.title?.let {
                 AnalyticsBlockHeader(
                     title = stringResource(it),
-                    isPreview = true,
                     onInfoClick = block.info?.let { info ->
                         {
                             navController.slideFromRight(R.id.coinAnalyticsInfoFragment, info)

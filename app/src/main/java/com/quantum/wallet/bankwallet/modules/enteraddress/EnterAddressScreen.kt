@@ -224,7 +224,7 @@ fun AddressCheck(
     if (checkResults.isNotEmpty()) {
         SectionHeader(
             modifier = Modifier.padding(horizontal = 16.dp),
-            title = stringResource(R.string.Premium_UpgradeFeature_SecureSend),
+            title = stringResource(R.string.Settings_SecureSend),
             icon = R.drawable.defense_gradient_filled_24
         )
         Column(
