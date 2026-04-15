@@ -12,7 +12,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -20,7 +25,6 @@ import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.BaseComposeFragment
 import com.quantum.wallet.bankwallet.core.setNavigationResultX
 import com.quantum.wallet.bankwallet.modules.evmfee.ButtonsGroupWithShade
-import com.quantum.wallet.bankwallet.modules.usersubscription.ui.highlightText
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryYellow
 import com.quantum.wallet.bankwallet.ui.compose.components.HsDivider
@@ -134,6 +138,42 @@ fun SwapTermsScreen(navController: NavController) {
                 text = stringResource(R.string.SwapTerms_BottomText)
             )
             VSpacer(24.dp)
+        }
+    }
+}
+
+private fun highlightText(
+    text: String,
+    textColor: Color,
+    highlightPart: String,
+    highlightColor: Color
+): AnnotatedString {
+    return buildAnnotatedString {
+        withStyle(SpanStyle(color = textColor)) {
+            val highlightIndex = text
+                .lowercase()
+                .indexOf(highlightPart.lowercase())
+
+            if (highlightIndex != -1) {
+                append(text.substring(0, highlightIndex))
+
+                withStyle(
+                    SpanStyle(color = highlightColor)
+                ) {
+                    append(
+                        text.substring(
+                            highlightIndex,
+                            highlightIndex + highlightPart.length
+                        )
+                    )
+                }
+
+                append(
+                    text.substring(highlightIndex + highlightPart.length)
+                )
+            } else {
+                append(text)
+            }
         }
     }
 }

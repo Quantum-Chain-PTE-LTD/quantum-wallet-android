@@ -49,7 +49,6 @@ Update imports that reference the renamed packages. **CRITICAL**: Do NOT modify 
 - `io.horizontalsystems.core` → `com.quantum.wallet.core`
 - `io.horizontalsystems.chartview` → `com.quantum.wallet.chartview`
 - `io.horizontalsystems.icons` → `com.quantum.wallet.icons`
-- `io.horizontalsystems.subscriptions` → `com.quantum.wallet.subscriptions`
 
 **DO NOT rename** (external kits — any `io.horizontalsystems.*` not in the list above):
 - `io.horizontalsystems.bitcoinkit`, `ethereumkit`, `solanakit`, `tronkit`, `tonkit`, `marketkit`, `feeratekit`, `hdwalletkit`, `monerokit`, `stellarkit`, `zcashbinancekt`, `pin`, etc.
@@ -73,13 +72,9 @@ Remove any leftover empty `io/horizontalsystems/` directories after all files ar
 1. `:core` — smallest, fewest files
 2. `:components:icons` — small
 3. `:components:chartview` — small
-4. `:subscriptions-core` — small
-5. `:subscriptions-dev` — small
-6. `:subscriptions-fdroid` — small
-7. `:subscriptions-google-play` — small
-8. `:app` (main source set) — largest, do last
-9. `:app` (test source set)
-10. `:app` (androidTest source set)
+4. `:app` (main source set) — largest, do last
+5. `:app` (test source set)
+6. `:app` (androidTest source set)
 
 ## Constraints
 
@@ -97,7 +92,7 @@ Remove any leftover empty `io/horizontalsystems/` directories after all files ar
   - Cleaned up empty old directories
   ```
 - Verify with: `grep -r "package io.horizontalsystems" --include="*.kt"` should return zero hits for internal packages
-- Verify with: `grep -r "import io.horizontalsystems.bankwallet\|import io.horizontalsystems.core\|import io.horizontalsystems.chartview\|import io.horizontalsystems.icons\|import io.horizontalsystems.subscriptions" --include="*.kt"` should return zero hits
+- Verify with: `grep -r "import io.horizontalsystems.bankwallet\|import io.horizontalsystems.core\|import io.horizontalsystems.chartview\|import io.horizontalsystems.icons" --include="*.kt"` should return zero hits
 
 ## Output
 

@@ -14,10 +14,6 @@ All internal packages must be renamed. Apply these substitutions to `package` de
 | `io.horizontalsystems.core` | `com.quantum.wallet.core` |
 | `io.horizontalsystems.chartview` | `com.quantum.wallet.chartview` |
 | `io.horizontalsystems.icons` | `com.quantum.wallet.icons` |
-| `io.horizontalsystems.subscriptions.core` | `com.quantum.wallet.subscriptions.core` |
-| `io.horizontalsystems.subscriptions.dev` | `com.quantum.wallet.subscriptions.dev` |
-| `io.horizontalsystems.subscriptions.fdroid` | `com.quantum.wallet.subscriptions.fdroid` |
-| `io.horizontalsystems.subscriptions.googleplay` | `com.quantum.wallet.subscriptions.googleplay` |
 
 ### Directory Path Mapping
 

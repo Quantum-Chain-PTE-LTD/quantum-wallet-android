@@ -24,7 +24,6 @@ import com.quantum.wallet.bankwallet.core.slideFromBottom
 import com.quantum.wallet.bankwallet.core.slideFromRight
 import com.quantum.wallet.bankwallet.core.stats.StatEvent
 import com.quantum.wallet.bankwallet.core.stats.StatPage
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.entities.ViewState
 import com.quantum.wallet.bankwallet.modules.coin.analytics.CoinAnalyticsModule.AnalyticsViewItem
@@ -41,8 +40,6 @@ import com.quantum.wallet.bankwallet.modules.coin.majorholders.CoinMajorHoldersF
 import com.quantum.wallet.bankwallet.modules.coin.overview.ui.Loading
 import com.quantum.wallet.bankwallet.modules.coin.reports.CoinReportsFragment
 import com.quantum.wallet.bankwallet.modules.metricchart.ProChartFragment
-import com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog
-import com.quantum.wallet.bankwallet.modules.premium.PremiumFeature
 import com.quantum.wallet.bankwallet.ui.compose.HSSwipeRefresh
 import com.quantum.wallet.bankwallet.ui.compose.components.InfoText
 import com.quantum.wallet.bankwallet.ui.compose.components.ListEmptyView
@@ -152,7 +149,6 @@ private fun AnalyticsBlock(
             block.title?.let {
                 AnalyticsBlockHeader(
                     title = stringResource(it),
-                    isPreview = false,
                     onInfoClick = block.info?.let { info ->
                         {
                             navController.slideFromRight(R.id.coinAnalyticsInfoFragment, info)
@@ -285,7 +281,6 @@ private fun AnalyticsPreviewBlock(
             block.title?.let {
                 AnalyticsBlockHeader(
                     title = stringResource(it),
-                    isPreview = true,
                     onInfoClick = block.info?.let { info ->
                         {
                             navController.slideFromRight(R.id.coinAnalyticsInfoFragment, info)
@@ -303,16 +298,7 @@ private fun AnalyticsPreviewBlock(
                 }
             }
         },
-        onClick = {
-            navController.slideFromBottom(
-                R.id.defenseSystemFeatureDialog,
-                DefenseSystemFeatureDialog.Input(PremiumFeature.TokenInsightsFeature)
-            )
-            stat(
-                page = StatPage.CoinAnalytics,
-                event = StatEvent.OpenPremium(block.statTrigger ?: StatPremiumTrigger.Other)
-            )
-        }
+        onClick = null
     ) {
         if (block.value != null) {
             AnalyticsContentNumber(

@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.quantum.wallet.bankwallet.R
-import com.quantum.wallet.bankwallet.R.id.defenseSystemFeatureDialog
 import com.quantum.wallet.bankwallet.core.BaseComposeFragment
 import com.quantum.wallet.bankwallet.core.alternativeImageUrl
 import com.quantum.wallet.bankwallet.core.badge
@@ -55,8 +54,6 @@ import com.quantum.wallet.bankwallet.modules.evmfee.Cautions
 import com.quantum.wallet.bankwallet.modules.multiswap.settings.SwapSettingsRecipientFragment
 import com.quantum.wallet.bankwallet.modules.multiswap.settings.SwapSettingsSlippageFragment
 import com.quantum.wallet.bankwallet.modules.multiswap.ui.DataFieldFee
-import com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog.Input
-import com.quantum.wallet.bankwallet.modules.premium.PremiumFeature
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
 import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryDefault
@@ -84,7 +81,6 @@ import com.quantum.wallet.bankwallet.uiv3.components.info.TextBlock
 import com.quantum.wallet.bankwallet.uiv3.components.section.SectionHeader
 import com.quantum.wallet.core.helpers.HudHelper
 import io.horizontalsystems.marketkit.models.Token
-import com.quantum.wallet.subscriptions.core.SwapProtection
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -402,17 +398,6 @@ private fun SwapConfirmInternal(
                 ) {
                     CellRightControlsSwitcher(
                         checked = uiState.mevProtectionEnabled,
-                        confirmChange = {
-                            if (!uiState.mevProtectionActionAllowed) {
-                                navController.slideFromBottom(
-                                    defenseSystemFeatureDialog,
-                                    Input(PremiumFeature.getFeature(paidAction = SwapProtection))
-                                )
-                                false
-                            } else {
-                                true
-                            }
-                        },
                         onCheckedChange = { enabled ->
                             viewModel.setMevProtectionEnabled(enabled)
                         }

@@ -36,20 +36,17 @@ import com.quantum.wallet.bankwallet.BuildConfig
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.App
 import com.quantum.wallet.bankwallet.core.managers.RateAppManager
-import com.quantum.wallet.bankwallet.core.paidAction
 import com.quantum.wallet.bankwallet.core.providers.Translator
 import com.quantum.wallet.bankwallet.core.slideFromBottom
 import com.quantum.wallet.bankwallet.core.slideFromRight
 import com.quantum.wallet.bankwallet.core.stats.StatEvent
 import com.quantum.wallet.bankwallet.core.stats.StatPage
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.modules.contacts.ContactsFragment
 import com.quantum.wallet.bankwallet.modules.contacts.Mode
 import com.quantum.wallet.bankwallet.modules.manageaccount.dialogs.BackupRequiredDialog
 import com.quantum.wallet.bankwallet.modules.manageaccounts.ManageAccountsModule
 import com.quantum.wallet.bankwallet.modules.settings.banners.DonateBanner
-import com.quantum.wallet.bankwallet.modules.settings.banners.SubscriptionBanner
 import com.quantum.wallet.bankwallet.modules.settings.main.ui.BannerCarousel
 import com.quantum.wallet.bankwallet.modules.walletconnect.WCAccountTypeNotSupportedDialog
 import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
@@ -59,16 +56,13 @@ import com.quantum.wallet.bankwallet.ui.compose.components.BadgeText
 import com.quantum.wallet.bankwallet.ui.compose.components.CellSingleLineLawrenceSection
 import com.quantum.wallet.bankwallet.ui.compose.components.CellUniversalLawrenceSection
 import com.quantum.wallet.bankwallet.ui.compose.components.HsDivider
-import com.quantum.wallet.bankwallet.ui.compose.components.PremiumHeader
 import com.quantum.wallet.bankwallet.ui.compose.components.RowUniversal
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
 import com.quantum.wallet.bankwallet.ui.compose.components.body_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.caption_grey
-import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionPremiumUniversalLawrence
+import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionUniversalLawrence
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_grey
 import com.quantum.wallet.bankwallet.ui.helpers.LinkHelper
-import com.quantum.wallet.subscriptions.core.PrioritySupport
-import com.quantum.wallet.subscriptions.core.SecureSend
 
 @Composable
 fun SettingsScreen(
@@ -111,19 +105,6 @@ private fun SettingSections(
     val isFDroidBuild = BuildConfig.FDROID_BUILD
 
     val banners = buildList<@Composable () -> Unit> {
-        if (uiState.showPremiumBanner) {
-            add {
-                SubscriptionBanner(
-                    onClick = {
-                        navController.slideFromBottom(R.id.buySubscriptionFragment)
-                        stat(
-                            page = StatPage.Settings,
-                            event = StatEvent.OpenPremium(StatPremiumTrigger.Banner)
-                        )
-                    }
-                )
-            }
-        }
         if (isFDroidBuild) {
             add {
                 DonateBanner(
@@ -285,18 +266,6 @@ private fun SettingSections(
                     }
                 )
             }
-            if (!BuildConfig.FDROID_BUILD) {
-                add {
-                    HsSettingCell(
-                        R.string.Settings_Subscription,
-                        R.drawable.premium_24,
-                        value = if (uiState.hasSubscription) stringResource(R.string.SettingsSubscription_Active) else null,
-                        onClick = {
-                            navController.slideFromRight(R.id.subscriptionFragment)
-                        }
-                    )
-                }
-            }
 
             add {
                 HsSettingCell(
@@ -315,15 +284,9 @@ private fun SettingSections(
         }
     )
 
-    VSpacer(4.dp)
+    VSpacer(24.dp)
 
-    if (isFDroidBuild) {
-        PremiumHeader(R.string.Premium_TitleForDroid)
-    } else {
-        PremiumHeader()
-    }
-
-    SectionPremiumUniversalLawrence {
+    SectionUniversalLawrence {
         HsSettingCell(
             title = if(isFDroidBuild) R.string.Settings_Support else R.string.Settings_VipSupport,
             icon = R.drawable.ic_support_yellow_24,
@@ -332,15 +295,8 @@ private fun SettingSections(
                 if (isFDroidBuild) {
                     LinkHelper.openLinkInAppBrowser(context, viewModel.fdroidSupportLink)
                 } else {
-                    navController.paidAction(PrioritySupport) {
-                        LinkHelper.openLinkInAppBrowser(context, viewModel.vipSupportLink)
-                    }
+                    LinkHelper.openLinkInAppBrowser(context, viewModel.vipSupportLink)
                 }
-
-                stat(
-                    page = StatPage.Settings,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.VipSupport)
-                )
             }
         )
         HsDivider()
@@ -349,13 +305,7 @@ private fun SettingSections(
             icon = R.drawable.ic_radar_24,
             iconTint = ComposeAppTheme.colors.jacob,
             onClick = {
-                navController.paidAction(SecureSend) {
-                    navController.slideFromRight(R.id.addressCheckFragment)
-                }
-                stat(
-                    page = StatPage.Settings,
-                    event = StatEvent.OpenPremium(StatPremiumTrigger.AddressChecker)
-                )
+                navController.slideFromRight(R.id.addressCheckFragment)
             }
         )
     }

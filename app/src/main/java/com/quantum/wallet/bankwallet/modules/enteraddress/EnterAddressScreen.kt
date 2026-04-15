@@ -34,8 +34,6 @@ import com.quantum.wallet.bankwallet.entities.Address
 import com.quantum.wallet.bankwallet.modules.address.AddressParserModule
 import com.quantum.wallet.bankwallet.modules.address.AddressParserViewModel
 import com.quantum.wallet.bankwallet.modules.evmfee.ButtonsGroupWithShade
-import com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog
-import com.quantum.wallet.bankwallet.modules.premium.PremiumFeature
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryYellow
 import com.quantum.wallet.bankwallet.ui.compose.components.FormsInputAddress
@@ -118,14 +116,7 @@ fun EnterAddressScreen(
                         uiState.addressValidationError,
                         uiState.checkResults,
                     ) {
-                        if (uiState.hasPremium){
-                            navController.slideFromBottom(R.id.secureSendConfigDialog)
-                        } else {
-                            navController.slideFromBottom(
-                                R.id.defenseSystemFeatureDialog,
-                                DefenseSystemFeatureDialog.Input(PremiumFeature.SecureSendFeature)
-                            )
-                        }
+                        navController.slideFromBottom(R.id.secureSendConfigDialog)
                     }
                 }
 
@@ -233,7 +224,7 @@ fun AddressCheck(
     if (checkResults.isNotEmpty()) {
         SectionHeader(
             modifier = Modifier.padding(horizontal = 16.dp),
-            title = stringResource(R.string.Premium_UpgradeFeature_SecureSend),
+            title = stringResource(R.string.Settings_SecureSend),
             icon = R.drawable.defense_gradient_filled_24
         )
         Column(

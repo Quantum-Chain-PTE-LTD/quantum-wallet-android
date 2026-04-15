@@ -13,12 +13,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.quantum.wallet.bankwallet.R
-import com.quantum.wallet.bankwallet.core.paidAction
 import com.quantum.wallet.bankwallet.core.slideFromBottomForResult
 import com.quantum.wallet.bankwallet.core.slideFromRight
 import com.quantum.wallet.bankwallet.core.stats.StatEvent
 import com.quantum.wallet.bankwallet.core.stats.StatPage
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.core.stats.StatSection
 import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.core.stats.statPeriod
@@ -41,7 +39,6 @@ import com.quantum.wallet.bankwallet.uiv3.components.controls.ButtonVariant
 import com.quantum.wallet.bankwallet.uiv3.components.controls.HSButton
 import com.quantum.wallet.bankwallet.uiv3.components.controls.HSDropdownButton
 import com.quantum.wallet.bankwallet.uiv3.components.controls.HSIconButton
-import com.quantum.wallet.subscriptions.core.TradeSignals
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -160,21 +157,13 @@ fun MarketFavoritesScreen(
                                             title = stringResource(id = R.string.Market_Signals),
                                             onClick = {
                                                 if (!uiState.showSignal) {
-                                                    navController.paidAction(TradeSignals) {
-                                                        navController.slideFromBottomForResult<MarketSignalsFragment.Result>(
+                                                    navController.slideFromBottomForResult<MarketSignalsFragment.Result>(
                                                             R.id.marketSignalsFragment
                                                         ) {
                                                             if (it.enabled) {
                                                                 viewModel.showSignals()
                                                             }
                                                         }
-                                                    }
-                                                    stat(
-                                                        page = StatPage.MarketOverview,
-                                                        event = StatEvent.OpenPremium(
-                                                            StatPremiumTrigger.TradingSignal),
-                                                        section = StatSection.Watchlist
-                                                    )
                                                 } else {
                                                     viewModel.hideSignals()
                                                 }

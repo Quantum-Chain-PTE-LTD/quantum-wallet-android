@@ -23,7 +23,6 @@ import androidx.navigation.NavController
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.BaseComposeFragment
 import com.quantum.wallet.bankwallet.core.getInput
-import com.quantum.wallet.bankwallet.core.paidAction
 import com.quantum.wallet.bankwallet.core.setNavigationResultX
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
@@ -36,7 +35,6 @@ import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionUniversal
 import com.quantum.wallet.bankwallet.uiv3.components.HSScaffold
 import com.quantum.wallet.core.findNavController
 import io.horizontalsystems.marketkit.models.Blockchain
-import com.quantum.wallet.subscriptions.core.TokenInsights
 import kotlinx.parcelize.Parcelize
 
 class VaultBlockchainsSelectorFragment : BaseComposeFragment() {
@@ -128,12 +126,10 @@ private fun FilterByBlockchainsScreen(
                             blockchain = item,
                             checked = item in selectedBlockchains,
                         ) {
-                            navController.paidAction(TokenInsights) {
-                                if (item in selectedBlockchains) {
-                                    selectedBlockchains.remove(item)
-                                } else {
-                                    selectedBlockchains.add(item)
-                                }
+                            if (item in selectedBlockchains) {
+                                selectedBlockchains.remove(item)
+                            } else {
+                                selectedBlockchains.add(item)
                             }
                         }
                     }

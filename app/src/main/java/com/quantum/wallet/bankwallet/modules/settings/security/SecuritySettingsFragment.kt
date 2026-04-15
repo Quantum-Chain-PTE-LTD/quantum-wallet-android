@@ -27,26 +27,18 @@ import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.BaseComposeFragment
 import com.quantum.wallet.bankwallet.core.authorizedAction
 import com.quantum.wallet.bankwallet.core.ensurePinSet
-import com.quantum.wallet.bankwallet.core.paidAction
 import com.quantum.wallet.bankwallet.core.slideFromBottom
 import com.quantum.wallet.bankwallet.core.slideFromRight
 import com.quantum.wallet.bankwallet.core.stats.StatEvent
 import com.quantum.wallet.bankwallet.core.stats.StatPage
-import com.quantum.wallet.bankwallet.core.stats.StatPremiumTrigger
 import com.quantum.wallet.bankwallet.core.stats.stat
-import com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog
-import com.quantum.wallet.bankwallet.modules.premium.PremiumFeature
 import com.quantum.wallet.bankwallet.modules.settings.security.passcode.SecurityPasscodeSettingsModule
 import com.quantum.wallet.bankwallet.modules.settings.security.passcode.SecuritySettingsViewModel
 import com.quantum.wallet.bankwallet.modules.settings.security.ui.PasscodeBlock
-import com.quantum.wallet.bankwallet.modules.usersubscription.BuySubscriptionModel.descriptionStringRes
-import com.quantum.wallet.bankwallet.modules.usersubscription.BuySubscriptionModel.titleStringRes
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.HsDivider
 import com.quantum.wallet.bankwallet.ui.compose.components.RowUniversal
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
-import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionPremiumUniversalLawrence
-import com.quantum.wallet.bankwallet.uiv3.components.BoxBordered
 import com.quantum.wallet.bankwallet.uiv3.components.HSScaffold
 import com.quantum.wallet.bankwallet.uiv3.components.cell.CellMiddleInfo
 import com.quantum.wallet.bankwallet.uiv3.components.cell.CellPrimary
@@ -59,9 +51,6 @@ import com.quantum.wallet.bankwallet.uiv3.components.controls.ButtonVariant
 import com.quantum.wallet.bankwallet.uiv3.components.controls.HSButton
 import com.quantum.wallet.bankwallet.uiv3.components.controls.HSIconButton
 import com.quantum.wallet.bankwallet.uiv3.components.section.SectionHeader
-import com.quantum.wallet.subscriptions.core.RobberyProtection
-import com.quantum.wallet.subscriptions.core.SecureSend
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 
 class SecuritySettingsFragment : BaseComposeFragment() {
 
@@ -163,85 +152,39 @@ private fun SecurityCenterScreen(
 
             SectionHeader(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                title = stringResource(R.string.Premium_DefenseSystem),
+                title = stringResource(R.string.Settings_DefenseSystem),
                 icon = R.drawable.defense_gradient_filled_24
             )
 
-            SectionPremiumUniversalLawrence {
-                uiState.defenseSystemActions.forEachIndexed { i, defenseAction ->
-                    val action = defenseAction.action
-                    BoxBordered(top = i != 0) {
-                        CellPrimary(
-                            middle = {
-                                CellMiddleInfo(
-                                    title = stringResource(action.titleStringRes).hs,
-                                    subtitle = stringResource(action.descriptionStringRes).hs
-                                )
-                            },
-                            right = {
-                                CellRightControlsSwitcher(
-                                    checked = defenseAction.enabled,
-                                    confirmChange = {
-                                        if (UserSubscriptionManager.isActionAllowed(action)) {
-                                            if (action == SecureSend) {
-                                                navController.slideFromBottom(R.id.secureSendConfigDialog)
-                                                false
-                                            } else {
-                                                true
-                                            }
-                                        } else {
-                                            navController.slideFromBottom(
-                                                R.id.defenseSystemFeatureDialog,
-                                                DefenseSystemFeatureDialog.Input(PremiumFeature.getFeature(action))
-                                            )
-                                            false
-                                        }
+            Column(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(ComposeAppTheme.colors.lawrence)
+            ) {
+                CellPrimary(
+                    middle = {
+                        CellMiddleInfo(
+                            title = stringResource(R.string.Settings_RobberyProtection).hs,
+                            subtitle = stringResource(R.string.Settings_RobberyProtection_Description).hs
+                        )
+                    },
+                    right = {
+                        val onClick = {
+                            if (uiState.pinEnabled) {
+                                navController.authorizedAction {
+                                    if (uiState.duressPinEnabled) {
+                                        navController.slideFromRight(R.id.editDuressPinFragment)
+                                    } else {
+                                        navController.slideFromRight(R.id.setDuressPinIntroFragment)
                                     }
-                                ) {
-                                    securitySettingsViewModel.setActionEnabled(action, it)
-                                }
-                            },
-                            onClick = if (action == SecureSend) {
-                                {
-                                    navController.slideFromBottom(R.id.secureSendConfigDialog)
                                 }
                             } else {
-                                null
-                            }
-                        )
-                    }
-                }
-
-                BoxBordered(top = true) {
-                    CellPrimary(
-                        middle = {
-                            CellMiddleInfo(
-                                title = stringResource(R.string.Premium_UpgradeFeature_RobberyProtection).hs,
-                                subtitle = stringResource(R.string.Premium_UpgradeFeature_RobberyProtection_Description).hs
-                            )
-                        },
-                        right = {
-                            val onClick = {
-                                navController.paidAction(RobberyProtection) {
-                                    if (uiState.pinEnabled) {
-                                        navController.authorizedAction {
-                                            if (uiState.duressPinEnabled) {
-                                                navController.slideFromRight(R.id.editDuressPinFragment)
-                                            } else {
-                                                navController.slideFromRight(R.id.setDuressPinIntroFragment)
-                                            }
-                                        }
-                                    } else {
-                                        navController.ensurePinSet(R.string.PinSet_ForDuress) {
-                                            navController.slideFromRight(R.id.setDuressPinIntroFragment)
-                                        }
-                                    }
+                                navController.ensurePinSet(R.string.PinSet_ForDuress) {
+                                    navController.slideFromRight(R.id.setDuressPinIntroFragment)
                                 }
-                                stat(
-                                    page = StatPage.Security,
-                                    event = StatEvent.OpenPremium(StatPremiumTrigger.DuressMode)
-                                )
                             }
+                        }
 
                             if (uiState.duressPinEnabled) {
                                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -276,7 +219,6 @@ private fun SecurityCenterScreen(
                         }
                     )
                 }
-            }
 
             VSpacer(height = 32.dp)
         }

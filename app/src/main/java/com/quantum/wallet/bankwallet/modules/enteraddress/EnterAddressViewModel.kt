@@ -24,9 +24,6 @@ import com.quantum.wallet.bankwallet.modules.send.address.AddressExtractor
 import com.quantum.wallet.bankwallet.modules.send.address.EnterAddressValidator
 import io.horizontalsystems.marketkit.models.Token
 import io.horizontalsystems.marketkit.models.TokenQuery
-import com.quantum.wallet.subscriptions.core.ScamProtection
-import com.quantum.wallet.subscriptions.core.SecureSend
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -63,7 +60,7 @@ class EnterAddressViewModel(
     private var inputState: DataState<Address>? = null
     private var parseAddressJob: Job? = null
     private val checkJobs: MutableMap<AddressCheckType, Job> = mutableMapOf()
-    private var hasPremium = UserSubscriptionManager.isActionAllowed(SecureSend)
+    private var hasPremium = true
 
     private val addressExtractor = AddressExtractor(token.blockchainType, addressUriParser)
     private val addressCheckEnabled: Boolean
@@ -82,7 +79,6 @@ class EnterAddressViewModel(
 
     init {
         initialAddress?.let { onEnterAddress(it) }
-        observeSubscription()
         observeCheckSettings()
     }
 
@@ -93,31 +89,10 @@ class EnterAddressViewModel(
     }
 
     private fun buildInitialCheckResults(): Map<AddressCheckType, AddressCheckData> =
-        if (UserSubscriptionManager.isActionAllowed(ScamProtection)) {
-            availableCheckTypes.associateWith { type ->
-                if (isCheckEnabled(type)) AddressCheckData(inProgress = true, disabled = false)
-                else AddressCheckData(inProgress = false, disabled = true)
-            }
-        } else {
-            availableCheckTypes.associateWith {
-                AddressCheckData(inProgress = false, disabled = false, checkResult = AddressCheckResult.NotAllowed)
-            }
+        availableCheckTypes.associateWith { type ->
+            if (isCheckEnabled(type)) AddressCheckData(inProgress = true, disabled = false)
+            else AddressCheckData(inProgress = false, disabled = true)
         }
-
-    private fun observeSubscription() {
-        viewModelScope.launch {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect { subscription ->
-                hasPremium = UserSubscriptionManager.isActionAllowed(SecureSend)
-                if (value.isNotEmpty()) {
-                    cancelAllJobs()
-                    checkResults = buildInitialCheckResults()
-                    addressValidationInProgress = true
-                    emitState()
-                    processAddress(value)
-                }
-            }
-        }
-    }
 
     private fun observeCheckSettings() {
         viewModelScope.launch {
@@ -261,15 +236,6 @@ class EnterAddressViewModel(
 
     private fun dispatchChecks(address: Address) {
         if (!addressCheckEnabled) {
-            addressValidationInProgress = false
-            inputState = DataState.Success(address)
-            emitState()
-            return
-        }
-        if (!UserSubscriptionManager.isActionAllowed(ScamProtection)) {
-            checkResults = availableCheckTypes.associateWith {
-                AddressCheckData(inProgress = false, disabled = false, checkResult = AddressCheckResult.NotAllowed)
-            }
             addressValidationInProgress = false
             inputState = DataState.Success(address)
             emitState()

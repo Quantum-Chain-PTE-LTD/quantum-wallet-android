@@ -46,8 +46,6 @@ import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.getInputX
 import com.quantum.wallet.bankwallet.core.imageUrl
 import com.quantum.wallet.bankwallet.core.slideFromBottom
-import com.quantum.wallet.bankwallet.modules.premium.DefenseSystemFeatureDialog
-import com.quantum.wallet.bankwallet.modules.premium.PremiumFeature
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.HsImage
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
@@ -185,13 +183,7 @@ fun WCSessionScreen(
                     .clip(RoundedCornerShape(16.dp))
                     .background(ComposeAppTheme.colors.lawrence)
                     .border(1.dp, ComposeAppTheme.colors.blade, RoundedCornerShape(16.dp))
-                    .padding(16.dp)
-                    .clickable(enabled = !uiState.scamProtectionActionAllowed) {
-                        navController.slideFromBottom(
-                            R.id.defenseSystemFeatureDialog,
-                            DefenseSystemFeatureDialog.Input(PremiumFeature.ScamProtectionFeature)
-                        )
-                    },
+                    .padding(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -202,21 +194,12 @@ fun WCSessionScreen(
                     modifier = Modifier.widthIn(max = 200.dp),
                     contentAlignment = Alignment.CenterEnd
                 ) {
-                    if (!uiState.scamProtectionActionAllowed) {
-                        Icon(
-                            painter = painterResource(R.drawable.lock_24),
-                            contentDescription = null,
-                            tint = ComposeAppTheme.colors.grey,
-                            modifier = Modifier.size(20.dp)
-                        )
-                    } else {
-                        when (uiState.whiteListState) {
-                            WCWhiteListState.InWhiteList ->
-                                subheadSB_remus(text = stringResource(R.string.WalletConnect_DAppCheck_Secure))
-                            WCWhiteListState.NotInWhiteList ->
-                                subheadSB_lucian(text = stringResource(R.string.WalletConnect_DAppCheck_Risky))
-                            else -> {}
-                        }
+                    when (uiState.whiteListState) {
+                        WCWhiteListState.InWhiteList ->
+                            subheadSB_remus(text = stringResource(R.string.WalletConnect_DAppCheck_Secure))
+                        WCWhiteListState.NotInWhiteList ->
+                            subheadSB_lucian(text = stringResource(R.string.WalletConnect_DAppCheck_Risky))
+                        else -> {}
                     }
                 }
             }
@@ -240,8 +223,7 @@ fun WCSessionScreen(
                 text = stringResource(R.string.WalletConnect_ConnectWarning),
             )
 
-            if (uiState.scamProtectionActionAllowed &&
-                uiState.whiteListState == WCWhiteListState.NotInWhiteList
+            if (uiState.whiteListState == WCWhiteListState.NotInWhiteList
             ) {
                 VSpacer(16.dp)
                 AlertCard(

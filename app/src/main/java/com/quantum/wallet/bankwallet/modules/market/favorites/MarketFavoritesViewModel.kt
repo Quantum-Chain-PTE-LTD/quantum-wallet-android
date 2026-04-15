@@ -10,7 +10,6 @@ import com.quantum.wallet.bankwallet.entities.DataState
 import com.quantum.wallet.bankwallet.entities.ViewState
 import com.quantum.wallet.bankwallet.modules.market.MarketViewItem
 import com.quantum.wallet.bankwallet.modules.market.TimeDuration
-import com.quantum.wallet.subscriptions.core.UserSubscriptionManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.rx2.asFlow
@@ -54,12 +53,6 @@ class MarketFavoritesViewModel(
                     DataState.Loading -> {}
                 }
                 emitState()
-            }
-        }
-
-        viewModelScope.launch {
-            UserSubscriptionManager.activeSubscriptionStateFlow.collect {
-                refresh()
             }
         }
 

@@ -9,7 +9,7 @@ You are the **Verification Agent** for the Quantum Wallet rebrand. Your job is t
 
 ### Search 1 — Old internal package references
 
-Search all `.kt`, `.kts`, `.java`, `.xml`, `.gradle` files for `io.horizontalsystems.bankwallet`, `io.horizontalsystems.core`, `io.horizontalsystems.chartview`, `io.horizontalsystems.icons`, and `io.horizontalsystems.subscriptions`.
+Search all `.kt`, `.kts`, `.java`, `.xml`, `.gradle` files for `io.horizontalsystems.bankwallet`, `io.horizontalsystems.core`, `io.horizontalsystems.chartview`, and `io.horizontalsystems.icons`.
 
 **Expected result**: Zero hits. Any hit is a missed rename.
 
@@ -46,7 +46,6 @@ Verify that old source directories no longer exist:
 - `app/src/main/java/io/horizontalsystems/bankwallet/` should NOT exist
 - `core/src/main/java/io/horizontalsystems/core/` should NOT exist
 - `components/*/src/main/java/io/horizontalsystems/` should NOT exist
-- `subscriptions-*/src/main/java/io/horizontalsystems/` should NOT exist
 
 Verify new directories exist:
 - `app/src/main/java/com/quantum/wallet/bankwallet/` should exist

@@ -1,7 +1,6 @@
 package com.quantum.wallet.bankwallet.ui.compose.components.cell
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -84,41 +82,11 @@ fun CellUniversalFixedHeight(
 }
 
 @Composable
-fun SectionPremiumUniversalLawrence(
-    content: @Composable() (ColumnScope.() -> Unit),
-) {
-    SectionPremiumUniversal(
-        backgroundColor = ComposeAppTheme.colors.lawrence,
-        content = content
-    )
-}
-
-@Composable
 fun SectionUniversalLawrence(
     content: @Composable() (ColumnScope.() -> Unit),
 ) {
     SectionUniversal(
         backgroundColor = ComposeAppTheme.colors.lawrence,
-        content = content
-    )
-}
-
-@Composable
-private fun SectionPremiumUniversal(
-    backgroundColor: Color,
-    content: @Composable() (ColumnScope.() -> Unit),
-) {
-    val brush = Brush.horizontalGradient(
-        0.0f to Color(0xFFFFAA00),
-        1.0f to Color(0xFFFE4A11),
-    )
-
-    Column(
-        modifier = Modifier
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .border(1.dp, brush, RoundedCornerShape(16.dp))
-            .background(backgroundColor),
         content = content
     )
 }

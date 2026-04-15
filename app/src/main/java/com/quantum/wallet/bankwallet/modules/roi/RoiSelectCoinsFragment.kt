@@ -27,7 +27,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.BaseComposeFragment
-import com.quantum.wallet.bankwallet.core.paidAction
 import com.quantum.wallet.bankwallet.modules.evmfee.ButtonsGroupWithShade
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.Select
@@ -45,7 +44,6 @@ import com.quantum.wallet.bankwallet.ui.compose.components.cell.CellUniversal
 import com.quantum.wallet.bankwallet.ui.compose.components.cell.SectionUniversalLawrence
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_grey
 import com.quantum.wallet.core.helpers.HudHelper
-import com.quantum.wallet.subscriptions.core.TokenInsights
 
 class RoiSelectCoinsFragment : BaseComposeFragment() {
     @Composable
@@ -108,9 +106,7 @@ fun RoiSelectCoinsScreen(navController: NavController) {
                                 iconRight = painterResource(R.drawable.ic_down_arrow_20),
                                 title = period.title.getString(),
                                 onClick = {
-                                    navController.paidAction(TokenInsights) {
-                                        dialog = PeriodSelectorDialog(text, period, i)
-                                    }
+                                                                            dialog = PeriodSelectorDialog(text, period, i)
                                 }
                             )
                         }
@@ -130,15 +126,13 @@ fun RoiSelectCoinsScreen(navController: NavController) {
                     val checked = uiState.selectedCoins.contains(item.performanceCoin)
                     val view = LocalView.current
                     val onClick = {
-                        navController.paidAction(TokenInsights) {
-                            try {
-                                viewModel.onToggle(item, !checked)
-                            } catch (e: Throwable) {
-                                HudHelper.showWarningMessage(
-                                    view,
-                                    text = e.message ?: e.javaClass.simpleName
-                                )
-                            }
+                        try {
+                            viewModel.onToggle(item, !checked)
+                        } catch (e: Throwable) {
+                            HudHelper.showWarningMessage(
+                                view,
+                                text = e.message ?: e.javaClass.simpleName
+                            )
                         }
                     }
                     CellUniversal(

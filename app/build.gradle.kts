@@ -398,8 +398,6 @@ dependencies {
     implementation(project(":components:icons"))
     implementation(project(":components:chartview"))
 
-    implementation(project(":subscriptions-core"))
-
     // UI Tests
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.test.runner)
@@ -415,20 +413,6 @@ dependencies {
     testImplementation(libs.spek.dsl.jvm)
     testRuntimeOnly(libs.spek.runner.junit5)
     testRuntimeOnly(libs.kotlin.reflect)
-}
-
-// Flavor-specific dependencies must be added after evaluation
-afterEvaluate {
-    dependencies {
-        "baseDebugImplementation"(project(":subscriptions-dev"))
-        findProject(":subscriptions-google-play")?.let {
-            "baseReleaseImplementation"(it)
-        }
-
-        "fdroidImplementation"(project(":subscriptions-fdroid"))
-        "fdroidCiImplementation"(project(":subscriptions-fdroid"))
-        "ciImplementation"(project(":subscriptions-dev"))
-    }
 }
 
 configurations.all {
