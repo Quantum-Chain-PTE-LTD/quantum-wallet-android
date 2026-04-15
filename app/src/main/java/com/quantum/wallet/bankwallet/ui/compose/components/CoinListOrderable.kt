@@ -26,7 +26,7 @@ import com.quantum.wallet.bankwallet.core.alternativeImageUrl
 import com.quantum.wallet.bankwallet.core.iconPlaceholder
 import com.quantum.wallet.bankwallet.core.imageUrl
 import com.quantum.wallet.bankwallet.modules.market.MarketViewItem
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.DraggableCardSimple
+import com.quantum.wallet.bankwallet.uiv3.components.DraggableCardSimple
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.uiv3.components.BoxBordered
 import com.quantum.wallet.bankwallet.uiv3.components.controls.HSCellButton

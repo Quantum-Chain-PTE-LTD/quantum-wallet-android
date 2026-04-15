@@ -11,7 +11,6 @@ import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.App
 import com.quantum.wallet.bankwallet.core.managers.ActionCompletedDelegate
 import com.quantum.wallet.bankwallet.modules.balance.OpenSendTokenSelect
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
 import kotlinx.parcelize.Parcelize
 
 object MainModule {
@@ -28,8 +27,6 @@ object MainModule {
                 App.releaseNotesManager,
                 App.donationShowManager,
                 App.localStorage,
-                App.wcSessionManager,
-                App.wcManager,
                 App.networkManager,
                 ActionCompletedDelegate
             ) as T
@@ -96,7 +93,6 @@ object MainModule {
         val showWhatsNew: Boolean,
         val showDonationPage: Boolean,
         val torEnabled: Boolean,
-        val wcSupportState: WCManager.SupportState?,
         val openSend: OpenSendTokenSelect?,
         val selectedTabItem: MainNavigation
     )

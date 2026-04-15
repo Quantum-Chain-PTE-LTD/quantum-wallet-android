@@ -44,12 +44,9 @@ import com.quantum.wallet.bankwallet.core.stats.StatPage
 import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.modules.contacts.ContactsFragment
 import com.quantum.wallet.bankwallet.modules.contacts.Mode
-import com.quantum.wallet.bankwallet.modules.manageaccount.dialogs.BackupRequiredDialog
 import com.quantum.wallet.bankwallet.modules.manageaccounts.ManageAccountsModule
 import com.quantum.wallet.bankwallet.modules.settings.banners.DonateBanner
 import com.quantum.wallet.bankwallet.modules.settings.main.ui.BannerCarousel
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCAccountTypeNotSupportedDialog
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.AppBar
 import com.quantum.wallet.bankwallet.ui.compose.components.BadgeText
@@ -167,67 +164,7 @@ private fun SettingSections(
                     stat(page = StatPage.AboutApp, event = StatEvent.Open(StatPage.Privacy))
                 }
             )
-        }, {
-            HsSettingCell(
-                R.string.DAppConnection_Title,
-                R.drawable.link_24,
-                value = (uiState.wcCounterType as? MainSettingsModule.CounterType.SessionCounter)?.number?.toString(),
-                counterBadge = (uiState.wcCounterType as? MainSettingsModule.CounterType.PendingRequestCounter)?.number?.toString(),
-                onClick = {
-                    when (val state = viewModel.walletConnectSupportState) {
-                        WCManager.SupportState.Supported -> {
-                            navController.slideFromRight(R.id.wcListFragment)
-
-                            stat(
-                                page = StatPage.Settings,
-                                event = StatEvent.Open(StatPage.WalletConnect)
-                            )
-                        }
-
-                        WCManager.SupportState.NotSupportedDueToNoActiveAccount -> {
-                            navController.slideFromBottom(R.id.wcErrorNoAccountFragment)
-                        }
-
-                        is WCManager.SupportState.NotSupportedDueToNonBackedUpAccount -> {
-                            val text = Translator.getString(R.string.WalletConnect_Error_NeedBackup)
-                            navController.slideFromBottom(
-                                R.id.backupRequiredDialog,
-                                BackupRequiredDialog.Input(state.account, text)
-                            )
-
-                            stat(
-                                page = StatPage.Settings,
-                                event = StatEvent.Open(StatPage.BackupRequired)
-                            )
-                        }
-
-                        is WCManager.SupportState.NotSupported -> {
-                            navController.slideFromBottom(
-                                R.id.wcAccountTypeNotSupportedDialog,
-                                WCAccountTypeNotSupportedDialog.Input(state.accountTypeDescription)
-                            )
-                        }
-                    }
-                }
-            )
-        },
-//            {
-//            HsSettingCell(
-//                title = R.string.Settings_TonConnect,
-//                icon = R.drawable.ic_ton_connect_24,
-//                value = null,
-//                counterBadge = null,
-//                onClick = {
-//                    navController.slideFromRight(R.id.tcListFragment)
-//
-//                    stat(
-//                        page = StatPage.Settings,
-//                        event = StatEvent.Open(StatPage.TonConnect)
-//                    )
-//                }
-//            )
-//        }
-        )
+        })
     )
 
     VSpacer(24.dp)
@@ -544,17 +481,6 @@ private fun previewSettingsScreen() {
             )
 
             Spacer(Modifier.height(32.dp))
-
-            CellSingleLineLawrenceSection(
-                listOf {
-                    HsSettingCell(
-                        R.string.Settings_WalletConnect,
-                        R.drawable.ic_wallet_connect_20,
-                        counterBadge = "13",
-                        onClick = { }
-                    )
-                }
-            )
         }
     }
 }

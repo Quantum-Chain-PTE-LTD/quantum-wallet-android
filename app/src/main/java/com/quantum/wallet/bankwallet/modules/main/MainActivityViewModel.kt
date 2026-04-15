@@ -5,14 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.reown.walletkit.client.Wallet
 import com.quantum.wallet.bankwallet.core.App
 import com.quantum.wallet.bankwallet.core.IAccountManager
 import com.quantum.wallet.bankwallet.core.ILocalStorage
 import com.quantum.wallet.bankwallet.core.managers.DAppRequestEntityWrapper
 import com.quantum.wallet.bankwallet.core.managers.TonConnectManager
 import com.quantum.wallet.bankwallet.core.managers.UserManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCDelegate
 import com.quantum.wallet.core.IKeyStoreManager
 import com.quantum.wallet.core.ISystemInfoManager
 import com.quantum.wallet.core.security.KeyStoreValidationError
@@ -29,7 +27,6 @@ class MainActivityViewModel(
 ) : ViewModel() {
 
     val navigateToMainLiveData = MutableLiveData(false)
-    val wcEvent = MutableLiveData<Wallet.Model?>()
     val tcSendRequest = MutableLiveData<SignTransaction?>()
     val tcDappRequest = MutableLiveData<DAppRequestEntityWrapper?>()
     val intentLiveData = MutableLiveData<Intent?>()
@@ -41,11 +38,6 @@ class MainActivityViewModel(
             }
         }
         viewModelScope.launch {
-            WCDelegate.walletEvents.collect {
-                wcEvent.postValue(it)
-            }
-        }
-        viewModelScope.launch {
             tonConnectManager.sendRequestFlow.collect {
                 tcSendRequest.postValue(it)
             }
@@ -54,16 +46,6 @@ class MainActivityViewModel(
             tonConnectManager.dappRequestFlow.collect {
                 tcDappRequest.postValue(it)
             }
-        }
-    }
-
-    fun onWcEventHandled() {
-        wcEvent.postValue(null)
-    }
-
-    fun reEmitPendingWcProposalIfNeeded() {
-        if (wcEvent.value == null && WCDelegate.sessionProposalEvent != null) {
-            wcEvent.postValue(WCDelegate.sessionProposalEvent!!.first)
         }
     }
 

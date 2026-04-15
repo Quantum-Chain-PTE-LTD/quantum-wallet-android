@@ -45,7 +45,6 @@ import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.core.stats.statTab
 import com.quantum.wallet.bankwallet.modules.balance.ui.BalanceScreen
 import com.quantum.wallet.bankwallet.modules.main.MainModule.MainNavigation
-import com.quantum.wallet.bankwallet.modules.manageaccount.dialogs.BackupRequiredDialog
 import com.quantum.wallet.bankwallet.modules.market.MarketScreen
 import com.quantum.wallet.bankwallet.modules.multiswap.SwapScreen
 import com.quantum.wallet.bankwallet.modules.rateapp.RateApp
@@ -59,8 +58,6 @@ import com.quantum.wallet.bankwallet.modules.tor.TorStatusView
 import com.quantum.wallet.bankwallet.modules.transactions.TransactionsModule
 import com.quantum.wallet.bankwallet.modules.transactions.TransactionsScreen
 import com.quantum.wallet.bankwallet.modules.transactions.TransactionsViewModel
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCAccountTypeNotSupportedDialog
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager.SupportState
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.BadgeText
 import com.quantum.wallet.bankwallet.uiv3.components.bottombars.HsNavigationBarItem
@@ -244,34 +241,6 @@ private fun MainScreen(
         )
     }
 
-    if (uiState.wcSupportState != null) {
-        when (val wcSupportState = uiState.wcSupportState) {
-            SupportState.NotSupportedDueToNoActiveAccount -> {
-                fragmentNavController.slideFromBottom(R.id.wcErrorNoAccountFragment)
-            }
-
-            is SupportState.NotSupportedDueToNonBackedUpAccount -> {
-                val text = stringResource(R.string.WalletConnect_Error_NeedBackup)
-                fragmentNavController.slideFromBottom(
-                    R.id.backupRequiredDialog,
-                    BackupRequiredDialog.Input(wcSupportState.account, text)
-                )
-
-                stat(page = StatPage.Main, event = StatEvent.Open(StatPage.BackupRequired))
-            }
-
-            is SupportState.NotSupported -> {
-                fragmentNavController.slideFromBottom(
-                    R.id.wcAccountTypeNotSupportedDialog,
-                    WCAccountTypeNotSupportedDialog.Input(wcSupportState.accountTypeDescription)
-                )
-            }
-
-            else -> {}
-        }
-        viewModel.wcSupportStateHandled()
-    }
-
     uiState.deeplinkPage?.let { deepLinkPage ->
         LaunchedEffect(Unit) {
             delay(500)
@@ -299,7 +268,6 @@ private fun MainScreen(
 
     LifecycleEventEffect(event = Lifecycle.Event.ON_RESUME) {
         viewModel.onResume()
-        mainActivityViewModel.reEmitPendingWcProposalIfNeeded()
     }
 }
 

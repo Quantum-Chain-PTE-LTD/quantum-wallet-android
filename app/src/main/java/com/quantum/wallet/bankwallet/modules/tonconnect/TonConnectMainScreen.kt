@@ -103,7 +103,7 @@ fun TonConnectMainScreen(navController: NavController, deepLinkUri: String?) {
                 val dapps = uiState.dapps
                 if (dapps.isEmpty()) {
                     ListEmptyView(
-                        text = stringResource(R.string.WalletConnect_NoConnection),
+                        text = stringResource(R.string.TonConnect_NoConnection),
                         icon = R.drawable.ic_ton_connect_24
                     )
                 } else {

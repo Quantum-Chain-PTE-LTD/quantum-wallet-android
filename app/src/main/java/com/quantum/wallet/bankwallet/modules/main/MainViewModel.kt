@@ -29,9 +29,6 @@ import com.quantum.wallet.bankwallet.modules.balance.OpenSendTokenSelect
 import com.quantum.wallet.bankwallet.modules.coin.CoinFragment
 import com.quantum.wallet.bankwallet.modules.main.MainModule.MainNavigation
 import com.quantum.wallet.bankwallet.modules.market.topplatforms.Platform
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCSessionManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.WCListFragment
 import com.quantum.wallet.core.IPinComponent
 import io.horizontalsystems.marketkit.models.TokenType
 import kotlinx.coroutines.delay
@@ -47,13 +44,10 @@ class MainViewModel(
     private val releaseNotesManager: ReleaseNotesManager,
     private val donationShowManager: DonationShowManager,
     private val localStorage: ILocalStorage,
-    wcSessionManager: WCSessionManager,
-    private val wcManager: WCManager,
     private val networkManager: INetworkManager,
     private val actionCompletedDelegate: ActionCompletedDelegate
 ) : ViewModelUiState<MainModule.UiState>() {
 
-    private var wcPendingRequestsCount = 0
     private var marketsTabEnabled = localStorage.marketsTabEnabledFlow.value
     private var transactionsEnabled = isTransactionsTabEnabled()
     private var settingsBadge: MainModule.BadgeType? = null
@@ -99,7 +93,6 @@ class MainViewModel(
     private var showRateAppDialog = false
     private var showWhatsNew = false
     private var showDonationPage = false
-    private var wcSupportState: WCManager.SupportState? = null
     private var torEnabled = localStorage.torEnabled
     private var openSendTokenSelect: OpenSendTokenSelect? = null
 
@@ -110,11 +103,6 @@ class MainViewModel(
         }
 
         termsManager.termsAcceptedSharedFlow.collectWith(viewModelScope) {
-            updateSettingsBadge()
-        }
-
-        wcSessionManager.pendingRequestCountFlow.collectWith(viewModelScope) {
-            wcPendingRequestsCount = it
             updateSettingsBadge()
         }
 
@@ -167,7 +155,6 @@ class MainViewModel(
         showRateAppDialog = showRateAppDialog,
         showWhatsNew = showWhatsNew,
         showDonationPage = showDonationPage,
-        wcSupportState = wcSupportState,
         torEnabled = torEnabled,
         openSend = openSendTokenSelect,
         selectedTabItem = selectedTabItem,
@@ -232,11 +219,6 @@ class MainViewModel(
     private fun updateTransactionsTabEnabled() {
         transactionsEnabled = isTransactionsTabEnabled()
         syncNavigation()
-    }
-
-    fun wcSupportStateHandled() {
-        wcSupportState = null
-        emitState()
     }
 
     private fun navigationItems(): List<MainModule.NavigationViewItem> {
@@ -347,14 +329,6 @@ class MainViewModel(
                 tab = MainNavigation.Market
             }
 
-            deeplinkString.startsWith("wc:") -> {
-                wcSupportState = wcManager.getWalletConnectSupportState()
-                if (wcSupportState == WCManager.SupportState.Supported) {
-                    deeplinkPage = DeeplinkPage(R.id.wcListFragment, WCListFragment.Input(deeplinkString))
-                    tab = MainNavigation.Settings
-                }
-            }
-
             deeplinkString.startsWith("https://quantum.money/referral") -> {
                 val userId: String? = deepLink.getQueryParameter("userId")
                 val referralCode: String? = deepLink.getQueryParameter("referralCode")
@@ -420,9 +394,7 @@ class MainViewModel(
         val showDotBadge =
             !(backupManager.allBackedUp && termsManager.allTermsAccepted && pinComponent.isPinSet) || accountManager.hasNonStandardAccount
 
-        settingsBadge = if (wcPendingRequestsCount > 0) {
-            MainModule.BadgeType.BadgeNumber(wcPendingRequestsCount)
-        } else if (showDotBadge) {
+        settingsBadge = if (showDotBadge) {
             MainModule.BadgeType.BadgeDot
         } else {
             null

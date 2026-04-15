@@ -46,7 +46,7 @@ import com.quantum.wallet.bankwallet.modules.balance.BalanceViewItem2
 import com.quantum.wallet.bankwallet.modules.balance.BalanceViewModel
 import com.quantum.wallet.bankwallet.modules.balance.contextMenuItems
 import com.quantum.wallet.bankwallet.modules.syncerror.SyncErrorDialog
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.DraggableCardSimple
+import com.quantum.wallet.bankwallet.uiv3.components.DraggableCardSimple
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.CoinImage
 import com.quantum.wallet.bankwallet.ui.compose.components.HsDivider

@@ -23,11 +23,6 @@ class AppConfigProvider(localStorage: ILocalStorage) {
     val releaseNotesUrl by lazy { Translator.getString(R.string.releaseNotesUrl) }
     val mempoolSpaceUrl: String = "https://mempool.space"
     val blockCypherUrl: String = "https://api.blockcypher.com"
-    val walletConnectUrl = "relay.walletconnect.com"
-    val walletConnectProjectId by lazy { Translator.getString(R.string.walletConnectV2Key) }
-    val walletConnectAppMetaDataName by lazy { Translator.getString(R.string.walletConnectAppMetaDataName) }
-    val walletConnectAppMetaDataUrl by lazy { Translator.getString(R.string.walletConnectAppMetaDataUrl) }
-    val walletConnectAppMetaDataIcon by lazy { Translator.getString(R.string.walletConnectAppMetaDataIcon) }
     val accountsBackupFileSalt by lazy { Translator.getString(R.string.accountsBackupFileSalt) }
     val simplexSupportChat = "https://smp11.simplex.im/g#yTrDh716RZCNYsdPSDrqMMlHnqZlW4XJGnFTugBrsAI"
     val nymVpnLink = "https://nymtechnologies.pxf.io/N9vnr1"

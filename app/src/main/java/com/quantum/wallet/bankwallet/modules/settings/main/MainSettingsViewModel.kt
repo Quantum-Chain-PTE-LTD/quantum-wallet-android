@@ -8,9 +8,6 @@ import com.quantum.wallet.bankwallet.core.ITermsManager
 import com.quantum.wallet.bankwallet.core.ViewModelUiState
 import com.quantum.wallet.bankwallet.core.providers.AppConfigProvider
 import com.quantum.wallet.bankwallet.core.providers.Translator
-import com.quantum.wallet.bankwallet.modules.settings.main.MainSettingsModule.CounterType
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCSessionManager
 import com.quantum.wallet.core.IPinComponent
 import com.quantum.wallet.core.ISystemInfoManager
 import kotlinx.coroutines.launch
@@ -21,8 +18,6 @@ class MainSettingsViewModel(
     private val systemInfoManager: ISystemInfoManager,
     private val termsManager: ITermsManager,
     private val pinComponent: IPinComponent,
-    private val wcSessionManager: WCSessionManager,
-    private val wcManager: WCManager,
     private val accountManager: IAccountManager,
     private val appConfigProvider: AppConfigProvider,
 ) : ViewModelUiState<MainSettingUiState>() {
@@ -46,9 +41,6 @@ class MainSettingsViewModel(
 
     val companyWebPage = appConfigProvider.companyWebPageLink
 
-    val walletConnectSupportState: WCManager.SupportState
-        get() = wcManager.getWalletConnectSupportState()
-
     private val appWebPageLink = appConfigProvider.appWebPageLink
     private val hasNonStandardAccount: Boolean
         get() = accountManager.hasNonStandardAccount
@@ -56,27 +48,13 @@ class MainSettingsViewModel(
     private val allBackedUp: Boolean
         get() = backupManager.allBackedUp
 
-    private val walletConnectSessionCount: Int
-        get() = wcSessionManager.sessions.count()
-
     private val isPinSet: Boolean
         get() = pinComponent.isPinSet
-
-
-    private var wcCounterType: CounterType? = null
-    private var wcSessionsCount = walletConnectSessionCount
-    private var wcPendingRequestCount = 0
 
     init {
         viewModelScope.launch {
             backupManager.allBackedUpFlowable.asFlow().collect {
                 emitState()
-            }
-        }
-        viewModelScope.launch {
-            wcSessionManager.sessionsFlow.collect {
-                wcSessionsCount = walletConnectSessionCount
-                syncCounter()
             }
         }
         viewModelScope.launch {
@@ -90,14 +68,6 @@ class MainSettingsViewModel(
                 emitState()
             }
         }
-
-        viewModelScope.launch {
-            wcSessionManager.pendingRequestCountFlow.collect {
-                wcPendingRequestCount = it
-                syncCounter()
-            }
-        }
-        syncCounter()
     }
 
     override fun createState(): MainSettingUiState {
@@ -105,24 +75,10 @@ class MainSettingsViewModel(
             appWebPageLink = appWebPageLink,
             hasNonStandardAccount = hasNonStandardAccount,
             allBackedUp = allBackedUp,
-            pendingRequestCount = wcPendingRequestCount,
-            walletConnectSessionCount = wcSessionsCount,
             manageWalletShowAlert = !allBackedUp || hasNonStandardAccount,
             securityCenterShowAlert = !isPinSet,
             aboutAppShowAlert = !termsManager.allTermsAccepted,
-            wcCounterType = wcCounterType,
         )
-    }
-
-    private fun syncCounter() {
-        if (wcPendingRequestCount > 0) {
-            wcCounterType = CounterType.PendingRequestCounter(wcPendingRequestCount)
-        } else if (wcSessionsCount > 0) {
-            wcCounterType = CounterType.SessionCounter(wcSessionsCount)
-        } else {
-            wcCounterType = null
-        }
-        emitState()
     }
 }
 
@@ -130,10 +86,7 @@ data class MainSettingUiState(
     val appWebPageLink: String,
     val hasNonStandardAccount: Boolean,
     val allBackedUp: Boolean,
-    val pendingRequestCount: Int,
-    val walletConnectSessionCount: Int,
     val manageWalletShowAlert: Boolean,
     val securityCenterShowAlert: Boolean,
     val aboutAppShowAlert: Boolean,
-    val wcCounterType: CounterType?,
 )

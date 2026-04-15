@@ -386,6 +386,8 @@
 
     <string name="Wallet_Title">Wallet</string>
     <string name="Balance_Title">Balance</string>
+    <string name="Balance_ScanQr">Scan QR</string>
+    <string name="Balance_Connecting">Connecting…</string>
     <string name="Balance_Send">Send</string>
     <string name="Balance_Receive">Receive</string>
     <string name="Balance_RatePerCoin">%1$s per %2$s</string>
@@ -607,68 +609,11 @@
     <string name="TonConnect_Url" translatable="false">URL</string>
     <string name="TonConnect_Wallet">Wallet</string>
     <string name="TonConnect_ChooseWallet">Choose a Wallet</string>
+    <string name="TonConnect_NoConnection">You don\'t have any connected dapps</string>
+    <string name="TonConnect_Approve_Hint">By clicking connect, you allow this app to view your public address. This is important security step to protect your data from potential phishing risks.</string>
 
-    <!--WalletConnect-->
-    <string name="WalletConnect_Title" translatable="false">WalletConnect</string>
-    <string name="WalletConnect_Status">Status</string>
-    <string name="WalletConnect_Approve_Hint">By clicking connect, you allow this app to view your public address. This is important security step to protect your data from potential phishing risks.</string>
-    <string name="WalletConnect_Reconnect_Hint">Unable to connect using this link. Please double-check it and try again.</string>
-    <string name="WalletConnect_Error_InvalidUrl">Invalid URL</string>
-    <string name="WalletConnect_Status_Offline">Offline</string>
-    <string name="WalletConnect_Status_Online">Online</string>
-    <string name="WalletConnect_Status_Connecting">Connecting…</string>
-    <string name="WalletConnect_NewConnect">New Connection</string>
-    <string name="WalletConnect_SendTransactionRequest_Title">Send Transaction</string>
-    <string name="WalletConnect_SendTransactionRequest_ButtonSend">Send</string>
-    <string name="WalletConnect_SignMessageRequest_Title">Sign Request</string>
-    <string name="WalletConnect_Error_NoWallet">You need to create or import a wallet before you can use WalletConnect</string>
-    <string name="WalletConnect_Error_NeedBackup">Create a backup of your recovery phrase and the associated passphrase. These will allow you to restore your wallet if your phone is lost, stolen, or damaged.</string>
-    <string name="WalletConnect_Error_UnsupportedChainId">Unsupported Blockchain</string>
-    <string name="WalletConnect_Error_NoSuitableAccount">No suitable account</string>
-    <string name="WalletConnect_Error_NoSuitableEvmKit">No suitable evm kit</string>
-    <string name="WalletConnect_Error_UnsupportedChains">Unsupported chains: %s</string>
-    <string name="WalletConnect_Error_UnsupportedMethods">Unsupported methods: %s</string>
-    <string name="WalletConnect_Error_UnsupportedEvents">Unsupported events: %s</string>
-    <string name="WalletConnect_Error_RequestNotFoundError">Request not found error</string>
-    <string name="WalletConnect_NoConnection">You don\’t have any connected dapps</string>
-    <string name="WalletConnect_ActiveWallet">Wallet</string>
-    <string name="WalletConnect_NotSupportedDescription">You current wallet type %s does not support WalletConnect</string>
-    <string name="WalletConnect_Unnamed">Unnamed</string>
-    <string name="WalletConnect_PairedDApps">Paired dApps</string>
-    <string name="WalletConnect_Pairings_DeleteAll">Delete All</string>
-    <string name="WalletConnect_Pairings_ConfirmationDeleteAll">Do you want to delete all paired dApss?</string>
-    <string name="WalletConnect_Pairings_Delete">Delete</string>
-    <string name="WalletConnect_DeleteAllPairs">Delete All Pairs</string>
-    <string name="WalletConnect_Networks">Networks</string>
-    <string name="WalletConnect_ConnectTo">Connect to %s</string>
-    <string name="WalletConnect_ConnectedTo">Connected to %s</string>
-    <string name="WalletConnect_Disconnect">Disconnect %s</string>
-    <string name="WalletConnect_ConnectWarning">By clicking connect, you allow this app to view your public address.</string>
-    <string name="WalletConnect_Attention">Attention!</string>
-    <string name="WalletConnect_Danger">Danger!</string>
-    <string name="WalletConnect_Safe">Safe</string>
-    <string name="WalletConnect_Domain">Domain</string>
-    <string name="WalletConnect_Message">Message</string>
-    <string name="WalletConnect_Checking">Checking…</string>
-    <string name="WalletConnect_RequestFailed">Request Failed</string>
-    <string name="WalletConnect_Value">Value</string>
-    <string name="WalletConnect_TokenAllowance">Token Allowance</string>
-    <string name="WalletConnect_ConfirmTransaction">Confirm Transaction</string>
-    <string name="WalletConnect_DappWillBeAbleToMoveToken">%s will be able to move these tokens on your behalf.</string>
-    <string name="WalletConnect_RequestFailedDescription">Something went wrong and the request couldn’t be completed</string>
-    <string name="WalletConnect_DisconnectWarning">Are you sure you want to remove this connection?</string>
-    <string name="WalletConnect_DefenseMessage_Warning">You may connect to a fake site and lose funds. Turn me on to stay protected.</string>
-    <string name="WalletConnect_DefenseMessage_Danger">This dApp is not verified. Connecting may put your funds at risk.</string>
-    <string name="WalletConnect_DefenseMessage_Safe">I checked it. This dApp is secure to connect.</string>
-    <string name="WalletConnect_ScamProtection">Scam Protection</string>
-    <string name="WalletConnect_DAppCheck">dApp Check</string>
-    <string name="WalletConnect_DAppCheck_Secure">Secure</string>
-    <string name="WalletConnect_DAppCheck_Risky">Risky</string>
-
-
-    <!-- dApp Connection-->
-    <string name="DAppConnection_Title">DApp Connection</string>
-    <string name="DAppConnection_Requests">Requests</string>
+    <!--General-->
+    <string name="Common_Unnamed">Unnamed</string>
 
     <!--EthereumTransaction-->
     <string name="EthereumTransaction_Warning_Title">Warning</string>
@@ -1003,7 +948,6 @@
     <string name="Settings_CompanyName" translatable="false">horizontal systems</string>
     <string name="Settings_Faq" translatable="false">FAQ</string>
     <string name="Settings_AppStatus">App Status</string>
-    <string name="Settings_WalletConnect" translatable="false">WalletConnect</string>
     <string name="Settings_RateUs">Rate Us</string>
     <string name="Settings_LaunchScreen">Launch Screen</string>
     <string name="Settings_LaunchScreen_Tip">Choose which screen the app opens on by default.</string>
@@ -1189,7 +1133,7 @@
     <string name="SettingsSecurity_EditPin">Edit Passcode</string>
     <string name="SettingsSecurity_ManageKeys">Manage Wallets</string>
     <string name="SettingsSecurity_AppRestartWarning">This action will restart Quantum Wallet.</string>
-    <string name="SettingsSecurity_TorConnectionDescription">Fully anonymize your internet while using this app. Note, in some cases WalletConnect feature for DeFi apps may be very slow or not work at all.</string>
+    <string name="SettingsSecurity_TorConnectionDescription">Fully anonymize your internet while using this app. Note, in some cases DeFi features may be very slow or not work at all.</string>
     <string name="SettingsSecurity_SortingShuffle">Shuffle</string>
     <string name="SettingsSecurity_SortingShuffleDescription">Random Indexing</string>
     <string name="SettingsSecurity_SortingBip69Short">Deterministic</string>

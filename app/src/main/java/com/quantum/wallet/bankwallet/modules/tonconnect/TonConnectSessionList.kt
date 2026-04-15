@@ -34,10 +34,10 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.tonapps.wallet.data.tonconnect.entities.DAppEntity
 import com.quantum.wallet.bankwallet.R
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.ActionsRow
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.DraggableCardSimple
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.getShape
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.showDivider
+import com.quantum.wallet.bankwallet.uiv3.components.ActionsRow
+import com.quantum.wallet.bankwallet.uiv3.components.DraggableCardSimple
+import com.quantum.wallet.bankwallet.uiv3.components.getShape
+import com.quantum.wallet.bankwallet.uiv3.components.showDivider
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.components.HeaderText
 import com.quantum.wallet.bankwallet.ui.compose.components.HsDivider

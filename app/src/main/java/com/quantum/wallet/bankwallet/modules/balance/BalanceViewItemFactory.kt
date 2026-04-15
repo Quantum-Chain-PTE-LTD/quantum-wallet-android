@@ -195,7 +195,7 @@ class BalanceViewItemFactory {
                 }
             }
 
-            is AdapterState.Connecting -> Translator.getString(R.string.WalletConnect_Status_Connecting)
+            is AdapterState.Connecting -> Translator.getString(R.string.Balance_Connecting)
             is AdapterState.SearchingTxs -> Translator.getString(R.string.Balance_SearchingTransactions)
             else -> null
         }

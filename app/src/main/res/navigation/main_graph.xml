@@ -391,17 +391,11 @@
         android:id="@+id/proUsersActivateDialog"
         android:name="com.quantum.wallet.bankwallet.modules.profeatures.yakauthorization.ProUsersActivateDialog" />
     <dialog
-        android:id="@+id/confirmDeleteAllPairingsDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.pairing.ConfirmDeleteAllPairingsDialog" />
-    <dialog
         android:id="@+id/configuredTokenInfo"
         android:name="com.quantum.wallet.bankwallet.modules.configuredtoken.ConfiguredTokenInfoDialog" />
     <dialog
         android:id="@+id/addressRiskyBottomSheetAlert"
         android:name="com.quantum.wallet.bankwallet.modules.send.AddressRiskyBottomSheetAlert" />
-    <dialog
-        android:id="@+id/wcSessionBottomSheetDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.session.WCSessionBottomSheet" />
     <dialog
         android:id="@+id/errorBottomSheet"
         android:name="com.quantum.wallet.bankwallet.modules.confirm.ErrorBottomSheet" />
@@ -412,16 +406,7 @@
         android:id="@+id/secureSendConfigDialog"
         android:name="com.quantum.wallet.bankwallet.modules.settings.security.securesend.SecureSendConfigDialog" />
 
-    <!--Wallet Connect-->
-    <fragment
-        android:id="@+id/wcNetworksFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.session.WCNetworksFragment" />
-    <fragment
-        android:id="@+id/wcSendEvmTransactionSettings"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.request.WCEvmTransactionSettingsFragment" />
-    <fragment
-        android:id="@+id/wcListFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.list.WCListFragment" />
+    <!--TonConnect-->
     <fragment
         android:id="@+id/tcListFragment"
         android:name="com.quantum.wallet.bankwallet.modules.tonconnect.TonConnectMainFragment" />
@@ -431,15 +416,6 @@
     <fragment
         android:id="@+id/tcNewFragment"
         android:name="com.quantum.wallet.bankwallet.modules.tonconnect.TonConnectNewFragment" />
-    <fragment
-        android:id="@+id/wcPairingsFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.pairing.WCPairingsFragment" />
-    <dialog
-        android:id="@+id/wcErrorNoAccountFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.WCErrorNoAccountFragment" />
-    <dialog
-        android:id="@+id/wcAccountTypeNotSupportedDialog"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.WCAccountTypeNotSupportedDialog" />
     <fragment
         android:id="@+id/activateTokenFragment"
         android:name="com.quantum.wallet.bankwallet.modules.activatetoken.ActivateTokenFragment" />
@@ -458,9 +434,6 @@
     <fragment
         android:id="@+id/vaultsBlockchainsSelectorFragment"
         android:name="com.quantum.wallet.bankwallet.modules.market.earn.VaultBlockchainsSelectorFragment" />
-    <dialog
-        android:id="@+id/wcRequestFragment"
-        android:name="com.quantum.wallet.bankwallet.modules.walletconnect.request.WCRequestFragment" />
     <dialog
         android:id="@+id/swapInfoDialog"
         android:name="com.quantum.wallet.bankwallet.modules.multiswap.SwapInfoDialog" />

@@ -48,10 +48,10 @@ import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.entities.EvmSyncSource
 import com.quantum.wallet.bankwallet.modules.btcblockchainsettings.BlockchainSettingCell
 import com.quantum.wallet.bankwallet.modules.evmnetwork.addrpc.AddRpcScreen
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.ActionsRow
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.DraggableCardSimple
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.getShape
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.showDivider
+import com.quantum.wallet.bankwallet.uiv3.components.ActionsRow
+import com.quantum.wallet.bankwallet.uiv3.components.DraggableCardSimple
+import com.quantum.wallet.bankwallet.uiv3.components.getShape
+import com.quantum.wallet.bankwallet.uiv3.components.showDivider
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
 import com.quantum.wallet.bankwallet.ui.compose.components.AppBar
@@ -330,7 +330,7 @@ fun RpcCell(
             Column(modifier = Modifier.weight(1f)) {
                 val title = when {
                     item.name.isNotBlank() -> item.name
-                    else -> stringResource(id = R.string.WalletConnect_Unnamed)
+                    else -> stringResource(id = R.string.Common_Unnamed)
                 }
 
                 headline2_leah(
