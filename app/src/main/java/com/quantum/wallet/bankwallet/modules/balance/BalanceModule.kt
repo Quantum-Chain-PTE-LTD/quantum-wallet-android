@@ -35,7 +35,6 @@ object BalanceModule {
                 BalanceViewItemFactory(),
                 App.balanceViewTypeManager,
                 App.localStorage,
-                App.wcManager,
                 AddressHandlerFactory(App.appConfigProvider.udnApiKey),
                 App.priceManager,
                 App.adapterManager,

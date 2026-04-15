@@ -49,9 +49,6 @@ android {
         resValue("string", "appTelegramLink", "https://t.me/+XF1OapBYfu1iMzg0")
         resValue("string", "reportEmail", "contact@quantumcha.in")
         resValue("string", "releaseNotesUrl", "TODO(Replace with Quantum Wallet release notes URL)")
-        resValue("string", "walletConnectAppMetaDataName", "QuantumWallet")
-        resValue("string", "walletConnectAppMetaDataUrl", "quantumcha.in")
-        resValue("string", "walletConnectAppMetaDataIcon", "TODO(Replace with Quantum Wallet icon URL)")
         resValue("string", "accountsBackupFileSalt", "quantumwallet")
 
         buildConfigField("boolean", "FDROID_BUILD", "false")
@@ -145,7 +142,6 @@ android {
             resValue("integer", "quantumChainApiVersion", "1")
             resValue("string", "quantumChainApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "openSeaApiKey", "bfbd6061a33e455c8581b594774fecb3")
-            resValue("string", "walletConnectV2Key", "8b4f41c60880a3e3ad57d82fddb30568")
             resValue("string", "solanaAlchemyApiKey", "PKgWxOMarrHgyMESGjIkJ,BOlzgqJUeGYe5E7K613Fm")
             resValue("string", "solanaJupiterApiKey", "ec901a97-0375-45b1-8b7d-da1ea9934cb0")
             resValue("string", "trongridApiKeys", "33374494-8060-447e-8367-90c5efd4ed95")
@@ -181,7 +177,6 @@ android {
             resValue("integer", "quantumChainApiVersion", "1")
             resValue("string", "quantumChainApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "openSeaApiKey", "bfbd6061a33e455c8581b594774fecb3")
-            resValue("string", "walletConnectV2Key", "0c5ca155c2f165a7d0c88686f2113a72")
             resValue("string", "solanaAlchemyApiKey", "BOlzgqJUeGYe5E7K613Fm,Vmt7ucAGIMEux_c43Qqqf,uCordWq3EOD800awDx1kb,1uAryzn6DOEVs5PIugeoR,PKgWxOMarrHgyMESGjIkJ")
             resValue("string", "solanaJupiterApiKey", "ec901a97-0375-45b1-8b7d-da1ea9934cb0")
             resValue("string", "trongridApiKeys", "8f5ae2c8-8012-42a8-b0ca-ffc2741f6a29,578aa64f-a79f-4ee8-86e9-e9860e2d050a,1e92f1fc-41f8-401f-a7f6-5b719b6f1280,d1511874-1547-48df-9536-a32cc85949ac")
@@ -233,16 +228,6 @@ android {
             substitute(module("com.google.protobuf:protobuf-java:3.6.1")).using(module("com.google.protobuf:protobuf-javalite:3.21.1"))
             substitute(module("net.jcip:jcip-annotations:1.0")).using(module("com.github.stephenc.jcip:jcip-annotations:1.0-1"))
 
-            substitute(module("com.tinder.scarlet:scarlet:0.1.12")).using(module("com.walletconnect.Scarlet:scarlet:1.0.2"))
-            substitute(module("com.tinder.scarlet:websocket-okhttp:0.1.12")).using(module("com.walletconnect.Scarlet:websocket-okhttp:1.0.2"))
-            substitute(module("com.tinder.scarlet:stream-adapter-rxjava2:0.1.12")).using(module("com.walletconnect.Scarlet:stream-adapter-rxjava2:1.0.2"))
-            substitute(module("com.tinder.scarlet:message-adapter-gson:0.1.12")).using(module("com.walletconnect.Scarlet:message-adapter-gson:1.0.2"))
-            substitute(module("com.tinder.scarlet:lifecycle-android:0.1.12")).using(module("com.walletconnect.Scarlet:lifecycle-android:1.0.2"))
-            substitute(module("com.github.WalletConnect.Scarlet:scarlet:1.0.0")).using(module("com.walletconnect.Scarlet:scarlet:1.0.2"))
-            substitute(module("com.github.WalletConnect.Scarlet:websocket-okhttp:1.0.0")).using(module("com.walletconnect.Scarlet:websocket-okhttp:1.0.2"))
-            substitute(module("com.github.WalletConnect.Scarlet:stream-adapter-rxjava2:1.0.0")).using(module("com.walletconnect.Scarlet:stream-adapter-rxjava2:1.0.2"))
-            substitute(module("com.github.WalletConnect.Scarlet:message-adapter-gson:1.0.0")).using(module("com.walletconnect.Scarlet:message-adapter-gson:1.0.2"))
-            substitute(module("com.github.WalletConnect.Scarlet:lifecycle-android:1.0.0")).using(module("com.walletconnect.Scarlet:lifecycle-android:1.0.2"))
         }
 
         resolutionStrategy.eachDependency {
@@ -343,15 +328,6 @@ dependencies {
     // QR
     api(libs.zxing)
     implementation(libs.qrose)
-
-    // Reown (WalletConnect)
-    implementation(platform(libs.reown.bom))
-    implementation(libs.reown.walletkit) {
-        exclude(group = "com.google.firebase")
-    }
-    implementation(libs.reown.android.core) {
-        exclude(group = "com.google.firebase")
-    }
 
     // Web3
     implementation(libs.web3j)

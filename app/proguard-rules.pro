@@ -114,11 +114,6 @@
 -keep class io.horizontalsystems.bankwallet.modules.pin.core.** { *; }
 
 # ============================================================
-# App: WalletConnect session storage
-# ============================================================
--keep class io.horizontalsystems.bankwallet.modules.walletconnect.storage.** { *; }
-
-# ============================================================
 # App: pro features storage
 # ============================================================
 -keep class io.horizontalsystems.bankwallet.modules.profeatures.storage.** { *; }
@@ -156,7 +151,7 @@
 }
 
 # ============================================================
-# WalletConnect / Web3 — suppress warnings from optional deps
+# Web3 — suppress warnings from optional deps
 # ============================================================
 -dontwarn com.sun.jna.**
 -dontwarn org.slf4j.**
@@ -193,10 +188,4 @@
 -dontwarn lombok.Generated
 -dontwarn lombok.NonNull
 
-# ============================================================
-# Firebase Messaging — referenced by WalletConnect (Reown) push notifications
-# but not present in F-Droid builds (no Google Play Services)
-# ============================================================
--dontwarn com.google.firebase.messaging.FirebaseMessagingService
--dontwarn com.google.firebase.messaging.RemoteMessage
--dontwarn com.google.firebase.messaging.RemoteMessage$Notification
+

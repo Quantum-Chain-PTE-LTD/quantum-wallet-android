@@ -29,8 +29,8 @@ import com.tonapps.wallet.data.tonconnect.entities.DAppRequestEntity
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.authorizedAction
 import com.quantum.wallet.bankwallet.modules.evmfee.ButtonsGroupWithShade
-import com.quantum.wallet.bankwallet.modules.walletconnect.session.TitleValueCell
-import com.quantum.wallet.bankwallet.modules.walletconnect.session.ui.DropDownCell
+import com.quantum.wallet.bankwallet.uiv3.components.TitleValueCell
+import com.quantum.wallet.bankwallet.uiv3.components.DropDownCell
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
 import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryDefault
@@ -184,7 +184,7 @@ fun TonConnectNewScreen(
             } else {
                 TextImportantWarning(
                     modifier = Modifier.padding(horizontal = 16.dp),
-                    text = stringResource(R.string.WalletConnect_Approve_Hint)
+                    text = stringResource(R.string.TonConnect_Approve_Hint)
                 )
             }
 

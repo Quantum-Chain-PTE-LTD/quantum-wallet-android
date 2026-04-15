@@ -50,6 +50,7 @@ import com.quantum.wallet.bankwallet.core.storage.migrations.Migration_72_73
 import com.quantum.wallet.bankwallet.core.storage.migrations.Migration_73_74
 import com.quantum.wallet.bankwallet.core.storage.migrations.Migration_74_75
 import com.quantum.wallet.bankwallet.core.storage.migrations.Migration_75_76
+import com.quantum.wallet.bankwallet.core.storage.migrations.Migration_76_77
 import com.quantum.wallet.bankwallet.entities.ActiveAccount
 import com.quantum.wallet.bankwallet.entities.BlockchainSettingRecord
 import com.quantum.wallet.bankwallet.entities.EnabledWallet
@@ -78,10 +79,8 @@ import com.quantum.wallet.bankwallet.modules.pin.core.Pin
 import com.quantum.wallet.bankwallet.modules.pin.core.PinDao
 import com.quantum.wallet.bankwallet.modules.profeatures.storage.ProFeaturesDao
 import com.quantum.wallet.bankwallet.modules.profeatures.storage.ProFeaturesSessionKey
-import com.quantum.wallet.bankwallet.modules.walletconnect.storage.WCSessionDao
-import com.quantum.wallet.bankwallet.modules.walletconnect.storage.WalletConnectV2Session
 
-@Database(version = 76, exportSchema = false, entities = [
+@Database(version = 77, exportSchema = false, entities = [
     EnabledWallet::class,
     EnabledWalletCache::class,
     AccountRecord::class,
@@ -89,7 +88,6 @@ import com.quantum.wallet.bankwallet.modules.walletconnect.storage.WalletConnect
     EvmSyncSourceRecord::class,
     LogEntry::class,
     FavoriteCoin::class,
-    WalletConnectV2Session::class,
     RestoreSettingRecord::class,
     ActiveAccount::class,
     NftCollectionRecord::class,
@@ -124,7 +122,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun restoreSettingDao(): RestoreSettingDao
     abstract fun logsDao(): LogsDao
     abstract fun marketFavoritesDao(): MarketFavoritesDao
-    abstract fun wcSessionDao(): WCSessionDao
     abstract fun nftDao(): NftDao
     abstract fun proFeaturesDao(): ProFeaturesDao
     abstract fun evmAddressLabelDao(): EvmAddressLabelDao
@@ -199,7 +196,8 @@ abstract class AppDatabase : RoomDatabase() {
                             Migration_72_73,
                             Migration_73_74,
                             Migration_74_75,
-                    Migration_75_76,
+                            Migration_75_76,
+                    Migration_76_77,
                     )
                     .build()
         }

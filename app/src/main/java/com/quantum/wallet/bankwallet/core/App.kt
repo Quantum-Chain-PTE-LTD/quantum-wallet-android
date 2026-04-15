@@ -13,11 +13,6 @@ import coil.ImageLoaderFactory
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import coil.decode.SvgDecoder
-import com.reown.android.Core
-import com.reown.android.CoreClient
-import com.reown.android.relay.ConnectionType
-import com.reown.walletkit.client.Wallet
-import com.reown.walletkit.client.WalletKit
 import com.quantum.wallet.bankwallet.BuildConfig
 import com.quantum.wallet.bankwallet.core.factories.AccountFactory
 import com.quantum.wallet.bankwallet.core.factories.AdapterFactory
@@ -110,12 +105,6 @@ import com.quantum.wallet.bankwallet.modules.settings.appearance.AppIconService
 import com.quantum.wallet.bankwallet.modules.settings.appearance.LaunchScreenService
 import com.quantum.wallet.bankwallet.modules.theme.ThemeService
 import com.quantum.wallet.bankwallet.modules.theme.ThemeType
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCSessionManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCWalletRequestHandler
-import com.quantum.wallet.bankwallet.modules.walletconnect.handler.WCHandlerEvm
-import com.quantum.wallet.bankwallet.modules.walletconnect.stellar.WCHandlerStellar
-import com.quantum.wallet.bankwallet.modules.walletconnect.storage.WCSessionStorage
 import com.quantum.wallet.bankwallet.widgets.MarketWidgetManager
 import com.quantum.wallet.bankwallet.widgets.MarketWidgetRepository
 import com.quantum.wallet.bankwallet.widgets.MarketWidgetWorker
@@ -182,9 +171,6 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         lateinit var accountCleaner: IAccountCleaner
         lateinit var rateAppManager: IRateAppManager
         lateinit var coinManager: ICoinManager
-        lateinit var wcSessionManager: WCSessionManager
-        lateinit var wcManager: WCManager
-        lateinit var wcWalletRequestHandler: WCWalletRequestHandler
         lateinit var termsManager: ITermsManager
         lateinit var swapTermsManager: SwapTermsManager
         lateinit var marketFavoritesManager: MarketFavoritesManager
@@ -415,11 +401,6 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
 
         rateAppManager = RateAppManager(walletManager, adapterManager, localStorage)
 
-        wcManager = WCManager(accountManager)
-        wcManager.addWcHandler(WCHandlerEvm(evmBlockchainManager))
-        wcManager.addWcHandler(WCHandlerStellar(stellarKitManager))
-        wcWalletRequestHandler = WCWalletRequestHandler(evmBlockchainManager)
-
         termsManager = TermsManager(localStorage)
         swapTermsManager = SwapTermsManager(localStorage)
 
@@ -443,10 +424,6 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         nftMetadataManager = NftMetadataManager(marketKit, appConfigProvider, nftStorage)
         nftAdapterManager = NftAdapterManager(walletManager, evmBlockchainManager)
         nftMetadataSyncer = NftMetadataSyncer(nftAdapterManager, nftMetadataManager, nftStorage)
-
-        initializeWalletConnectV2(appConfig)
-
-        wcSessionManager = WCSessionManager(accountManager, WCSessionStorage(appDatabase))
 
         baseTokenManager = BaseTokenManager(coinManager, localStorage)
         balanceViewTypeManager = BalanceViewTypeManager(localStorage)
@@ -524,32 +501,6 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
             .build()
     }
 
-    private fun initializeWalletConnectV2(appConfig: AppConfigProvider) {
-        val projectId = appConfig.walletConnectProjectId
-        val serverUrl = "wss://${appConfig.walletConnectUrl}?projectId=$projectId"
-        val connectionType = ConnectionType.AUTOMATIC
-        val appMetaData = Core.Model.AppMetaData(
-            name = appConfig.walletConnectAppMetaDataName,
-            description = "",
-            url = appConfig.walletConnectAppMetaDataUrl,
-            icons = listOf(appConfig.walletConnectAppMetaDataIcon),
-            redirect = null,
-        )
-
-        CoreClient.initialize(
-            metaData = appMetaData,
-            relayServerUrl = serverUrl,
-            connectionType = connectionType,
-            application = this,
-            onError = { error ->
-                Timber.w(error.throwable)
-            },
-        )
-        WalletKit.initialize(Wallet.Params.Init(core = CoreClient)) { error ->
-            Timber.e(error.throwable)
-        }
-    }
-
     private fun setAppTheme() {
         val nightMode = when (localStorage.currentTheme) {
             ThemeType.Light -> AppCompatDelegate.MODE_NIGHT_NO
@@ -624,7 +575,6 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
             nftMetadataSyncer.start()
             pinComponent.initDefaultPinLevel()
             accountManager.clearAccounts()
-            wcSessionManager.start()
             swapSyncService.start()
 
             AppVersionManager(systemInfoManager, localStorage).apply { storeAppVersion() }

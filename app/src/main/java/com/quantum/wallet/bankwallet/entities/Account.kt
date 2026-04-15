@@ -367,12 +367,6 @@ sealed class AccountType : Parcelable {
             else -> false
         }
 
-    val supportsWalletConnect: Boolean
-        get() = when (this) {
-            is Mnemonic, is EvmPrivateKey -> true
-            else -> false
-        }
-
     val isWatchAccountType: Boolean
         get() = when (this) {
             is EvmAddress -> true

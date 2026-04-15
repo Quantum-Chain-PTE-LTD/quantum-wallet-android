@@ -371,38 +371,6 @@
     <string name="TonConnect_Unnamed">İsimsiz</string>
     <string name="TonConnect_Wallet">Cüzdanı</string>
     <string name="TonConnect_ChooseWallet">Cüzdan Seçin</string>
-    <!--WalletConnect-->
-    <string name="WalletConnect_Status">Durum</string>
-    <string name="WalletConnect_Approve_Hint">Onayla butonunu tıklayarak, bu uygulamanın açık adresinizi görüntülemesine izin vermiş olursunuz. Bu, verilerinizi olası kimlik hırsızlığı risklerinden korumak için önemli bir güvenlik adımıdır.</string>
-    <string name="WalletConnect_Reconnect_Hint">Bağlantı kurulamadı. Yeniden bağlanmayı deneyin.</string>
-    <string name="WalletConnect_Error_InvalidUrl">Geçersiz URL Adresi</string>
-    <string name="WalletConnect_Status_Offline">Çevrimdışı</string>
-    <string name="WalletConnect_Status_Online">Çevrimiçi</string>
-    <string name="WalletConnect_Status_Connecting">Bağlanıyor…</string>
-    <string name="WalletConnect_NewConnect">Yeni bağlantı</string>
-    <string name="WalletConnect_SendTransactionRequest_ButtonSend">Gönder</string>
-    <string name="WalletConnect_SignMessageRequest_Title">İmza Talebi</string>
-    <string name="WalletConnect_Error_NoWallet">WalletConnect\'i kullanmadan önce bir cüzdan oluşturmanız veya içe aktarmanız gerekir</string>
-    <string name="WalletConnect_Error_UnsupportedChainId">Desteklenmeyen Blockchain</string>
-    <string name="WalletConnect_Error_NoSuitableAccount">Uygun hesap yok</string>
-    <string name="WalletConnect_Error_NoSuitableEvmKit">Uygun evm kiti yok</string>
-    <string name="WalletConnect_Error_UnsupportedChains">Desteklenmeyen zincirler: %s</string>
-    <string name="WalletConnect_Error_UnsupportedMethods">Desteklenmeyen yöntemler: %s</string>
-    <string name="WalletConnect_Error_UnsupportedEvents">Desteklenmeyen olaylar: %s</string>
-    <string name="WalletConnect_Error_RequestNotFoundError">İstek bulunamadı hatası</string>
-    <string name="WalletConnect_NoConnection">Bağlı dapp\'niz yok</string>
-    <string name="WalletConnect_ActiveWallet">Cüzdanı</string>
-    <string name="WalletConnect_NotSupportedDescription">Mevcut cüzdan türünüz %s WalletConnect\'i desteklemiyor</string>
-    <string name="WalletConnect_Unnamed">İsimsiz</string>
-    <string name="WalletConnect_PairedDApps">Eşleştirilmiş dApps</string>
-    <string name="WalletConnect_Pairings_DeleteAll">Hepsini Sil</string>
-    <string name="WalletConnect_Pairings_ConfirmationDeleteAll">Eşleştirilmiş tüm dAps\'leri silmek istiyor musunuz?</string>
-    <string name="WalletConnect_Pairings_Delete">Sil</string>
-    <string name="WalletConnect_DeleteAllPairs">Hepsini sil</string>
-    <string name="WalletConnect_DAppCheck_Risky">Riskli</string>
-    <!-- dApp Connection-->
-    <string name="DAppConnection_Title">DApp Bağlantısı</string>
-    <string name="DAppConnection_Requests">Talepler</string>
     <!--EthereumTransaction-->
     <string name="EthereumTransaction_Warning_Title">Uyarı</string>
     <string name="EthereumTransaction_Error_Title">Hata</string>
@@ -677,7 +645,7 @@
     <string name="SettingsSecurity_EditPin">Kod Değiştir</string>
     <string name="SettingsSecurity_ManageKeys">Cüzdanları yönet</string>
     <string name="SettingsSecurity_AppRestartWarning">Bu eylem, QUANTUM Cüzdan\'ı yeniden başlatacak.</string>
-    <string name="SettingsSecurity_TorConnectionDescription">Bu uygulamayı kullanırken internetinizi tamamen anonimleştirin. Bazı durumlarda DeFi uygulamaları için WalletConnect özelliğinin çok yavaş olabileceğini veya hiç çalışmayabileceğini unutmayın.</string>
+    <string name="SettingsSecurity_TorConnectionDescription">Bu uygulamayı kullanırken internetinizi tamamen anonimleştirin. Bazı durumlarda DeFi özelliklerinin çok yavaş olabileceğini veya hiç çalışmayabileceğini unutmayın.</string>
     <string name="SettingsSecurity_SortingShuffle">Karıştır</string>
     <string name="SettingsSecurity_SortingShuffleDescription">Rastgele Dizinleme</string>
     <string name="SettingsSecurity_SortingBip69">BIP69</string>

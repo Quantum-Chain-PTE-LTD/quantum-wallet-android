@@ -63,7 +63,7 @@ import com.quantum.wallet.bankwallet.core.imageUrl
 import com.quantum.wallet.bankwallet.modules.market.ImageSource
 import com.quantum.wallet.bankwallet.modules.market.MarketViewItem
 import com.quantum.wallet.bankwallet.modules.market.search.MarketSearchModule.DiscoveryItem
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.ui.DraggableCardSimple
+import com.quantum.wallet.bankwallet.uiv3.components.DraggableCardSimple
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
 import com.quantum.wallet.bankwallet.uiv3.components.BoxBordered

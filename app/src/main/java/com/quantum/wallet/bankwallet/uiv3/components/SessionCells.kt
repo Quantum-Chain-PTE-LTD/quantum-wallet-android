@@ -1,4 +1,4 @@
-package com.quantum.wallet.bankwallet.modules.walletconnect.session.ui
+package com.quantum.wallet.bankwallet.uiv3.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -17,6 +17,31 @@ import com.quantum.wallet.bankwallet.ui.compose.components.HSpacer
 import com.quantum.wallet.bankwallet.ui.compose.components.RowUniversal
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead2_grey
+import com.quantum.wallet.bankwallet.uiv3.components.cell.CellMiddleInfo
+import com.quantum.wallet.bankwallet.uiv3.components.cell.CellRightInfo
+import com.quantum.wallet.bankwallet.uiv3.components.cell.CellSecondary
+import com.quantum.wallet.bankwallet.uiv3.components.cell.hs
+
+@Composable
+fun TitleValueCell(
+    title: String,
+    value: String,
+    secondaryValue: String? = null,
+) {
+    CellSecondary(
+        middle = {
+            CellMiddleInfo(
+                subtitle = title.hs,
+            )
+        },
+        right = {
+            CellRightInfo(
+                title = value.hs,
+                subtitle = secondaryValue?.hs
+            )
+        },
+    )
+}
 
 @Composable
 fun DropDownCell(

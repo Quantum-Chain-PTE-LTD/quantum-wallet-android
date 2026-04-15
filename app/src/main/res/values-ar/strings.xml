@@ -100,8 +100,6 @@
     <!-- Fee Settings -->
     <!--Fee Info -->
     <!--Tron-->
-    <!--WalletConnect-->
-    <string name="WalletConnect_Pairings_Delete">حذف</string>
     <!--EthereumTransaction-->
     <string name="EthereumTransaction_Error_Title">خطأ</string>
     <!--Swap-->

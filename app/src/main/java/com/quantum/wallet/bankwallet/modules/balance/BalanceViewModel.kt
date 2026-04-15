@@ -4,8 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import com.reown.walletkit.client.Wallet.Params.Pair
-import com.reown.walletkit.client.WalletKit
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.AdapterState
 import com.quantum.wallet.bankwallet.core.App
@@ -26,9 +24,6 @@ import com.quantum.wallet.bankwallet.entities.AddressUri
 import com.quantum.wallet.bankwallet.entities.ViewState
 import com.quantum.wallet.bankwallet.entities.Wallet
 import com.quantum.wallet.bankwallet.modules.address.AddressHandlerFactory
-import com.quantum.wallet.bankwallet.modules.walletconnect.WCManager
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.WalletConnectListModule
-import com.quantum.wallet.bankwallet.modules.walletconnect.list.WalletConnectListViewModel
 import io.horizontalsystems.marketkit.models.BlockchainType
 import io.horizontalsystems.marketkit.models.TokenType
 import kotlinx.coroutines.Dispatchers
@@ -43,7 +38,6 @@ class BalanceViewModel(
     private val balanceViewItemFactory: BalanceViewItemFactory,
     private val balanceViewTypeManager: BalanceViewTypeManager,
     private val localStorage: ILocalStorage,
-    private val wCManager: WCManager,
     private val addressHandlerFactory: AddressHandlerFactory,
     private val priceManager: PriceManager,
     private val adapterManager: IAdapterManager,
@@ -67,12 +61,6 @@ class BalanceViewModel(
     private val sortTypes =
         listOf(BalanceSortType.Value, BalanceSortType.Name, BalanceSortType.PercentGrowth)
     private var sortType = service.sortType
-
-    var connectionResult by mutableStateOf<WalletConnectListViewModel.ConnectionResult?>(null)
-        private set
-
-    var walletConnectRequest by mutableStateOf<String?>(null)
-        private set
 
     private var refreshViewItemsJob: Job? = null
 
@@ -229,7 +217,6 @@ class BalanceViewModel(
     }
 
     fun onHandleRoute() {
-        connectionResult = null
     }
 
     override fun onCleared() {
@@ -286,10 +273,6 @@ class BalanceViewModel(
         }
     }
 
-    fun getWalletConnectSupportState(): WCManager.SupportState {
-        return wCManager.getWalletConnectSupportState()
-    }
-
     fun handleScannedData(scannedText: String) {
         viewModelScope.launch {
             if (
@@ -298,12 +281,7 @@ class BalanceViewModel(
             ) {
                 App.tonConnectManager.handle(scannedText)
             } else {
-                val wcUriVersion = WalletConnectListModule.getVersionFromUri(scannedText)
-                if (wcUriVersion == 2) {
-                    handleWalletConnectRequest(scannedText)
-                } else {
-                    handleAddressData(scannedText)
-                }
+                handleAddressData(scannedText)
             }
         }
     }
@@ -361,25 +339,6 @@ class BalanceViewModel(
             )
             emitState()
         }
-    }
-
-    private fun handleWalletConnectRequest(scannedText: String) {
-        walletConnectRequest = scannedText
-    }
-
-    fun onWalletConnectRequestHandled() {
-        walletConnectRequest = null
-    }
-
-    fun connectWC(uri: String) {
-        WalletKit.pair(Pair(uri.trim()),
-            onSuccess = {
-                connectionResult = null
-            },
-            onError = {
-                connectionResult = WalletConnectListViewModel.ConnectionResult.Error
-            }
-        )
     }
 
     fun onSendOpened() {

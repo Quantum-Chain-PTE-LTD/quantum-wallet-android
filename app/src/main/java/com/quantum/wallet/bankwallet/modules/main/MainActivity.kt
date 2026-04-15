@@ -12,7 +12,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
-import com.reown.walletkit.client.Wallet
 import com.quantum.wallet.bankwallet.R
 import com.quantum.wallet.bankwallet.core.App
 import com.quantum.wallet.bankwallet.core.BaseActivity
@@ -23,7 +22,6 @@ import com.quantum.wallet.bankwallet.modules.keystore.KeyStoreActivity
 import com.quantum.wallet.bankwallet.modules.pin.ui.PinUnlock
 import com.quantum.wallet.bankwallet.modules.tonconnect.TonConnectNewFragment
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
-import com.quantum.wallet.core.helpers.HudHelper
 import com.quantum.wallet.core.hideKeyboard
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -79,36 +77,6 @@ class MainActivity : BaseActivity() {
             if (it) {
                 navController.popBackStack(navController.graph.startDestinationId, false)
                 viewModel.onNavigatedToMain()
-            }
-        }
-
-        viewModel.wcEvent.observe(this) { wcEvent ->
-            if (wcEvent != null) {
-                when (wcEvent) {
-                    is Wallet.Model.SessionRequest -> {
-                        navController.slideFromBottom(R.id.wcRequestFragment)
-                    }
-
-                    is Wallet.Model.SessionProposal -> {
-                        navController.slideFromBottom(R.id.wcSessionBottomSheetDialog)
-                    }
-
-                    is Wallet.Model.Error -> {
-                        navHost.view?.let {
-                            HudHelper.showErrorMessage(it, wcEvent.throwable.message ?: "Error")
-                        }
-                    }
-
-                    is Wallet.Model.SettledSessionResponse.Result -> {
-                        navHost.view?.let {
-                            HudHelper.showSuccessMessage(it, getString(R.string.Hud_Text_Connected))
-                        }
-                    }
-
-                    else -> {}
-                }
-
-                viewModel.onWcEventHandled()
             }
         }
 

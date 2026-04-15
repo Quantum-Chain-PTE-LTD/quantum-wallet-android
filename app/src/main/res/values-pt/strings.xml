@@ -301,31 +301,6 @@
     <!--Tron-->
     <string name="Tron_SelfSendTrxNotAllowed">Cannot transfer TRX to yourself</string>
     <string name="Tron_ZeroAmountTrxNotAllowed">Cannot transfer 0 %s</string>
-    <!--WalletConnect-->
-    <string name="WalletConnect_Status">Status</string>
-    <string name="WalletConnect_Approve_Hint">Ao clicar em conectar, você permite que este aplicativo visualize seu endereço público. Esta é uma importante etapa de segurança para proteger seus dados contra possíveis riscos de phishing.</string>
-    <string name="WalletConnect_Reconnect_Hint">Não foi possível estabelecer a conexão. Tente reconectar novamente.</string>
-    <string name="WalletConnect_Error_InvalidUrl">Endereço URL Inválido</string>
-    <string name="WalletConnect_Status_Offline">Desconectado</string>
-    <string name="WalletConnect_Status_Online">On-line</string>
-    <string name="WalletConnect_Status_Connecting">Conectando...</string>
-    <string name="WalletConnect_NewConnect">Nova Conexão</string>
-    <string name="WalletConnect_SignMessageRequest_Title">Solicitação de assinatura</string>
-    <string name="WalletConnect_Error_NoWallet">Você precisa criar ou importar uma carteira antes de usar o WalletConnect</string>
-    <string name="WalletConnect_Error_NeedBackup">Create a backup copy of the recovery phrase and the associated password that will allow you to recover your wallet if your phone is lost, stolen, broken, etc.</string>
-    <string name="WalletConnect_Error_UnsupportedChainId">Unsupported chain id</string>
-    <string name="WalletConnect_Error_NoSuitableAccount">Sem conta adequada</string>
-    <string name="WalletConnect_Error_NoSuitableEvmKit">Nenhum kit evm adequado</string>
-    <string name="WalletConnect_Error_RequestNotFoundError">Pedido não encontrado erro</string>
-    <string name="WalletConnect_NoConnection">Você não tem nenhum Dapps conectado</string>
-    <string name="WalletConnect_ActiveWallet">Carteira ativa</string>
-    <string name="WalletConnect_NotSupportedDescription">Seu tipo de carteira atual %s não suporta WalletConnect</string>
-    <string name="WalletConnect_Unnamed">Sem nome</string>
-    <string name="WalletConnect_PairedDApps">dApps pareados</string>
-    <string name="WalletConnect_Pairings_DeleteAll">Excluir Tudo</string>
-    <string name="WalletConnect_Pairings_ConfirmationDeleteAll">Você deseja excluir todos os dApps pareados?</string>
-    <string name="WalletConnect_Pairings_Delete">Deletar</string>
-    <string name="WalletConnect_DeleteAllPairs">Deletar todos pareados</string>
     <!--EthereumTransaction-->
     <string name="EthereumTransaction_Warning_Title">Aviso</string>
     <string name="EthereumTransaction_Error_Title">Erro</string>
@@ -539,7 +514,7 @@
     <string name="SettingsSecurity_EditPin">Editar senha</string>
     <string name="SettingsSecurity_ManageKeys">Gerenciar carteiras</string>
     <string name="SettingsSecurity_AppRestartWarning">Esta ação reiniciará Carteira QUANTUM.</string>
-    <string name="SettingsSecurity_TorConnectionDescription">Anonimize sua internet completamente enquanto estiver usando este aplicativo. Nota: em alguns casos, o recurso WalletConnect para apps DeFi pode ser muito lento ou nem funcionar.</string>
+    <string name="SettingsSecurity_TorConnectionDescription">Anonimize sua internet completamente enquanto estiver usando este aplicativo. Nota: em alguns casos, os recursos DeFi podem ser muito lentos ou nem funcionar.</string>
     <string name="SettingsSecurity_SortingShuffle">Embaralhar</string>
     <string name="SettingsSecurity_SortingShuffleDescription">Indexação aleatória</string>
     <string name="SettingsSecurity_SortingBip69Short">Determinístico</string>

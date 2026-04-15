@@ -27,7 +27,7 @@ import com.quantum.wallet.bankwallet.core.composablePage
 import com.quantum.wallet.bankwallet.entities.DataState
 import com.quantum.wallet.bankwallet.modules.addtoken.blockchainselector.AddTokenBlockchainSelectorScreen
 import com.quantum.wallet.bankwallet.modules.addtoken.blockchainselector.BlockchainSelectorResult
-import com.quantum.wallet.bankwallet.modules.walletconnect.session.TitleValueCell
+import com.quantum.wallet.bankwallet.uiv3.components.TitleValueCell
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
 import com.quantum.wallet.bankwallet.ui.compose.TranslatableString
 import com.quantum.wallet.bankwallet.ui.compose.components.CellUniversalLawrenceSection
