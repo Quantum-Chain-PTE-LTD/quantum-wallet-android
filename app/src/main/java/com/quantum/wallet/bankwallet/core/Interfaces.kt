@@ -9,6 +9,7 @@ import com.quantum.wallet.bankwallet.core.adapters.BitcoinFeeInfo
 import com.quantum.wallet.bankwallet.core.adapters.zcash.ZcashAdapter
 import com.quantum.wallet.bankwallet.core.managers.ActiveAccountState
 import com.quantum.wallet.bankwallet.core.managers.EvmKitWrapper
+import com.quantum.wallet.bankwallet.core.managers.QuantumKitWrapper
 import com.quantum.wallet.bankwallet.core.managers.MiniAppRegisterService.RegisterAppResponse
 import com.quantum.wallet.bankwallet.core.managers.ServiceWCWhitelist
 import com.quantum.wallet.bankwallet.core.providers.FeeRates
@@ -313,6 +314,11 @@ interface ITransactionsAdapter {
         limit: Int
     ): List<io.horizontalsystems.stellarkit.room.Operation> = emptyList()
 
+    suspend fun getQuantumFullTransactionsBefore(
+        fromTransactionHash: ByteArray?,
+        limit: Int
+    ): List<com.quantum.quantumkit.models.FullTransaction> = emptyList()
+
     fun getRawTransaction(transactionHash: String): String? = null
 
     fun getTransactionRecordsFlow(
@@ -444,6 +450,13 @@ interface ISendEthereumAdapter {
     val balanceData: BalanceData
 
     fun getTransactionData(amount: BigDecimal, address: Address): TransactionData
+}
+
+interface ISendQuantumAdapter {
+    val quantumKitWrapper: QuantumKitWrapper
+    val balanceData: BalanceData
+
+    fun getTransactionData(amount: BigDecimal, address: com.quantum.quantumkit.models.Address): com.quantum.quantumkit.models.TransactionData
 }
 
 interface ISendZcashAdapter {

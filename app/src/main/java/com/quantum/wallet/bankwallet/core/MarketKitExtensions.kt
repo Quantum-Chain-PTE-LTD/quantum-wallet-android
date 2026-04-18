@@ -141,6 +141,9 @@ val TokenQuery.isSupported: Boolean
         BlockchainType.Monero -> {
             tokenType is TokenType.Native
         }
+        BlockchainType.QuantumChain -> {
+            tokenType is TokenType.Native || tokenType is TokenType.Eip20
+        }
         is BlockchainType.Unsupported -> false
     }
 
@@ -167,6 +170,7 @@ val Blockchain.description: String
         BlockchainType.Ton -> "TON"
         BlockchainType.Stellar -> "XLM, Stellar assets"
         BlockchainType.Monero -> "XMR"
+        BlockchainType.QuantumChain -> "QUANTUM, QRC20 tokens"
         else -> ""
     }
 
@@ -209,6 +213,7 @@ private val blockchainOrderMap: Map<BlockchainType, Int> by lazy {
         BlockchainType.BitcoinCash,
         BlockchainType.Fantom,
         BlockchainType.ECash,
+        BlockchainType.QuantumChain,
     ).forEachIndexed { index, blockchainType ->
         map[blockchainType] = index
     }
@@ -259,6 +264,7 @@ val BlockchainType.title: String
     BlockchainType.Ton -> "Ton"
     BlockchainType.Stellar -> "Stellar"
     BlockchainType.Monero -> "Monero"
+    BlockchainType.QuantumChain -> "Quantum Chain"
     is BlockchainType.Unsupported -> this.uid
 }
 
@@ -310,6 +316,7 @@ private val chainIdBlockchainTypeMap: Map<Long, BlockchainType> = mapOf(
     250L to BlockchainType.Fantom,
     8453L to BlockchainType.Base,
     324L to BlockchainType.ZkSync,
+    20803L to BlockchainType.QuantumChain,
 )
 
 val BlockchainType.isEvm: Boolean
@@ -331,6 +338,7 @@ val BlockchainType.isEvm: Boolean
         BlockchainType.Dash,
         BlockchainType.ECash,
         BlockchainType.Litecoin,
+        BlockchainType.QuantumChain,
         BlockchainType.Solana,
         BlockchainType.Stellar,
         BlockchainType.Ton,
@@ -364,6 +372,7 @@ fun BlockchainType.supports(accountType: AccountType): Boolean {
                 BlockchainType.Stellar,
                 BlockchainType.Ton,
                 BlockchainType.Tron,
+                BlockchainType.QuantumChain,
                 BlockchainType.Zcash,
                 BlockchainType.ZkSync -> true
                 is BlockchainType.Unsupported -> false
