@@ -4,6 +4,7 @@ import android.util.Log
 import com.quantum.wallet.bankwallet.core.App
 import com.quantum.wallet.bankwallet.core.ILocalStorage
 import com.quantum.wallet.bankwallet.core.adapters.EvmTransactionsAdapter
+import com.quantum.wallet.bankwallet.core.adapters.QuantumTransactionsAdapter
 import com.quantum.wallet.bankwallet.core.adapters.StellarTransactionsAdapter
 import com.quantum.wallet.bankwallet.core.adapters.TronTransactionsAdapter
 import com.quantum.wallet.bankwallet.core.storage.ScannedTransactionStorage
@@ -30,6 +31,7 @@ class SpamManager(
 
     // Transaction event extractors for each blockchain
     val evmExtractor = EvmTransactionEventExtractor()
+    val quantumExtractor = QuantumTransactionEventExtractor()
     val tronExtractor = TronTransactionEventExtractor()
     val stellarExtractor = StellarTransactionEventExtractor()
 
@@ -177,6 +179,12 @@ class SpamManager(
                     adapter.getTronFullTransactionsBefore(transactionHash, OUTGOING_CONTEXT_SIZE)
                         .sortedByDescending { it.transaction.timestamp }
                         .mapNotNull { tronExtractor.extractOutgoingInfo(it, userAddress) }
+                }
+                is QuantumTransactionsAdapter -> {
+                    val userAddress = adapter.quantumKitWrapper.quantumKit.receiveAddress
+                    adapter.getQuantumFullTransactionsBefore(null, OUTGOING_CONTEXT_SIZE)
+                        .sortedByDescending { it.transaction.timestamp }
+                        .mapNotNull { quantumExtractor.extractOutgoingInfo(it, userAddress) }
                 }
                 is StellarTransactionsAdapter -> {
                     val selfAddress = adapter.stellarKitWrapper.stellarKit.receiveAddress
