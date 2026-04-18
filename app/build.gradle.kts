@@ -48,7 +48,7 @@ android {
         resValue("string", "appTwitterLink", "https://x.com/qntmchain")
         resValue("string", "appTelegramLink", "https://t.me/+XF1OapBYfu1iMzg0")
         resValue("string", "reportEmail", "contact@quantumcha.in")
-        resValue("string", "releaseNotesUrl", "TODO(Replace with Quantum Wallet release notes URL)")
+        resValue("string", "releaseNotesUrl", "https://api.github.com/repos/horizontalsystems/unstoppable-wallet-android/releases/tags/")
         resValue("string", "accountsBackupFileSalt", "quantumwallet")
 
         buildConfigField("boolean", "FDROID_BUILD", "false")
@@ -131,11 +131,11 @@ android {
             resValue("string", "bscscanKey", "R396MSJNCKX2YK4EIMP3EWYAW21NSVMXRN")
             resValue("string", "otherScanKey", "FU7CYEXQEUSMXJJF8MZR6BNRMP9XT8S9CP")
             resValue("string", "is_release", "false")
-            resValue("string", "guidesUrl", "TODO(Replace with Quantum Wallet guides URL)")
-            resValue("string", "eduUrl", "TODO(Replace with Quantum Wallet edu URL)")
-            resValue("string", "faqUrl", "TODO(Replace with Quantum Wallet FAQ URL)")
-            resValue("string", "coinsJsonUrl", "TODO(Replace with Quantum Wallet coins JSON URL)")
-            resValue("string", "providerCoinsJsonUrl", "TODO(Replace with Quantum Wallet provider coins JSON URL)")
+            resValue("string", "guidesUrl", "https://raw.githubusercontent.com/horizontalsystems/blockchain-crypto-guides/v1.2/index.json")
+            resValue("string", "eduUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/refs/tags/v1.4/src/edu.json")
+            resValue("string", "faqUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/master/src/faq.json")
+            resValue("string", "coinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/coins.json")
+            resValue("string", "providerCoinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/provider.coins.json")
             resValue("string", "marketApiBaseUrl", "https://api-dev.blocksdecoded.com")
             resValue("string", "marketApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "quantumChainApiBaseUrl", "https://api.quantumapi.io")
@@ -153,7 +153,7 @@ android {
             resValue("string", "chainalysisApiKey", "928bb256db73f1cb93e1b3366a145d9fbe06e28581c8b665b82ad70bbfef1db4")
             resValue("string", "hashDitBaseUrl", "https://service.hashdit.io/v2/hashdit/")
             resValue("string", "hashDitApiKey", "aGMkgODYiUFtTYrSRcEZsIfPHeASOlGYXClJZNWF")
-            resValue("string", "uswapApiBaseUrl", "TODO(Replace with Quantum Wallet swap dev API URL)")
+            resValue("string", "uswapApiBaseUrl", "https://swap-dev.unstoppable.money/api/v1/")
         }
 
         release {
@@ -166,11 +166,11 @@ android {
             resValue("string", "bscscanKey", "FQ2HSNNEHVG71U96P1TF3WF9RTF6AF5MRA,G6K8VZDWYSJHTCRURRITFZ2ZWV48GRGTZQ,R396MSJNCKX2YK4EIMP3EWYAW21NSVMXRN,8QW2JNMPHPUPAACFGXZ3A5PVQY6PBCJPEG")
             resValue("string", "otherScanKey", "Y855XHV4XKUC9DTRM2ZQG8XAQ96EJV221Q,43DEJEEMA1P81YAU555A1TECRY5FPIWCFH")
             resValue("string", "is_release", "true")
-            resValue("string", "guidesUrl", "TODO(Replace with Quantum Wallet guides URL)")
-            resValue("string", "eduUrl", "TODO(Replace with Quantum Wallet edu URL)")
-            resValue("string", "faqUrl", "TODO(Replace with Quantum Wallet FAQ URL)")
-            resValue("string", "coinsJsonUrl", "TODO(Replace with Quantum Wallet coins JSON URL)")
-            resValue("string", "providerCoinsJsonUrl", "TODO(Replace with Quantum Wallet provider coins JSON URL)")
+            resValue("string", "guidesUrl", "https://raw.githubusercontent.com/horizontalsystems/blockchain-crypto-guides/v1.2/index.json")
+            resValue("string", "eduUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/refs/tags/v1.4/src/edu.json")
+            resValue("string", "faqUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/master/src/faq.json")
+            resValue("string", "coinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/coins.json")
+            resValue("string", "providerCoinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/provider.coins.json")
             resValue("string", "marketApiBaseUrl", "https://api.blocksdecoded.com")
             resValue("string", "marketApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "quantumChainApiBaseUrl", "https://api.quantumapi.io")
@@ -188,7 +188,7 @@ android {
             resValue("string", "chainalysisApiKey", "928bb256db73f1cb93e1b3366a145d9fbe06e28581c8b665b82ad70bbfef1db4")
             resValue("string", "hashDitBaseUrl", "https://service.hashdit.io/v2/hashdit/")
             resValue("string", "hashDitApiKey", "aGMkgODYiUFtTYrSRcEZsIfPHeASOlGYXClJZNWF")
-            resValue("string", "uswapApiBaseUrl", "TODO(Replace with Quantum Wallet swap API URL)")
+            resValue("string", "uswapApiBaseUrl", "https://swap.unstoppable.money/api/v1/")
         }
     }
 
@@ -224,10 +224,13 @@ android {
 
     configurations.all {
         resolutionStrategy.dependencySubstitution {
-            substitute(module("org.bouncycastle:bcprov-jdk15to18:1.68")).using(module("org.bouncycastle:bcprov-jdk15on:1.65"))
+            substitute(module("org.bouncycastle:bcprov-jdk15to18:1.68")).using(module("org.bouncycastle:bcprov-jdk18on:1.83"))
+            substitute(module("org.bouncycastle:bcprov-jdk15on")).using(module("org.bouncycastle:bcprov-jdk18on:1.83"))
+            substitute(module("org.bouncycastle:bcpkix-jdk15on")).using(module("org.bouncycastle:bcpkix-jdk18on:1.83"))
+            substitute(module("org.bouncycastle:bcutil-jdk15on")).using(module("org.bouncycastle:bcutil-jdk18on:1.83"))
+            substitute(module("org.bouncycastle:bcutil-jdk15to18")).using(module("org.bouncycastle:bcutil-jdk18on:1.83"))
             substitute(module("com.google.protobuf:protobuf-java:3.6.1")).using(module("com.google.protobuf:protobuf-javalite:3.21.1"))
             substitute(module("net.jcip:jcip-annotations:1.0")).using(module("com.github.stephenc.jcip:jcip-annotations:1.0-1"))
-
         }
 
         resolutionStrategy.eachDependency {
@@ -332,6 +335,7 @@ dependencies {
     // Web3
     implementation(libs.web3j)
     implementation(libs.unstoppable.domains)
+    implementation(libs.bouncycastle.bcprov)
 
     // Wallet Kits
     implementation(libs.kit.monero)
@@ -344,19 +348,22 @@ dependencies {
     implementation(libs.kit.solana)
     implementation(libs.kit.tron)
     implementation(libs.kit.zcash)
+    implementation(libs.kit.quantum)
+    implementation(libs.kit.qrc20)
 
     // Binance
-    implementation(libs.binance.connector) {
-        exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
-    }
+    implementation(libs.binance.connector)
 
     // Desugar
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
-    // Exclude old version from wherever it's coming
+    // Exclude old BouncyCastle variants to avoid conflicts
     configurations.configureEach {
-        exclude(group = "org.bouncycastle", module = "bcprov-jdk18on")
-        exclude(group = "org.bouncycastle", module = "bcutil-jdk18on")
+        exclude(group = "org.bouncycastle", module = "bcprov-jdk15on")
+        exclude(group = "org.bouncycastle", module = "bcprov-jdk15to18")
+        exclude(group = "org.bouncycastle", module = "bcpkix-jdk15on")
+        exclude(group = "org.bouncycastle", module = "bcutil-jdk15on")
+        exclude(group = "org.bouncycastle", module = "bcutil-jdk15to18")
     }
 
     // Tor
@@ -403,3 +410,4 @@ configurations.all {
         force("io.ktor:ktor-client-core:2.3.7")
     }
 }
+

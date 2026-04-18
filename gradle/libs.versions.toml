@@ -75,9 +75,13 @@ marketKit = "b2aea45"
 solanaKit = "82c5ef4"
 tronKit = "2f07e86"
 zcashSdk = "0eca3b9"
+quantumKit = "0.1.0"
 
 # Binance
 binanceConnector = "3.4.1"
+
+# BouncyCastle
+bouncycastle = "1.83"
 
 # Ktor (for TonKit)
 ktor = "2.3.7"
@@ -220,9 +224,15 @@ kit-market = { module = "com.github.horizontalsystems:market-kit-android", versi
 kit-solana = { module = "com.github.horizontalsystems:solana-kit-android", version.ref = "solanaKit" }
 kit-tron = { module = "com.github.horizontalsystems:tron-kit-android", version.ref = "tronKit" }
 kit-zcash = { module = "com.github.horizontalsystems:zcash-android-wallet-sdk", version.ref = "zcashSdk" }
+kit-quantum = { module = "com.quantum:quantumkit", version.ref = "quantumKit" }
+kit-qrc20 = { module = "com.quantum:qrc20kit", version.ref = "quantumKit" }
 
 # Binance
 binance-connector = { module = "io.github.binance:binance-connector-java", version.ref = "binanceConnector" }
+
+# BouncyCastle
+bouncycastle-bcprov = { module = "org.bouncycastle:bcprov-jdk18on", version.ref = "bouncycastle" }
+bouncycastle-bcpkix = { module = "org.bouncycastle:bcpkix-jdk18on", version.ref = "bouncycastle" }
 
 # Desugar
 desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
