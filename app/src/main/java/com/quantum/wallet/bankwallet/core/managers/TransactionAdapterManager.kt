@@ -74,6 +74,9 @@ class TransactionAdapterManager(
                     BlockchainType.Stellar -> {
                         adapterFactory.stellarTransactionsAdapter(wallet.transactionSource)
                     }
+                    BlockchainType.QuantumChain -> {
+                        adapterFactory.quantumTransactionsAdapter(wallet.transactionSource)
+                    }
                     else -> adapter as? ITransactionsAdapter
                 }
             }

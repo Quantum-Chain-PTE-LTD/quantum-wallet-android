@@ -15,6 +15,9 @@ import com.quantum.wallet.bankwallet.core.adapters.Eip20Adapter
 import com.quantum.wallet.bankwallet.core.adapters.EvmAdapter
 import com.quantum.wallet.bankwallet.core.adapters.EvmTransactionsAdapter
 import com.quantum.wallet.bankwallet.core.adapters.JettonAdapter
+import com.quantum.wallet.bankwallet.core.adapters.Qip20Adapter
+import com.quantum.wallet.bankwallet.core.adapters.QuantumAdapter
+import com.quantum.wallet.bankwallet.core.adapters.QuantumTransactionsAdapter
 import com.quantum.wallet.bankwallet.core.adapters.LitecoinAdapter
 import com.quantum.wallet.bankwallet.core.adapters.MoneroAdapter
 import com.quantum.wallet.bankwallet.core.adapters.SolanaAdapter
@@ -39,6 +42,7 @@ import com.quantum.wallet.bankwallet.core.managers.EvmSyncSourceManager
 import com.quantum.wallet.bankwallet.core.managers.MoneroNodeManager
 import com.quantum.wallet.bankwallet.core.managers.RestoreSettingsManager
 import com.quantum.wallet.bankwallet.core.managers.SolanaKitManager
+import com.quantum.wallet.bankwallet.core.managers.QuantumKitManager
 import com.quantum.wallet.bankwallet.core.managers.StellarKitManager
 import com.quantum.wallet.bankwallet.core.managers.TonKitManager
 import com.quantum.wallet.bankwallet.core.managers.TronKitManager
@@ -58,6 +62,7 @@ class AdapterFactory(
     private val tronKitManager: TronKitManager,
     private val tonKitManager: TonKitManager,
     private val stellarKitManager: StellarKitManager,
+    private val quantumKitManager: QuantumKitManager,
     private val moneroNodeManager: MoneroNodeManager,
     private val backgroundManager: BackgroundManager,
     private val restoreSettingsManager: RestoreSettingsManager,
@@ -107,6 +112,17 @@ class AdapterFactory(
         val stellarKitWrapper = stellarKitManager.getStellarKitWrapper(wallet.account)
 
         return StellarAssetAdapter(stellarKitWrapper, code, issuer)
+    }
+
+    private fun getQuantumAdapter(wallet: Wallet): IAdapter {
+        val quantumKitWrapper = quantumKitManager.getQuantumKitWrapper(wallet.account)
+        return QuantumAdapter(quantumKitWrapper, coinManager)
+    }
+
+    private fun getQip20Adapter(wallet: Wallet, address: String): IAdapter? {
+        val quantumKitWrapper = quantumKitManager.getQuantumKitWrapper(wallet.account)
+        val baseToken = coinManager.getToken(TokenQuery(BlockchainType.QuantumChain, TokenType.Native)) ?: return null
+        return Qip20Adapter(context, quantumKitWrapper, address, baseToken, coinManager, wallet, evmLabelManager)
     }
 
     fun getAdapterOrNull(wallet: Wallet) = try {
@@ -175,6 +191,9 @@ class AdapterFactory(
             BlockchainType.Stellar -> {
                 StellarAdapter(stellarKitManager.getStellarKitWrapper(wallet.account))
             }
+            BlockchainType.QuantumChain -> {
+                getQuantumAdapter(wallet)
+            }
             BlockchainType.Monero -> {
                 MoneroAdapter.create(
                     context = context,
@@ -187,10 +206,10 @@ class AdapterFactory(
             else -> null
         }
         is TokenType.Eip20 -> {
-            if (wallet.token.blockchainType == BlockchainType.Tron) {
-                getTrc20Adapter(wallet, tokenType.address)
-            } else {
-                getEip20Adapter(wallet, tokenType.address)
+            when (wallet.token.blockchainType) {
+                BlockchainType.Tron -> getTrc20Adapter(wallet, tokenType.address)
+                BlockchainType.QuantumChain -> getQip20Adapter(wallet, tokenType.address)
+                else -> getEip20Adapter(wallet, tokenType.address)
             }
         }
         is TokenType.Spl -> getSplAdapter(wallet, tokenType.address)
@@ -230,6 +249,13 @@ class AdapterFactory(
         val tonTransactionConverter = tonTransactionConverter(address, source) ?: return null
 
         return TonTransactionsAdapter(tonKitWrapper, tonTransactionConverter)
+    }
+
+    fun quantumTransactionsAdapter(source: TransactionSource): ITransactionsAdapter? {
+        val quantumKitWrapper = quantumKitManager.getQuantumKitWrapper(source.account)
+        val baseToken = coinManager.getToken(TokenQuery(BlockchainType.QuantumChain, TokenType.Native)) ?: return null
+
+        return QuantumTransactionsAdapter(quantumKitWrapper, baseToken, coinManager, source, evmLabelManager)
     }
 
     fun stellarTransactionsAdapter(source: TransactionSource): ITransactionsAdapter? {
@@ -286,6 +312,9 @@ class AdapterFactory(
             BlockchainType.Stellar -> {
                 stellarKitManager.unlink(wallet.account)
             }
+            BlockchainType.QuantumChain -> {
+                quantumKitManager.unlink(wallet.account)
+            }
             else -> Unit
         }
     }
@@ -313,6 +342,9 @@ class AdapterFactory(
             }
             BlockchainType.Stellar -> {
                 stellarKitManager.unlink(transactionSource.account)
+            }
+            BlockchainType.QuantumChain -> {
+                quantumKitManager.unlink(transactionSource.account)
             }
             else -> Unit
         }

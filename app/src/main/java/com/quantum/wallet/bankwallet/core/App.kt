@@ -57,6 +57,8 @@ import com.quantum.wallet.bankwallet.core.managers.SolanaWalletManager
 import com.quantum.wallet.bankwallet.core.managers.SpamManager
 import com.quantum.wallet.bankwallet.core.managers.StellarAccountManager
 import com.quantum.wallet.bankwallet.core.managers.StellarKitManager
+import com.quantum.wallet.bankwallet.core.managers.QuantumAccountManager
+import com.quantum.wallet.bankwallet.core.managers.QuantumKitManager
 import com.quantum.wallet.bankwallet.core.managers.SwapTermsManager
 import com.quantum.wallet.bankwallet.core.managers.SystemInfoManager
 import com.quantum.wallet.bankwallet.core.managers.TermsManager
@@ -114,6 +116,7 @@ import com.quantum.wallet.core.security.EncryptionManager
 import com.quantum.wallet.core.security.KeyStoreManager
 import io.horizontalsystems.ethereumkit.core.EthereumKit
 import io.horizontalsystems.hdwalletkit.Mnemonic
+import io.horizontalsystems.marketkit.models.BlockchainType
 import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -166,6 +169,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         lateinit var tronKitManager: TronKitManager
         lateinit var tonKitManager: TonKitManager
         lateinit var stellarKitManager: StellarKitManager
+        lateinit var quantumKitManager: QuantumKitManager
         lateinit var numberFormatter: IAppNumberFormatter
         lateinit var feeCoinProvider: FeeTokenProvider
         lateinit var accountCleaner: IAccountCleaner
@@ -289,6 +293,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         tronKitManager = TronKitManager(evmSyncSourceManager, backgroundManager)
         tonKitManager = TonKitManager(backgroundManager)
         stellarKitManager = StellarKitManager(backgroundManager)
+        quantumKitManager = QuantumKitManager(backgroundManager)
 
         wordsManager = WordsManager(Mnemonic())
         networkManager = NetworkManager()
@@ -343,6 +348,14 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         val stellarAccountManager = StellarAccountManager(accountManager, walletManager, stellarKitManager, tokenAutoEnableManager)
         stellarAccountManager.start()
 
+        val quantumAccountManager = QuantumAccountManager(
+            BlockchainType.QuantumChain,
+            accountManager,
+            walletManager,
+            marketKit,
+            quantumKitManager,
+            tokenAutoEnableManager
+        )
         systemInfoManager = SystemInfoManager(appConfigProvider)
 
         languageManager = LanguageManager()
@@ -367,6 +380,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
             tronKitManager = tronKitManager,
             tonKitManager = tonKitManager,
             stellarKitManager = stellarKitManager,
+            quantumKitManager = quantumKitManager,
             backgroundManager = backgroundManager,
             restoreSettingsManager = restoreSettingsManager,
             coinManager = coinManager,
@@ -382,6 +396,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
             tronKitManager,
             tonKitManager,
             stellarKitManager,
+            quantumKitManager,
         )
         transactionAdapterManager = TransactionAdapterManager(adapterManager, adapterFactory)
         spamManager = SpamManager(localStorage, scannedTransactionStorage, contactsRepository, transactionAdapterManager)

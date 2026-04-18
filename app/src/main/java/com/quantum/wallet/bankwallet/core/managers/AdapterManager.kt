@@ -24,6 +24,7 @@ class AdapterManager(
     private val tronKitManager: TronKitManager,
     private val tonKitManager: TonKitManager,
     private val stellarKitManager: StellarKitManager,
+    private val quantumKitManager: QuantumKitManager,
 ) : IAdapterManager {
 
     private val coroutineScope = CoroutineScope(Dispatchers.Default)
@@ -52,6 +53,7 @@ class AdapterManager(
         tronKitManager.tronKitWrapper?.tronKit?.refresh()
         tonKitManager.tonKitWrapper?.tonKit?.refresh()
         stellarKitManager.stellarKitWrapper?.stellarKit?.refresh()
+        quantumKitManager.quantumKitWrapper?.quantumKit?.refresh()
     }
 
     @Synchronized
