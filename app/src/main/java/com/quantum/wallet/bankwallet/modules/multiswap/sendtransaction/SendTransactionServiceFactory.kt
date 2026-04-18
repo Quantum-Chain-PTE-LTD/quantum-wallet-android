@@ -22,6 +22,9 @@ object SendTransactionServiceFactory {
             BlockchainType.Fantom,
                 -> SendTransactionServiceEvm(blockchainType)
 
+            BlockchainType.QuantumChain,
+                -> SendTransactionServiceEvm(blockchainType)
+
             BlockchainType.Bitcoin,
             BlockchainType.BitcoinCash,
             BlockchainType.ECash,

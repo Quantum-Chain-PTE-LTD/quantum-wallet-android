@@ -73,7 +73,8 @@ object AddressInputModule {
                 BlockchainType.ZkSync,
                 BlockchainType.Gnosis,
                 BlockchainType.Fantom,
-                BlockchainType.ArbitrumOne -> {
+                BlockchainType.ArbitrumOne,
+                BlockchainType.QuantumChain -> {
                     addressParserChain.addHandler(AddressHandlerEvm(blockchainType))
                 }
                 BlockchainType.Solana -> {

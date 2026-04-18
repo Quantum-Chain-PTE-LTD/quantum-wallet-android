@@ -38,7 +38,8 @@ object AddressValidatorFactory {
             BlockchainType.ZkSync,
             BlockchainType.Gnosis,
             BlockchainType.Fantom,
-            BlockchainType.ArbitrumOne -> {
+            BlockchainType.ArbitrumOne,
+            BlockchainType.QuantumChain -> {
                 EvmAddressValidator()
             }
 

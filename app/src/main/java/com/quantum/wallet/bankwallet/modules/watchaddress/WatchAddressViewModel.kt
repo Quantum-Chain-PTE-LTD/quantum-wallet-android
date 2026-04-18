@@ -221,7 +221,8 @@ class WatchAddressViewModel(
         BlockchainType.ZkSync,
         BlockchainType.ArbitrumOne,
         BlockchainType.Gnosis,
-        BlockchainType.Fantom -> Type.EvmAddress
+        BlockchainType.Fantom,
+        BlockchainType.QuantumChain -> Type.EvmAddress
 
         BlockchainType.Solana -> Type.SolanaAddress
         BlockchainType.Tron -> Type.TronAddress

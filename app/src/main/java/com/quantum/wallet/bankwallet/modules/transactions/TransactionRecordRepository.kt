@@ -85,7 +85,8 @@ class TransactionRecordRepository(
                 BlockchainType.Tron,
                 BlockchainType.Stellar,
                 BlockchainType.Monero,
-                BlockchainType.Ton -> {
+                BlockchainType.Ton,
+                BlockchainType.QuantumChain -> {
                     if (mergedWallets.none { it.source == wallet.source }) {
                         mergedWallets.add(TransactionWallet(null, wallet.source, null))
                     }

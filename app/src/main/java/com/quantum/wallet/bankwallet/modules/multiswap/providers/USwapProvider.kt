@@ -102,6 +102,7 @@ class USwapProvider(private val provider: UProvider) : IMultiSwapProvider {
                 BlockchainType.Fantom,
                 BlockchainType.Gnosis,
                 BlockchainType.ZkSync,
+                BlockchainType.QuantumChain
                     -> {
                     val tokenType = if (!token.address.isNullOrBlank()) {
                         TokenType.Eip20(token.address)
@@ -179,7 +180,6 @@ class USwapProvider(private val provider: UProvider) : IMultiSwapProvider {
                         assetsMap[it] = token.identifier
                     }
                 }
-
                 is BlockchainType.Unsupported -> Unit
             }
         }

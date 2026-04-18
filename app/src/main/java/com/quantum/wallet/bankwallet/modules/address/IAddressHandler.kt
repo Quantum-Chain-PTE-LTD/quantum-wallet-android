@@ -121,6 +121,8 @@ class AddressHandlerUdn(
             BlockchainType.Fantom,
             BlockchainType.ArbitrumOne -> "ETH"
 
+            BlockchainType.QuantumChain -> "QTM"
+
             BlockchainType.Bitcoin -> "BTC"
             BlockchainType.BitcoinCash -> "BCH"
             BlockchainType.ECash -> "XEC"

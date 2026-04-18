@@ -171,6 +171,7 @@ class SwapInfoViewModel(
             BlockchainType.Tron -> "https://tronscan.io/#/transaction/$txHash"
             BlockchainType.Ton -> "https://tonviewer.com/transaction/$txHash"
             BlockchainType.Stellar -> "https://stellar.expert/explorer/public/tx/$txHash"
+            BlockchainType.QuantumChain -> "https://qntmscan.io/tx/$txHash"
             is BlockchainType.Unsupported -> null
         }
 
