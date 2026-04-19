@@ -49,6 +49,7 @@ val Token.protocolInfo: String
             when (this.blockchainType) {
                 BlockchainType.Ethereum -> parts.add("(ERC20)")
                 BlockchainType.BinanceSmartChain -> parts.add("(BEP20)")
+                BlockchainType.QuantumChain -> parts.add("(QRC20)")
                 else -> {}
             }
             parts.joinToString(" ")
@@ -75,7 +76,8 @@ val TokenQuery.protocolType: String?
                 BlockchainType.Ethereum,
                 BlockchainType.BinanceSmartChain,
                 BlockchainType.Tron,
-                BlockchainType.Ton -> null
+                BlockchainType.Ton,
+                BlockchainType.QuantumChain -> null
 
                 else -> blockchainType.title
             }
@@ -86,6 +88,7 @@ val TokenQuery.protocolType: String?
                 BlockchainType.Ethereum -> "ERC20"
                 BlockchainType.BinanceSmartChain -> "BEP20"
                 BlockchainType.Tron -> "TRC20"
+                BlockchainType.QuantumChain -> "QRC20"
                 else -> blockchainType.title
             }
         }
@@ -180,7 +183,10 @@ fun Blockchain.jettonUrl(address: String) = "https://tonviewer.com/$address"
 fun Blockchain.assetUrl(code: String, issuer: String) = "https://stellar.expert/explorer/public/asset/$code-$issuer"
 
 val BlockchainType.imageUrl: String
-    get() = "https://cdn.blocksdecoded.com/blockchain-icons/32px/$uid@3x.png"
+    get() {
+        App.coinIconProvider.blockchainIconUrl(uid)?.let { return it }
+        return "https://cdn.blocksdecoded.com/blockchain-icons/32px/$uid@3x.png"
+    }
 
 val BlockchainType.restoreSettingTypes: List<RestoreSettingType>
     get() = when (this) {
@@ -194,6 +200,7 @@ private val blockchainOrderMap: Map<BlockchainType, Int> by lazy {
     listOf(
         BlockchainType.Bitcoin,
         BlockchainType.Ethereum,
+        BlockchainType.QuantumChain,
         BlockchainType.Monero,
         BlockchainType.Tron,
         BlockchainType.Zcash,
@@ -213,7 +220,6 @@ private val blockchainOrderMap: Map<BlockchainType, Int> by lazy {
         BlockchainType.BitcoinCash,
         BlockchainType.Fantom,
         BlockchainType.ECash,
-        BlockchainType.QuantumChain,
     ).forEachIndexed { index, blockchainType ->
         map[blockchainType] = index
     }
@@ -238,6 +244,7 @@ val BlockchainType.tokenIconPlaceholder: Int
         BlockchainType.Tron -> R.drawable.tron_trc20
         BlockchainType.Ton -> R.drawable.the_open_network_jetton
         BlockchainType.Stellar -> R.drawable.stellar_asset
+        BlockchainType.QuantumChain -> R.drawable.qrc20
         else -> R.drawable.coin_placeholder
     }
 
@@ -288,12 +295,14 @@ val BlockchainType.brandColor: Color?
         BlockchainType.Base -> Color(0xFF2759F6)
         BlockchainType.ZkSync -> Color(0xFF8D8FF0)
         BlockchainType.ArbitrumOne -> Color(0xFF96BEDC)
+        BlockchainType.QuantumChain -> Color(0xFFFFFFFF)
         else -> null
     }
 
 val BlockchainType.feePriceScale: FeePriceScale
     get() = when (this) {
         BlockchainType.Avalanche -> FeePriceScale.Navax
+        BlockchainType.QuantumChain -> FeePriceScale.GQwei
         else -> FeePriceScale.Gwei
     }
 
@@ -405,6 +414,7 @@ fun BlockchainType.supports(accountType: AccountType): Boolean {
                     || this == BlockchainType.ArbitrumOne
                     || this == BlockchainType.Gnosis
                     || this == BlockchainType.Fantom
+                    || this == BlockchainType.QuantumChain
         is AccountType.EvmPrivateKey -> {
             this == BlockchainType.Ethereum
                     || this == BlockchainType.BinanceSmartChain
@@ -464,7 +474,10 @@ val TokenType.bitcoinCashCoinType: TokenType.AddressType?
     }
 
 val Coin.imageUrl: String
-    get() = "https://cdn.blocksdecoded.com/coin-icons/32px/$uid@3x.png"
+    get() {
+        App.coinIconProvider.coinIconUrl(uid)?.let { return it }
+        return "https://cdn.blocksdecoded.com/coin-icons/32px/$uid@3x.png"
+    }
 
 val Coin.alternativeImageUrl: String?
     get() = image
@@ -472,8 +485,11 @@ val Coin.alternativeImageUrl: String?
 val Coin.imagePlaceholder: Int
     get() = R.drawable.coin_placeholder
 
-val TopPlatform.imageUrl
-    get() = "https://cdn.blocksdecoded.com/blockchain-icons/32px/${blockchain.uid}@3x.png"
+val TopPlatform.imageUrl: String
+    get() {
+        App.coinIconProvider.blockchainIconUrl(blockchain.uid)?.let { return it }
+        return "https://cdn.blocksdecoded.com/blockchain-icons/32px/${blockchain.uid}@3x.png"
+    }
 
 val FullCoin.typeLabel: String?
     get() = tokens.singleOrNull()?.protocolType
@@ -657,6 +673,7 @@ val BlockchainType.Companion.supported: List<BlockchainType>
     get() = listOf(
         BlockchainType.Bitcoin,
         BlockchainType.Ethereum,
+        BlockchainType.QuantumChain,
         BlockchainType.BinanceSmartChain,
         BlockchainType.Polygon,
         BlockchainType.Avalanche,

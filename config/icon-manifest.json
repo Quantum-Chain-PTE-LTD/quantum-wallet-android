@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "default_size": "96px",
+  "base_url": "https://quantum-static-prod-s3-apse1.s3.ap-southeast-1.amazonaws.com/qwallet",
+  "coins": [
+    {
+      "uid": "quantum",
+      "name": "Quantum"
+    }
+  ],
+  "blockchains": [
+    {
+      "uid": "quantum-chain",
+      "name": "Quantum Chain"
+    }
+  ]
+}

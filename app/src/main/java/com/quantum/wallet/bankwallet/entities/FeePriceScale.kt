@@ -1,24 +1,25 @@
 package com.quantum.wallet.bankwallet.entities
 
 enum class FeePriceScale {
-    Satoshi, Gwei, Navax;
+    Satoshi, Gwei, Navax, GQwei;
 
     val unit: String
         get() = when (this) {
             Satoshi -> "satoshi"
             Gwei -> "Gwei"
             Navax -> "nAvax"
+            GQwei -> "GQwei"
         }
 
     val scaleValue: Int
         get() = when (this) {
             Satoshi -> 1
-            Gwei, Navax -> 1_000_000_000
+            Gwei, Navax, GQwei -> 1_000_000_000
         }
 
     val decimals: Int
         get() = when(this) {
             Satoshi -> 1
-            Gwei, Navax -> 9
+            Gwei, Navax, GQwei -> 9
         }
 }

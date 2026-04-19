@@ -77,6 +77,7 @@ import com.quantum.wallet.bankwallet.core.managers.WalletStorage
 import com.quantum.wallet.bankwallet.core.managers.WordsManager
 import com.quantum.wallet.bankwallet.core.managers.ZcashBirthdayProvider
 import com.quantum.wallet.bankwallet.core.providers.AppConfigProvider
+import com.quantum.wallet.bankwallet.core.providers.CoinIconProvider
 import com.quantum.wallet.bankwallet.core.providers.EvmLabelProvider
 import com.quantum.wallet.bankwallet.core.providers.FeeRateProvider
 import com.quantum.wallet.bankwallet.core.providers.FeeTokenProvider
@@ -123,7 +124,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import org.bouncycastle.jce.provider.BouncyCastleProvider
 import java.security.MessageDigest
+import java.security.Security
 import java.util.logging.Level
 import java.util.logging.Logger
 import androidx.work.Configuration as WorkConfiguration
@@ -207,6 +210,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         lateinit var recentAddressManager: RecentAddressManager
         lateinit var roiManager: RoiManager
         lateinit var appIconService: AppIconService
+        lateinit var coinIconProvider: CoinIconProvider
         lateinit var swapRecordManager: SwapRecordManager
         lateinit var swapSyncService: SwapSyncService
     }
@@ -215,6 +219,10 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Register BouncyCastle provider for BKS KeyStore support.
+        // Android 15+ (API 35) removed the built-in BouncyCastle provider.
+        Security.insertProviderAt(BouncyCastleProvider(), 1)
 
         if (!BuildConfig.DEBUG) {
             //Disable logging for lower levels in Release build
@@ -297,6 +305,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
 
         wordsManager = WordsManager(Mnemonic())
         networkManager = NetworkManager()
+        coinIconProvider = CoinIconProvider(this)
         accountFactory = AccountFactory(accountManager, userManager)
         backupManager = BackupManager(accountManager)
 
@@ -552,7 +561,7 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
         localeAwareContext(this)
     }
 
-    override val isSwapEnabled = true
+    override val isSwapEnabled = false
 
     override fun getApplicationSignatures() = try {
         val signatureList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
