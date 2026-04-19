@@ -21,18 +21,12 @@ class ThemeService(private val localStorage: ILocalStorage) {
 
     fun setThemeType(themeType: ThemeType) {
         App.pinComponent.keepUnlocked()
-        localStorage.currentTheme = themeType
+        localStorage.currentTheme = ThemeType.Dark
 
         _optionsFlow.update {
-            Select(themeType, themes)
+            Select(ThemeType.Dark, themes)
         }
 
-        val nightMode = when (themeType) {
-            ThemeType.Light -> AppCompatDelegate.MODE_NIGHT_NO
-            ThemeType.Dark -> AppCompatDelegate.MODE_NIGHT_YES
-            ThemeType.System -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        }
-
-        AppCompatDelegate.setDefaultNightMode(nightMode)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     }
 }

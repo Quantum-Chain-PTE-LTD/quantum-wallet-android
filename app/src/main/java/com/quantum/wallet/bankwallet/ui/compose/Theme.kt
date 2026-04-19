@@ -44,15 +44,11 @@ val darkPalette = Colors(
 
 @Composable
 fun ComposeAppTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    darkTheme: Boolean = true,
     content: @Composable() () -> Unit
 ) {
 
-    val colors = if (darkTheme) {
-        darkPalette
-    } else {
-        lightPalette
-    }
+    val colors = darkPalette
 
     //custom styles
     ProvideLocalAssets(colors = colors, typography = Typography()) {
