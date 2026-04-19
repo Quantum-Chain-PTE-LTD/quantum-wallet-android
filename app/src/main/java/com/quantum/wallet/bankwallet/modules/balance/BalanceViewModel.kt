@@ -277,7 +277,7 @@ class BalanceViewModel(
         viewModelScope.launch {
             if (
                 scannedText.startsWith("tc:") ||
-                scannedText.startsWith("https://quantum.money/ton-connect")
+                scannedText.startsWith("https://quantum.wallet/ton-connect")
             ) {
                 App.tonConnectManager.handle(scannedText)
             } else {

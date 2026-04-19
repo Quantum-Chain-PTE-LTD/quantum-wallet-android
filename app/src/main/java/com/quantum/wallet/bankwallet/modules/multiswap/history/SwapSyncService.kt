@@ -20,13 +20,15 @@ import java.math.BigDecimal
 
 class SwapSyncService(
     private val swapRecordManager: SwapRecordManager,
-    appConfigProvider: AppConfigProvider,
+    private val appConfigProvider: AppConfigProvider,
 ) : Clearable {
 
-    private val quantumAPI = APIClient.build(
-        appConfigProvider.uswapApiBaseUrl,
-        mapOf("x-api-key" to appConfigProvider.uswapApiKey)
-    ).create(QuantumAPI::class.java)
+    private val quantumAPI by lazy {
+        APIClient.build(
+            appConfigProvider.uswapApiBaseUrl,
+            mapOf("x-api-key" to appConfigProvider.uswapApiKey)
+        ).create(QuantumAPI::class.java)
+    }
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
 
@@ -51,6 +53,7 @@ class SwapSyncService(
             syncAllBridgeRecord(record)
             return
         }
+        if (appConfigProvider.uswapApiBaseUrl.isBlank()) return
         try {
             val request = SwapTrackRequestBuilder.build(record)
             val response = if (record.providerId == OneInchProvider.id) {

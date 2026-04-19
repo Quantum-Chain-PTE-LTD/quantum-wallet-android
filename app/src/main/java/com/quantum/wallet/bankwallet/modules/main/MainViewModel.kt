@@ -71,14 +71,14 @@ class MainViewModel(
             listOf(
                 MainNavigation.Market,
                 MainNavigation.Balance,
-                MainNavigation.Swap,
+//                MainNavigation.Swap,
 //                MainNavigation.Transactions,
                 MainNavigation.Settings,
             )
         } else {
             listOf(
                 MainNavigation.Balance,
-                MainNavigation.Swap,
+//                MainNavigation.Swap,
 //                MainNavigation.Transactions,
                 MainNavigation.Settings,
             )
@@ -329,7 +329,7 @@ class MainViewModel(
                 tab = MainNavigation.Market
             }
 
-            deeplinkString.startsWith("https://quantum.money/referral") -> {
+            deeplinkString.startsWith("https://quantum.wallet/referral") -> {
                 val userId: String? = deepLink.getQueryParameter("userId")
                 val referralCode: String? = deepLink.getQueryParameter("referralCode")
                 if (userId != null && referralCode != null) {
@@ -409,7 +409,7 @@ class MainViewModel(
 
     fun handleDeepLink(uri: Uri) {
         val deeplinkString = uri.toString()
-        if (deeplinkString.startsWith("quantum.money:") || deeplinkString.startsWith("tc:")) {
+        if (deeplinkString.startsWith("quantum.wallet:") || deeplinkString.startsWith("tc:")) {
             val returnParam = uri.getQueryParameter("ret")
             // when app is opened from camera app, it returns "none" as ret param
             // so we don't need closing app in this case

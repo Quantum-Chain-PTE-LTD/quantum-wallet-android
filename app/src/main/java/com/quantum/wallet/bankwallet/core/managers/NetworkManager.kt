@@ -139,7 +139,7 @@ object ServiceChangeLogs {
 }
 
 object MiniAppRegisterService {
-    private val apiUrl = "https://be.quantum.money/"
+    private val apiUrl = "https://be.quantum.wallet/"
 
     fun service(): QuantumApi {
         return APIClient.retrofit(apiUrl, 60)
