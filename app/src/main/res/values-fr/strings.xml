@@ -825,7 +825,7 @@
     <string name="SettingsBanner_BePartOfTheFuture">Faire partie de l\'avenir de la finance privée</string>
     <string name="SettingsBanner_SupportTheProject">Soutenez le projet !</string>
     <!--Why Donate Page-->
-    <string name="SettingsBanner_DonateTitle">Soutenir le mouvement imparable</string>
+    <string name="SettingsBanner_DonateTitle">Soutenir le mouvement Quantum Wallet</string>
     <string name="SettingsBanner_DonateSubtitle">Faire partie de l\'avenir de la finance privée</string>
     <string name="SettingsBanner_DonateUnstoppableHasBeenFreeFromDayOne">« Quantum Wallet a été gratuit, sans publicité et open-source dès le premier jour — et cela restera ainsi. »</string>
     <string name="SettingsBanner_DonateByJoiningMovement">En rejoignant le mouvement QUANTUM, vous optez pour une finance ouverte et privée :</string>
@@ -1119,7 +1119,7 @@
     <string name="PrivateKeys_Bip32RootKeyDescription">La clé privée maîtresse du portefeuille. Donne un contrôle total sur tous les comptes et actifs dérivés.</string>
     <string name="PrivateKeys_AccountExtendedPrivateKey">Clé privée étendue du compte</string>
     <string name="PrivateKeys_AccountExtendedPrivateKeyDescription">Donne un contrôle total sur Bitcoin et d\'autres actifs basés sur UTXO (par exemple, Litecoin, Bitcoin Cash, Dash) dans ce portefeuille.</string>
-    <string name="PrivateKeys_NeverShareWarning">Ne partagez jamais votre phrase de récupération avec quiconque. Une équipe imparable ne demandera jamais votre phrase de récupération.</string>
+    <string name="PrivateKeys_NeverShareWarning">Ne partagez jamais votre phrase de récupération avec quiconque. L\'équipe Quantum Wallet ne demandera jamais votre phrase de récupération.</string>
     <string name="PrivateKeys_MoneroPrivateKey">Clés privées Monero</string>
     <string name="PrivateKeys_MoneroPrivateKeyDescription">Donne un contrôle total sur les actifs Monero (XMR) dans ce portefeuille, y compris la possibilité de dépenser des fonds.</string>
     <string name="MoneroKeyType">Type de texte</string>

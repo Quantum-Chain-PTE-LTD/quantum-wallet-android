@@ -477,7 +477,7 @@
     <string name="FeeSettings_FeeRate">Taxa de Taxa (SAT/BYTE)</string>
     <string name="FeeSettings_FeeRate_RecommendedInfo">Aqui é o valor recomendado para atingir os próximos 2 blocos</string>
     <string name="FeeSettings_FeeRate_Info">Ao enviar uma transação, você deve pagar uma taxa de rede. Quanto maior for a rede, maior será a tarifa.
-        \n\nCarteira Imparável sugere uma taxa ideal para ajudar a sua transação a ser confirmada em um período razoável. Você pode aumentar ou diminuir este valor.
+        \n\nQuantum Wallet sugere uma taxa ideal para ajudar a sua transação a ser confirmada em um período razoável. Você pode aumentar ou diminuir este valor.
         \n\nDefinir a taxa muito baixa pode fazer com que sua transação permaneça pendente por um longo tempo ou até mesmo seja rejeitada. Para uma confirmação mais rápida, use uma taxa maior.</string>
     <!--Fee Info -->
     <string name="FeeInfo_Title">Velocidade da Transação</string>
@@ -592,7 +592,7 @@
     <string name="SwapTerms_RiskRestrictions">Risco de restrições</string>
     <string name="SwapTerms_RiskRestrictions_Info">Entendo que alguns provedores de swap não-DEX aplicam o screening de transações (AML). Esses fornecedores podem rejeitar (e reembolso) swaps ou, em raros casos, (CSAM e terrorismo), congelar fundos e solicitar dados da KYC.</string>
     <string name="SwapTerms_UserResponsibility">Responsabilidade do usuário</string>
-    <string name="SwapTerms_UserResponsibility_Info">Entendo que o uso de provedores não-DEX introduz riscos adicionais e que esses riscos são da minha responsabilidade. Não parável pode garantir o comportamento do fornecedor.</string>
+    <string name="SwapTerms_UserResponsibility_Info">Entendo que o uso de provedores não-DEX introduz riscos adicionais e que esses riscos são da minha responsabilidade. Quantum Wallet pode garantir o comportamento do fornecedor.</string>
     <!-- Swap Settings -->
     <string name="SwapSettings_SlippageTitle">Tolerância de Slippage</string>
     <string name="SwapSettings_RecipientAddressTitle">Endereço do Destinatário</string>
@@ -825,15 +825,15 @@
     <string name="SettingsBanner_BePartOfTheFuture">Faça parte do futuro das finanças privadas</string>
     <string name="SettingsBanner_SupportTheProject">Apoie o Projeto!</string>
     <!--Why Donate Page-->
-    <string name="SettingsBanner_DonateTitle">Apoie o movimento Imparável</string>
+    <string name="SettingsBanner_DonateTitle">Apoie o movimento Quantum Wallet</string>
     <string name="SettingsBanner_DonateSubtitle">Faça parte do futuro das finanças privadas</string>
-    <string name="SettingsBanner_DonateUnstoppableHasBeenFreeFromDayOne">O Wallet não parável tem sido gratuito, sem anúncios e de código aberto desde o primeiro dia — e assim permanecerá.\"</string>
-    <string name="SettingsBanner_DonateByJoiningMovement">Ao aderir ao movimento Incessável, você defende finanças abertas e privadas:</string>
-    <string name="SettingsBanner_DonateUnstoppableWalletTeam">A Equipe de Carteira Iparável</string>
+    <string name="SettingsBanner_DonateUnstoppableHasBeenFreeFromDayOne">O Quantum Wallet tem sido gratuito, sem anúncios e de código aberto desde o primeiro dia — e assim permanecerá.\"</string>
+    <string name="SettingsBanner_DonateByJoiningMovement">Ao aderir ao movimento Quantum Wallet, você defende finanças abertas e privadas:</string>
+    <string name="SettingsBanner_DonateUnstoppableWalletTeam">A Equipe de Quantum Wallet</string>
     <string name="SettingsBanner_DonateYourSupportIsCommitment">Seu apoio não tem apenas a ver com desbloquear recursos — é um compromisso com a privacidade, liberdade e acesso aberto para todos.</string>
     <string name="SettingsBanner_DonateItHelpsWalletToBeAdFree">Ele ajuda a manter a carteira livre de anúncios, segura e verdadeiramente independente - para você e para centenas de milhares de pessoas que dependem dela em todo o mundo.</string>
     <string name="SettingsBanner_DonateExclusivelyOnFDroid">Exclusivamente em F-Droid</string>
-    <string name="SettingsBanner_DonateUnstoppableWalletGivesYouAdvancedFeatures">Wallet Istoppable fornece recursos avançados — sem assinatura, sem limites:</string>
+    <string name="SettingsBanner_DonateUnstoppableWalletGivesYouAdvancedFeatures">Quantum Wallet fornece recursos avançados — sem assinatura, sem limites:</string>
     <string name="SettingsBanner_DonateFeatureFullAnalytics">Análise completa e dados sobre tokens</string>
     <string name="SettingsBanner_DonateFeaturePrivacy">Modo de privacidade &amp; Modo de Duress</string>
     <string name="SettingsBanner_DonateFeatureSignals">Sinais para uma negociação segura</string>
@@ -841,7 +841,7 @@
     <string name="SettingsBanner_DonateFeatureAdvanced">Busca e filtros avançados de ativos</string>
     <string name="SettingsBanner_DonateFeaturePriority">Acesso prioritário ao suporte</string>
     <string name="SettingsBanner_DonateEveryBitOfSupportMatters">Todos os apoios são importantes.</string>
-    <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">Ao apoiar Carteira Iparável, você nos ajuda a crescer, melhorar e permanecer independente.</string>
+    <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">Ao apoiar Quantum Wallet, você nos ajuda a crescer, melhorar e permanecer independente.</string>
     <!--Setting Subscription -->
     <string name="SettingsSubscription_Active">Ativo</string>
     <string name="SettingsSubscription_GetPremium">Obter Premium</string>
@@ -894,7 +894,7 @@
     <string name="BackupManager_AppSettingsTitle">Configurações do Aplicativo</string>
     <string name="BackupManager_AppSettingsDescription">Linguagem, Moeda, Aparência …</string>
     <!-- Privacy  -->
-    <string name="Privacy_Information">Não parável não coletar dados pessoais como seus saldos ou endereços de carteira. Usamos apenas dados anônimos para melhorar o aplicativo.</string>
+    <string name="Privacy_Information">Quantum Wallet não coletar dados pessoais como seus saldos ou endereços de carteira. Usamos apenas dados anônimos para melhorar o aplicativo.</string>
     <string name="ShareUiData">Compartilhar Dados de UI</string>
     <string name="ShareUiDataDescription">Esta configuração permite que você desative a análise e mantenha sua atividade totalmente privada.</string>
     <!-- Security Center -->
@@ -919,7 +919,7 @@
         \n\nEm → transações aparecem instantaneamente como pendentes quando a transmissão (sincronização mais rápida, mas baixa privacidade e confiança no nó).
         \n\nOff → transações são mostradas apenas após confirmações da rede (lento, mas mais seguro e mais privado).</string>
     <string name="MoneroNodeSettings_Trusted">Confiável</string>
-    <string name="MoneroNodeSettings_Description">Escolha o aplicativo \"Não\" Interparável para a sincronização de carteiras(s).</string>
+    <string name="MoneroNodeSettings_Description">Escolha o aplicativo Quantum Wallet para a sincronização de carteiras(s).</string>
     <!--Btc Blockchain Settings -->
     <string name="BtcBlockchainSettings_RestoreSourceChangeWarning">Após alterar a fonte, a carteira terá que ressincronizar.</string>
     <string name="BtcBlockchainSettings_RestoreSourceSettingsDescription">Selecione uma fonte de dados para restaurar uma carteira com transações.</string>

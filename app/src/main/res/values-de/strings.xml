@@ -101,7 +101,7 @@
     <string name="Language_Portuguese">Portugiesisch</string>
     <!--Rate App-->
     <string name="RateApp_Title_Rate_This_App">GM!</string>
-    <string name="RateApp_Description_Rate_This_App">Gefällt Ihnen unaufhaltsam? Teilen Sie Feedback und Ideen, um es weiterzuführen.</string>
+    <string name="RateApp_Description_Rate_This_App">Gefällt Ihnen Quantum Wallet? Teilen Sie Feedback und Ideen, um es weiterzuführen.</string>
     <string name="RateApp_Button_RateIt">Bewerten</string>
     <string name="RateApp_Button_NotNow">Nicht jetzt</string>
     <string name="Restore_SelectNetwork_Title">Netzwerk auswählen</string>
@@ -123,7 +123,7 @@
     <string name="Restore_PrivateKeyHint">Geben Sie EVM Private Key, BIP32 Root Key, Stellar Secret Key oder Account Extended Private Key ein</string>
     <string name="Restore_PhraseHint">Wiederherstellungsphrase eingeben</string>
     <string name="Restore_NonStandardRestore">Non-Standard Import</string>
-    <string name="Restore_NonStandard_Description">Diese Seite bietet unaufhaltsamen Benutzern einen speziellen Wallet-Wiederherstellungsmechanismus für unaufhaltsame Brieftaschen an. Solche Brieftaschen könnten in Version 0 unaufhaltsam erstellt worden sein. 7 - 0.28 unter Verwendung einer nicht-englischen Wiederherstellungsphrase und/oder eines Sonderzeichens in der Brieftasche Passphrase (d.h. diakritisches Symbol).\n\nWenn Sie ein betroffener Benutzer sind, wird Ihr Wallet-Guthaben in Version 0.29 oder höher 0 angezeigt. Auf dieser Seite können Sie den Zugriff auf Ihre nicht standardmäßige Brieftasche wiederherstellen. Nach der Wiederherstellung empfehlen wir, eine neue Wallet zu erstellen (die standardkonform ist) und Geld dorthin zu verschieben.</string>
+    <string name="Restore_NonStandard_Description">Diese Seite bietet Quantum Wallet Benutzern einen speziellen Wallet-Wiederherstellungsmechanismus für Quantum Wallet Brieftaschen an. Solche Brieftaschen könnten in Version 0 mit Quantum Wallet erstellt worden sein. 7 - 0.28 unter Verwendung einer nicht-englischen Wiederherstellungsphrase und/oder eines Sonderzeichens in der Brieftasche Passphrase (d.h. diakritisches Symbol).\n\nWenn Sie ein betroffener Benutzer sind, wird Ihr Wallet-Guthaben in Version 0.29 oder höher 0 angezeigt. Auf dieser Seite können Sie den Zugriff auf Ihre nicht standardmäßige Brieftasche wiederherstellen. Nach der Wiederherstellung empfehlen wir, eine neue Wallet zu erstellen (die standardkonform ist) und Geld dorthin zu verschieben.</string>
     <string name="Restore_Bip_Recommended">(empfohlen)</string>
     <string name="Restore_PrivateKey_InvalidKey">Ungültiger Schlüssel</string>
     <string name="SelectContacts_All">Alle</string>
@@ -587,7 +587,7 @@
     <string name="SwapConfirm_MevDescription">Schalten Sie den Schutz ein, um Ihren Swap-Wert zu sichern und vermeiden Sie den Verlust von Wert an Bots.</string>
     <string name="SwapError_FailedToFetchQuote">Zitat konnte nicht abgerufen werden.</string>
     <string name="SwapTerms_Title">Begriffe tauschen</string>
-    <string name="SwapTerms_TopText">Unaufhaltsam aggregiert mehrere dezentralisierte (DEX) und zentralisierte Swap-Anbieter, um konkurrenzfähige Kurse und eine breite Unterstützung von Vermögenswerten anzubieten.</string>
+    <string name="SwapTerms_TopText">Quantum Wallet aggregiert mehrere dezentralisierte (DEX) und zentralisierte Swap-Anbieter, um konkurrenzfähige Kurse und eine breite Unterstützung von Vermögenswerten anzubieten.</string>
     <string name="SwapTerms_BottomText">Wählen Sie immer einen Swap-Anbieter, der Ihren Anforderungen entspricht.</string>
     <string name="SwapTerms_RiskRestrictions">Risiko von Einschränkungen</string>
     <string name="SwapTerms_RiskRestrictions_Info">Ich verstehe, dass einige nicht DEX Swap-Anbieter Transaktions-Screening (AML) anwenden. Solche Anbieter können Swaps ablehnen (und erstatten) oder in seltenen Fällen (CSAM und Terrorismus) einfrieren und KYC-Daten anfordern.</string>
@@ -736,10 +736,10 @@
     <string name="StatusInfo_Processing">In Bearbeitung</string>
     <string name="StatusInfo_Confirmed">Abgeschlossen</string>
     <string name="StatusInfo_Failed">Fehler</string>
-    <string name="StatusInfo_PendingDescription">Die Transaktion wurde noch nicht in der Blockchain bestätigt. Transaktionen, die mit einer empfohlenen oder höheren Gebühreneinstellung gesendet werden, werden in der Regel innerhalb weniger Minuten abgewickelt. Transaktionen, die mit einer geringen Gebühr gesendet werden, können für einige Stunden oder sogar Tage ausstehend bleiben und sogar abgelehnt werden. Beachten Sie, dass der Status einer individuellen Transaktion in der Schnittstelle Unstoppbare Brieftasche typischerweise mit einer kurzen Verzögerung aktualisiert wird.</string>
+    <string name="StatusInfo_PendingDescription">Die Transaktion wurde noch nicht in der Blockchain bestätigt. Transaktionen, die mit einer empfohlenen oder höheren Gebühreneinstellung gesendet werden, werden in der Regel innerhalb weniger Minuten abgewickelt. Transaktionen, die mit einer geringen Gebühr gesendet werden, können für einige Stunden oder sogar Tage ausstehend bleiben und sogar abgelehnt werden. Beachten Sie, dass der Status einer individuellen Transaktion in der Schnittstelle Quantum Wallet typischerweise mit einer kurzen Verzögerung aktualisiert wird.</string>
     <string name="StatusInfo_ProcessingDescription">Die Transaktion wurde bereits in die Blockchain einbezogen, hat aber noch nicht die endgültige Endlichkeit erreicht. An diesem Punkt ist es sicher, die Transaktion als abgeschlossen für kleinere Zahlungen zu betrachten. Bei größeren Zahlungen empfiehlt es sich zu warten, bis der Transaktionsstatus geändert wird.</string>
     <string name="StatusInfo_ConfirmedDescription">Die Transaktion wird abgeschlossen und als dauerhaft und unumkehrbar betrachtet.</string>
-    <string name="StatusInfo_FailedDescription">Die Transaktion wurde nicht verarbeitet und es wurde kein Werttransfer durchgeführt. Abhängig vom Grund des Scheiterns können einige fehlgeschlagene Transaktionen Transaktionsgebühren kosten. Transaktionen, die durch eine andere Transaktion ersetzt oder storniert wurden, verbrauchen keine Transaktionsgebühren und scheinen ebenfalls fehlgeschlagen zu sein. Die unaufhaltsame App kann den Grund für fehlgeschlagene Transaktionen nicht anzeigen. aber Benutzer können es selbst auf einem öffentlichen Block-Explorer i. . etherscan.io.</string>
+    <string name="StatusInfo_FailedDescription">Die Transaktion wurde nicht verarbeitet und es wurde kein Werttransfer durchgeführt. Abhängig vom Grund des Scheiterns können einige fehlgeschlagene Transaktionen Transaktionsgebühren kosten. Transaktionen, die durch eine andere Transaktion ersetzt oder storniert wurden, verbrauchen keine Transaktionsgebühren und scheinen ebenfalls fehlgeschlagen zu sein. Die Quantum Wallet App kann den Grund für fehlgeschlagene Transaktionen nicht anzeigen. aber Benutzer können es selbst auf einem öffentlichen Block-Explorer i. . etherscan.io.</string>
     <!-- Transaction Info Options -->
     <string name="TransactionInfoOptions_SpeedUp_Title">Beschleunigen</string>
     <string name="TransactionInfoOptions_SpeedUp_Button">Erneut senden</string>
@@ -773,7 +773,7 @@
     <string name="SettingsCurrency_Title">Basiswährung</string>
     <string name="SettingsCurrency_Other">ANDERE</string>
     <string name="SettingsCurrency_DisclaimerTitle">Haftungsausschluss</string>
-    <string name="SettingsCurrency_DisclaimerText">Die Wechselkursdaten werden von einem Dritten Service - Coingecko.com bereitgestellt.\n\nDie unaufhaltsame Wallet-App garantiert nicht, dass diese Werte immer korrekt sind und den Marktdaten entsprechen. Die Wahrscheinlichkeit für Inkonsistenz ist höher, wenn Sie eine andere Basiswährung als %s wählen.</string>
+    <string name="SettingsCurrency_DisclaimerText">Die Wechselkursdaten werden von einem Dritten Service - Coingecko.com bereitgestellt.\n\nDie Quantum Wallet-App garantiert nicht, dass diese Werte immer korrekt sind und den Marktdaten entsprechen. Die Wahrscheinlichkeit für Inkonsistenz ist höher, wenn Sie eine andere Basiswährung als %s wählen.</string>
     <!--Settings-->
     <string name="Settings_Title">Einstellungen</string>
     <string name="Settings_SecurityCenter">Sicherheit</string>
@@ -791,7 +791,7 @@
     <string name="Settings_Subscription">Abonnement</string>
     <string name="Settings_AutoLock">Auto-Sperren</string>
     <string name="Settings_AutoLock_Description">Schließt die App automatisch nach einer ausgewählten Zeit.</string>
-    <string name="Settings_JoinUnstoppables">Schließen Sie unaufhaltsam an</string>
+    <string name="Settings_JoinUnstoppables">Quantum Wallet beitreten</string>
     <string name="Settings_Support">Unterstützung</string>
     <string name="Settings_VipSupport">VIP Support</string>
     <string name="Settings_Donate">Spenden</string>
@@ -825,15 +825,15 @@
     <string name="SettingsBanner_BePartOfTheFuture">Seien Sie Teil der Zukunft der privaten Finanzen</string>
     <string name="SettingsBanner_SupportTheProject">Unterstütze das Projekt!</string>
     <!--Why Donate Page-->
-    <string name="SettingsBanner_DonateTitle">Unterstütze die unaufhaltsame Bewegung</string>
+    <string name="SettingsBanner_DonateTitle">Unterstütze die Quantum Wallet Bewegung</string>
     <string name="SettingsBanner_DonateSubtitle">Seien Sie Teil der Zukunft der privaten Finanzen</string>
-    <string name="SettingsBanner_DonateUnstoppableHasBeenFreeFromDayOne">„Das unaufhaltsame Wallet war vom ersten Tag an frei, werbefrei und Open-Source – und es wird so bleiben.“</string>
-    <string name="SettingsBanner_DonateByJoiningMovement">Indem Sie der unaufhaltsamen Bewegung beitreten, stehen Sie für offene und private Finanzierung:</string>
-    <string name="SettingsBanner_DonateUnstoppableWalletTeam">Das unaufhaltsame Wallet-Team</string>
+    <string name="SettingsBanner_DonateUnstoppableHasBeenFreeFromDayOne">„Quantum Wallet war vom ersten Tag an frei, werbefrei und Open-Source – und es wird so bleiben.“</string>
+    <string name="SettingsBanner_DonateByJoiningMovement">Indem Sie der Quantum Wallet Bewegung beitreten, stehen Sie für offene und private Finanzierung:</string>
+    <string name="SettingsBanner_DonateUnstoppableWalletTeam">Das Quantum Wallet-Team</string>
     <string name="SettingsBanner_DonateYourSupportIsCommitment">Bei Ihrer Unterstützung geht es nicht nur um das Entsperren von Funktionen, sondern um das Bekenntnis zu Privatsphäre, Freiheit und freiem Zugang für alle.</string>
     <string name="SettingsBanner_DonateItHelpsWalletToBeAdFree">Es hilft, die Brieftasche werbefrei, sicher und wirklich unabhängig zu halten – für Sie und für Hunderttausende, die sich weltweit darauf verlassen.</string>
     <string name="SettingsBanner_DonateExclusivelyOnFDroid">Exklusiv auf F-Droid</string>
-    <string name="SettingsBanner_DonateUnstoppableWalletGivesYouAdvancedFeatures">Unaufhaltsame Wallet bietet Ihnen erweiterte Funktionen – ohne Abonnement, ohne Grenzen:</string>
+    <string name="SettingsBanner_DonateUnstoppableWalletGivesYouAdvancedFeatures">Quantum Wallet bietet Ihnen erweiterte Funktionen – ohne Abonnement, ohne Grenzen:</string>
     <string name="SettingsBanner_DonateFeatureFullAnalytics">Vollständige Analyse und Daten über Tokens</string>
     <string name="SettingsBanner_DonateFeaturePrivacy">Datenschutzmodus &amp; Duress Modus</string>
     <string name="SettingsBanner_DonateFeatureSignals">Signale für selbstbewussten Handel</string>
@@ -841,7 +841,7 @@
     <string name="SettingsBanner_DonateFeatureAdvanced">Erweiterte Asset-Suche und Filter</string>
     <string name="SettingsBanner_DonateFeaturePriority">Vorrangiger Zugang zum Support</string>
     <string name="SettingsBanner_DonateEveryBitOfSupportMatters">Jedes Stück Unterstützung ist wichtig.</string>
-    <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">Indem Sie unaufhaltsame Wallet unterstützen, helfen Sie uns, zu wachsen, zu verbessern und unabhängig zu bleiben.</string>
+    <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">Indem Sie Quantum Wallet unterstützen, helfen Sie uns, zu wachsen, zu verbessern und unabhängig zu bleiben.</string>
     <!--Setting Subscription -->
     <string name="SettingsSubscription_Active">Aktiv</string>
     <string name="SettingsSubscription_GetPremium">Premium erhalten</string>
@@ -894,7 +894,7 @@
     <string name="BackupManager_AppSettingsTitle">App-Einstellungen</string>
     <string name="BackupManager_AppSettingsDescription">Sprache, Währung, Aussehen …</string>
     <!-- Privacy  -->
-    <string name="Privacy_Information">Unaufhaltsam sammelt keine persönlichen Daten wie Ihr Guthaben oder Ihre Brieftaschen-Adressen. Wir verwenden nur anonyme Daten, um die App zu verbessern.</string>
+    <string name="Privacy_Information">Quantum Wallet sammelt keine persönlichen Daten wie Ihr Guthaben oder Ihre Brieftaschen-Adressen. Wir verwenden nur anonyme Daten, um die App zu verbessern.</string>
     <string name="ShareUiData">UI-Daten teilen</string>
     <string name="ShareUiDataDescription">Mit dieser Einstellung können Sie die Analyse ausschalten und Ihre Aktivität vollständig privat halten.</string>
     <!-- Security Center -->
@@ -928,8 +928,8 @@
     <string name="BtcBlockchainSettings_TransactionInputsOutputs">Transaction Inputs / Outputs</string>
     <string name="BtcBlockchainSettings_TransactionInputsOutputsSettingsDescription">Machen Sie Ihre %s Transaktion schwerer nachvollziehbar, indem Sie die Art und Weise der Struktur der Transaktion ändern.</string>
     <string name="BtcBlockchainSettings_TransactionInputsOutputsDescription">Die meisten Bitcoin-Transaktionen sowie Transaktionen in Kryptowährungen wie Bitcoin-Cash, Dash, und Litecoin erzeugen zwei Ausgänge. Die eine Ausgabe ist der Betrag, der an den Empfänger geht, die andere ist die Umstellausgabe, die an den Absender zurückgegeben wird. Die Art und Weise, wie die meisten Brieftaschen Transaktionen erstellen, macht es für einen Dritten leicht zu verstehen, welche der Ausgaben an den Empfänger gingen und welcher der Änderungsbetrag an den Absender zurückgegeben wurde. Da die an den Absender zurückgegebene Ausgabe später bei zukünftigen Transaktionen verwendet wird, zeigt sich eine Verbindung zwischen diesen beiden Transaktionen.
-\n\nDie unaufhaltsame Brieftasche implementiert Maßnahmen, um es jemandem zu erschweren, herauszufinden, welche Ausgabe wohin geht.
-\n\nEs stehen zwei Optionen für unaufhaltsame Benutzer zur Verfügung:
+\n\nQuantum Wallet implementiert Maßnahmen, um es jemandem zu erschweren, herauszufinden, welche Ausgabe wohin geht.
+\n\nEs stehen zwei Optionen für Quantum Wallet Benutzer zur Verfügung:
 \n\n1. Shuffle: Die Reihenfolge der Transaktionsausgänge wird bei jeder Transaktion zufällig ermittelt. Manchmal kann Veränderung die erste Ausgabe sein, manchmal kann es die zweite sein. Wenn ein Benutzer dem Entwickler der App vertraut, erachte dies als empfohlene Option.
 \n\n2. Deterministisch: Es gibt einen allgemein vereinbarten Standard für die Bestellung von Transaktionsausgängen (bekannt als BIP69). In Open-Source-Brieftaschen stellt dieser Standard sicher, dass Wallet-Benutzer nicht darauf vertrauen müssen, wie Entwickler der App die Reihenfolge der Ausgaben implementieren. Da dieser Standard neu ist, haben noch nicht viele Brieftaschen ihn implementiert. Infolgedessen ist es einigermaßen möglich, auf der Blockchain zu sehen, ob eine Transaktion von einer Brieftasche gesendet wurde, die diesen Standard verwendet hat oder nicht.</string>
     <!--Info screen-->
@@ -940,7 +940,7 @@
     <string name="SettingsSecurity_DisablePin">Passwort deaktivieren</string>
     <string name="SettingsSecurity_EditPin">Passwort bearbeiten</string>
     <string name="SettingsSecurity_ManageKeys">Wallets verwalten</string>
-    <string name="SettingsSecurity_AppRestartWarning">Diese Aktion startet die unaufhaltsame Wallet neu.</string>
+    <string name="SettingsSecurity_AppRestartWarning">Diese Aktion startet Quantum Wallet neu.</string>
     <string name="SettingsSecurity_TorConnectionDescription">Vollständig anonymisieren Sie Ihr Internet während Sie diese App verwenden. Beachten Sie, dass in einigen Fällen DeFi-Funktionen sehr langsam oder gar nicht funktionieren können.</string>
     <string name="SettingsSecurity_SortingShuffle">Mischen</string>
     <string name="SettingsSecurity_SortingShuffleDescription">Zufällige Indexierung</string>
@@ -983,7 +983,7 @@
     <string name="SettingsTerms_UserResponsibility">Indem Sie fortfahren, erkennen Sie an, dass die Sicherheit Ihres Geldes und die rechtliche Einhaltung letztendlich in Ihrer Verantwortung liegen.</string>
     <!--Setting_Tell Friends-->
     <string name="SettingsShare_Title">Teilen</string>
-    <string name="SettingsShare_Text">Unaufhaltsam sein</string>
+    <string name="SettingsShare_Text">Quantum Wallet entdecken</string>
     <!--Setting_Contact-->
     <!--Setting_Notifications-->
     <!-- Settings Launch Screen -->
@@ -1020,13 +1020,13 @@
 \n- BIP-84 (empfohlen)
 \n- BIP-86 (neueste)
 \n
-\nWährend unaufhaltsame Brieftasche alle 4 von ihnen unterstützt, empfiehlt es sich, eine %2$s Brieftasche im BIP-84 Format zu verwenden. Die Brieftaschen in diesem Format zahlen die niedrigsten Gebühren beim Senden von %3$s -Transaktionen.</string>
+\nWährend Quantum Wallet alle 4 von ihnen unterstützt, empfiehlt es sich, eine %2$s Brieftasche im BIP-84 Format zu verwenden. Die Brieftaschen in diesem Format zahlen die niedrigsten Gebühren beim Senden von %3$s -Transaktionen.</string>
     <string name="ManageCoins_BchTypeDescription">Es gibt 2 Adressformate Bitcoin Cash Wallets zum Empfang eingehender Zahlungen:
 \n
 \n- TYPE0 (älter)
 \n- TYPE145 (neuer)
 \n
-\nWährend unaufhaltsame Brieftasche beide unterstützt, empfiehlt es sich, eine Bitcoin Cash Wallet im Format TYPE145 zu verwenden.</string>
+\nWährend Quantum Wallet beide unterstützt, empfiehlt es sich, eine Bitcoin Cash Wallet im Format TYPE145 zu verwenden.</string>
     <string name="ManageCoins_ContractAddress">CONTRACT ADRESSE</string>
     <!-- Experimental Feature -->
     <!-- Bitcoin Hodling -->
@@ -1126,7 +1126,7 @@
     <string name="PrivateKeys_Bip32RootKeyDescription">Der private Hauptschlüssel der Brieftaste. Gewährt volle Kontrolle über alle abgeleiteten Konten und Assets.</string>
     <string name="PrivateKeys_AccountExtendedPrivateKey">Konto Erweiterter privater Schlüssel</string>
     <string name="PrivateKeys_AccountExtendedPrivateKeyDescription">Gewährt die volle Kontrolle über Bitcoin und andere auf UTXO basierende Assets (z.B. Litecoin, Bitcoin Cash, Dash) innerhalb dieser Wallet.</string>
-    <string name="PrivateKeys_NeverShareWarning">Teilen Sie diesen Schlüssel niemals mit niemandem. Das unaufhaltsame Wallet-Support-Team wird ihn niemals anfordern.</string>
+    <string name="PrivateKeys_NeverShareWarning">Teilen Sie diesen Schlüssel niemals mit niemandem. Das Quantum Wallet-Support-Team wird ihn niemals anfordern.</string>
     <string name="PrivateKeys_MoneroPrivateKey">Monero Privatschlüssel</string>
     <string name="PrivateKeys_MoneroPrivateKeyDescription">Gewährt die volle Kontrolle über Monero (XMR) Vermögenswerte innerhalb dieser Brieftasche einschließlich der Möglichkeit, Gelder auszugeben.</string>
     <string name="MoneroKeyType">Typ</string>
@@ -1260,7 +1260,7 @@
     <string name="CoinPage_FastLength">Schnelle Länge</string>
     <string name="CoinPage_SlowLength">Langsame Länge</string>
     <string name="CoinPage_SignalSmoothing">Signal glättet</string>
-    <string name="CoinPage_IndicatorsAlertText">Indikatoren nur für unaufhaltsame Wallet-Premium-Nutzer verfügbar.</string>
+    <string name="CoinPage_IndicatorsAlertText">Indikatoren nur für Quantum Wallet-Premium-Nutzer verfügbar.</string>
     <string name="CoinPage_AiGeneratedText">Dies ist eine von der KI generierte Beschreibung basierend auf dem angegebenen Referenzmaterial für die angegebene Kryptowährung. Sie kann Fehler enthalten.</string>
     <string name="CoinPage_MarketsLabel_Verified">ÜBERPRÜFT</string>
     <string name="CoinPage_MarketsVerifiedMenu_Verified">Verifiziert</string>
@@ -1423,8 +1423,8 @@
     <string name="BalanceSyncError_ChangableSourceErrorText">Fehler beim Abrufen der Daten aus der aktuellen Quelle. Sie können erneut versuchen oder zu einer anderen Sync-Quelle wechseln.</string>
     <string name="BalanceSyncError_ErrorText">Fehler beim Abrufen der Daten aus der aktuellen Quelle. Bitte versuchen Sie es später erneut.</string>
     <!--Release notes-->
-    <string name="ReleaseNotes_JoinUnstoppables">QUANTUMN JOIN</string>
-    <string name="ProUsersInfo_UnstoppablePass">Unaufhaltsamer Pass</string>
+    <string name="ReleaseNotes_JoinUnstoppables">JOIN QUANTUM</string>
+    <string name="ProUsersInfo_UnstoppablePass">Quantum Pass</string>
     <string name="ProUsersInfo_Description">Um diese Daten zu aktivieren, solltest du Bronze-Level UW NFTs “Coin Info+”\n\nerwerben:</string>
     <string name="ProUsersInfo_Features_DexVolume">DEX-Volume und Rang</string>
     <string name="ProUsersInfo_Features_DesLiquidity">DEX Liquidität und Rang</string>
@@ -1442,8 +1442,8 @@
     <string name="Alert_KeysInvalidatedTitle">Android Keystore Fehler</string>
     <string name="Alert_KeysInvalidatedDescription">Die verschlüsselten Daten, die Ihre Brieftasche enthalten, wurden kürzlich ungültig weil Ihr Android Sperrbildschirm geändert wurde</string>
     <string name="Alert_TitleWarning">Warnung</string>
-    <string name="Alert_CustomKeyboardIsUsed">Es sieht so aus, als ob Ihr Gerät eine nicht-standardmäßige Tastatur verwendet. Unaufhaltsam empfiehlt die Auswahl der Standardtastatur auf Ihrem Gerät, da Tastaturen von Drittanbietern möglicherweise Daten von Benutzern erfassen und ausgeben können. \n\nKlicken Sie auf \'Überspringen\', wenn Sie Ihre bevorzugte Tastatur weiter verwenden möchten.</string>
-    <string name="Alert_DeviceIsRootedWarning">Das unaufhaltsame Team empfiehlt, App nur auf nicht-gerooteten (nicht eingesperrten) Telefonen auszuführen.\n\nBitte beachten Sie, wenn Sie ein gerootetes Gerät verwenden, kann die App nicht länger die Sicherheit Ihrer Kryptowährung vor schädlicher Software garantieren.</string>
+    <string name="Alert_CustomKeyboardIsUsed">Es sieht so aus, als ob Ihr Gerät eine nicht-standardmäßige Tastatur verwendet. Quantum Wallet empfiehlt die Auswahl der Standardtastatur auf Ihrem Gerät, da Tastaturen von Drittanbietern möglicherweise Daten von Benutzern erfassen und ausgeben können. \n\nKlicken Sie auf \'Überspringen\', wenn Sie Ihre bevorzugte Tastatur weiter verwenden möchten.</string>
+    <string name="Alert_DeviceIsRootedWarning">Das Quantum Wallet Team empfiehlt, App nur auf nicht-gerooteten (nicht eingesperrten) Telefonen auszuführen.\n\nBitte beachten Sie, wenn Sie ein gerootetes Gerät verwenden, kann die App nicht länger die Sicherheit Ihrer Kryptowährung vor schädlicher Software garantieren.</string>
     <!--OS Pin-->
     <string name="OSPin_Confirm_Title">Telefon-PIN</string>
     <string name="OSPin_Confirm_Desciption">Diese App erfordert, dass das Telefon das Passwort (Bildschirmsperre) aktiviert hat.\n\n Sie können es in den Android-Einstellungen aktivieren.\n\nBitte beachten Sie, dass, wenn Sie die PIN auf Betriebssystem-Ebene deaktivieren, die Sicherheitsmaßnahmen in der sicheren Speicherung Ihres Telefons die zuvor gespeicherten Daten ungültig gemacht haben. Sie müssen Ihre Wallet-Schlüssel wiederherstellen, um zurück zu Ihrer Wallet zu gelangen.</string>

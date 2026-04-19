@@ -478,7 +478,7 @@
     <string name="FeeSettings_FeeRate">Ставка комиссии (SAT/BYTE)</string>
     <string name="FeeSettings_FeeRate_RecommendedInfo">Это рекомендуемое значение для попадания в следующие 2 блока</string>
     <string name="FeeSettings_FeeRate_Info">При отправке транзакции вы должны оплатить сетевую плату. Работник сети, чем больше комиссия.
-        \n\nНеостановимый кошелек предлагает оптимальную комиссию для подтверждения вашей транзакции в разумные сроки. Вы можете увеличить или уменьшить это значение.
+        \n\nQuantum Wallet предлагает оптимальную комиссию для подтверждения вашей транзакции в разумные сроки. Вы можете увеличить или уменьшить это значение.
         \n\nУстановка комиссии может привести к тому, что ваша транзакция будет оставаться в ожидании долгого времени или даже быть отклонена. Для более быстрого подтверждения, используйте более высокую комиссию.</string>
     <!--Fee Info -->
     <string name="FeeInfo_Title">Скорость транзакции</string>
@@ -981,7 +981,7 @@
     <string name="SettingsTerms_UserResponsibility">Продолжая, Вы подтверждаете, что безопасность Ваших средств и правовое соблюдение в конечном счете являются Вашей ответственностью.</string>
     <!--Setting_Tell Friends-->
     <string name="SettingsShare_Title">Поделиться</string>
-    <string name="SettingsShare_Text">Неостановимый</string>
+    <string name="SettingsShare_Text">Quantum Wallet</string>
     <!--Setting_Contact-->
     <!--Setting_Notifications-->
     <!-- Settings Launch Screen -->
@@ -1024,7 +1024,7 @@
 \n- TYPE0 (старый)
 \n- TYPE145 (новее)
 \n
-\nно Неостановимый кошелек поддерживает оба из них, он рекомендует использовать кошелек Bitcoin Cash, работающий в формате TYPE145.</string>
+\nно Quantum Wallet поддерживает оба из них, он рекомендует использовать кошелек Bitcoin Cash, работающий в формате TYPE145.</string>
     <string name="ManageCoins_ContractAddress">АДРЕС КОНТРАКТА</string>
     <!-- Experimental Feature -->
     <!-- Bitcoin Hodling -->
@@ -1258,7 +1258,7 @@
     <string name="CoinPage_FastLength">Быстрая длина</string>
     <string name="CoinPage_SlowLength">Медленная длина</string>
     <string name="CoinPage_SignalSmoothing">Сглаживание сигнала</string>
-    <string name="CoinPage_IndicatorsAlertText">Индикаторы доступны только для неудержимых премиум-пользователей кошелька.</string>
+    <string name="CoinPage_IndicatorsAlertText">Индикаторы доступны только для Quantum Wallet премиум-пользователей кошелька.</string>
     <string name="CoinPage_AiGeneratedText">Это описание, генерируемое AI, основанное на предоставленном справочном материале для данной криптовалюты. Оно может содержать ошибки.</string>
     <string name="CoinPage_MarketsLabel_Verified">Подтверждено</string>
     <string name="CoinPage_MarketsVerifiedMenu_Verified">Подтверждено</string>
@@ -1440,7 +1440,7 @@
     <string name="Alert_KeysInvalidatedTitle">Ошибка Android Keystore</string>
     <string name="Alert_KeysInvalidatedDescription">Зашифрованные данные, держащие ваш кошелек недавно были аннулированы, потому что ваш экран блокировки Android был изменен</string>
     <string name="Alert_TitleWarning">Внимание</string>
-    <string name="Alert_CustomKeyboardIsUsed">Кажется, ваше устройство использует клавиатуру, не являющуюся по умолчанию. Неостановимый рекомендует выбрать на вашем устройстве клавиатуру по умолчанию, поскольку сторонние клавиатуры потенциально могут собирать и раскрывать информацию о пользователях. \n\nнажмите кнопку \'Пропустить\', если вы хотите продолжать использовать предпочитаемую вами клавиатуру.</string>
+    <string name="Alert_CustomKeyboardIsUsed">Кажется, ваше устройство использует клавиатуру, не являющуюся по умолчанию. Quantum Wallet рекомендует выбрать на вашем устройстве клавиатуру по умолчанию, поскольку сторонние клавиатуры потенциально могут собирать и раскрывать информацию о пользователях. \n\nнажмите кнопку \'Пропустить\', если вы хотите продолжать использовать предпочитаемую вами клавиатуру.</string>
     <string name="Alert_DeviceIsRootedWarning">Команда QUANTUM рекомендует запускать приложение только на телефонах, не имеющих рут (не выпущенных на jailbroken).\n\nПожалуйста, обратите внимание, когда вы используете устройство root, приложение больше не может гарантировать безопасность вашего криптовалюты от вредоносного программного обеспечения.</string>
     <!--OS Pin-->
     <string name="OSPin_Confirm_Title">PIN-код телефона</string>

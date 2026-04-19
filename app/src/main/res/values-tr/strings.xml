@@ -549,7 +549,7 @@
     <string name="SettingsCurrency_Title">Para birimi</string>
     <string name="SettingsCurrency_Other">DİĞER</string>
     <string name="SettingsCurrency_DisclaimerTitle">Uyarı</string>
-    <string name="SettingsCurrency_DisclaimerText">Üçüncü taraf bir hizmet olan Coingecko.com tarafından sağlanan döviz kuru verileri.\n\nDurdurulamaz cüzdan uygulaması, bu değerlerin her zaman doğru olduğunu ve piyasa verileriyle eşleştiğini garanti etmez. %s Dışında herhangi bir temel para birimi seçerseniz tutarsızlık olasılığı daha yüksektir.</string>
+    <string name="SettingsCurrency_DisclaimerText">Üçüncü taraf bir hizmet olan Coingecko.com tarafından sağlanan döviz kuru verileri.\n\nQuantum Wallet cüzdan uygulaması, bu değerlerin her zaman doğru olduğunu ve piyasa verileriyle eşleştiğini garanti etmez. %s Dışında herhangi bir temel para birimi seçerseniz tutarsızlık olasılığı daha yüksektir.</string>
     <!--Settings-->
     <string name="Settings_Title">Ayarlar</string>
     <string name="Settings_SecurityCenter">Güvenlik</string>
@@ -711,7 +711,7 @@
 \n- BIP-84 (önerilen)
 \n- BIP-86 (en yeni)
 \n
-\nDurdurulamaz cüzdan 4 tanesini de desteklerken, BIP-84 formatında çalışan bir %2$s cüzdanı kullanmanızı önerir. Bu biçimde çalışan cüzdanlar, %3$s işlemi gönderirken en düşük ücreti öderler.</string>
+\nQuantum Wallet cüzdan 4 tanesini de desteklerken, BIP-84 formatında çalışan bir %2$s cüzdanı kullanmanızı önerir. Bu biçimde çalışan cüzdanlar, %3$s işlemi gönderirken en düşük ücreti öderler.</string>
     <string name="ManageCoins_BchTypeDescription">Bitcoin Cash cüzdanlarının gelen ödemeleri almak için kullanabileceği 2 adres formatı vardır: 
 \n 
 \n- TYPE0 (eski) 
@@ -901,7 +901,7 @@
     <string name="CoinPage_FastLength">Hızlı Uzunluk</string>
     <string name="CoinPage_SlowLength">Yavaş Uzunluk</string>
     <string name="CoinPage_SignalSmoothing">Sinyal Düzleştirme</string>
-    <string name="CoinPage_IndicatorsAlertText">Göstergeler yalnızca Durdurulamaz Cüzdan premium kullanıcıları için mevcuttur.</string>
+    <string name="CoinPage_IndicatorsAlertText">Göstergeler yalnızca Quantum Wallet premium kullanıcıları için mevcuttur.</string>
     <string name="CoinPage_AiGeneratedText">Bu, verilen kripto para birimi için sağlanan referans materyale dayanarak yapay zeka tarafından oluşturulmuş bir açıklamadır. Hatalar içerebilir.</string>
     <string name="CoinPage_MarketsLabel_Verified">DOĞRULANMIŞ</string>
     <string name="CoinPage_MarketsVerifiedMenu_Verified">Onaylandı</string>

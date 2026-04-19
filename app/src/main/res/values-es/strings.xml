@@ -477,7 +477,7 @@
     <string name="FeeSettings_FeeRate">Tarifa de tarifa (SAT/BYTE)</string>
     <string name="FeeSettings_FeeRate_RecommendedInfo">Este es el valor recomendado para golpear los siguientes 2 bloques</string>
     <string name="FeeSettings_FeeRate_Info">Al enviar una transacción, debe pagar una cuota de red. Cuanto más buscada sea la red, más alta será la comisión.
-        \n\nMonedero imparable sugiere una tarifa óptima para ayudar a que su transacción confirme en un tiempo razonable. Puedes aumentar o disminuir este valor.
+        \n\nQuantum Wallet sugiere una tarifa óptima para ayudar a que su transacción confirme en un tiempo razonable. Puedes aumentar o disminuir este valor.
         \n\nEstablecer la comisión demasiado baja puede causar que tu transacción permanezca pendiente durante mucho tiempo o incluso sea rechazada. Para una confirmación más rápida, utilice una tarifa más alta.</string>
     <!--Fee Info -->
     <string name="FeeInfo_Title">Velocidad de transacción</string>
@@ -592,7 +592,7 @@
     <string name="SwapTerms_RiskRestrictions">Riesgo de restricciones</string>
     <string name="SwapTerms_RiskRestrictions_Info">Entiendo que algunos proveedores de swap no DEX aplican la detección de transacciones (AML). Tales proveedores pueden rechazar (y reembolsar) los swaps, o, en raras ocasiones, la AM y el terrorismo), congelar fondos y solicitar datos de KYC.</string>
     <string name="SwapTerms_UserResponsibility">Responsabilidad del usuario</string>
-    <string name="SwapTerms_UserResponsibility_Info">Entiendo que el uso de proveedores no DEX introduce riesgos adicionales y que estos riesgos son mi responsabilidad. Imparable no puede garantizar el comportamiento de los proveedores.</string>
+    <string name="SwapTerms_UserResponsibility_Info">Entiendo que el uso de proveedores no DEX introduce riesgos adicionales y que estos riesgos son mi responsabilidad. Quantum Wallet no puede garantizar el comportamiento de los proveedores.</string>
     <!-- Swap Settings -->
     <string name="SwapSettings_SlippageTitle">Tolerancia de deslizamiento</string>
     <string name="SwapSettings_RecipientAddressTitle">Dirección del destinatario</string>
@@ -736,10 +736,10 @@
     <string name="StatusInfo_Processing">Procesando</string>
     <string name="StatusInfo_Confirmed">Completado</string>
     <string name="StatusInfo_Failed">Fallo</string>
-    <string name="StatusInfo_PendingDescription">La transacción no ha sido confirmada en la cadena de bloques todavía. Las transacciones enviadas con un ajuste de comisión recomendado o superior se procesan generalmente en unos minutos. Las transacciones enviadas con una tarifa baja pueden permanecer pendientes por unas pocas horas o incluso días, e incluso pueden ser rechazadas. Tenga en cuenta que el estado de una transacción individual en la interfaz de cartera imparable normalmente se actualiza con un breve retraso.</string>
+    <string name="StatusInfo_PendingDescription">La transacción no ha sido confirmada en la cadena de bloques todavía. Las transacciones enviadas con un ajuste de comisión recomendado o superior se procesan generalmente en unos minutos. Las transacciones enviadas con una tarifa baja pueden permanecer pendientes por unas pocas horas o incluso días, e incluso pueden ser rechazadas. Tenga en cuenta que el estado de una transacción individual en la interfaz de Quantum Wallet normalmente se actualiza con un breve retraso.</string>
     <string name="StatusInfo_ProcessingDescription">La transacción ya ha sido incluida en el blockchain pero no ha alcanzado la final permanente. En este punto, es seguro considerar la transacción como completada para pagos más pequeños. Para pagos más grandes, se recomienda esperar hasta que el estado de la transacción cambie a completar.</string>
     <string name="StatusInfo_ConfirmedDescription">La transacción se completa y se considera permanente e irreversible.</string>
-    <string name="StatusInfo_FailedDescription">La transacción no se procesó y no hubo transferencia de valor. Dependiendo de la razón del fracaso, algunas transacciones fallidas pueden consumir comisiones de transacción. Las transacciones que fueron reemplazadas o canceladas por otra transacción no consumen comisiones de transacción y también aparecerán sa fallida. La aplicación imparable no puede mostrar la razón de las transacciones fallidas, pero los usuarios son capaces de buscarlo ellos mismos en un explorador público de bloques i. . etherscan.io.</string>
+    <string name="StatusInfo_FailedDescription">La transacción no se procesó y no hubo transferencia de valor. Dependiendo de la razón del fracaso, algunas transacciones fallidas pueden consumir comisiones de transacción. Las transacciones que fueron reemplazadas o canceladas por otra transacción no consumen comisiones de transacción y también aparecerán sa fallida. Quantum Wallet no puede mostrar la razón de las transacciones fallidas, pero los usuarios son capaces de buscarlo ellos mismos en un explorador público de bloques i. . etherscan.io.</string>
     <!-- Transaction Info Options -->
     <string name="TransactionInfoOptions_SpeedUp_Title">Acelerar</string>
     <string name="TransactionInfoOptions_SpeedUp_Button">Reenviar</string>
@@ -791,7 +791,7 @@
     <string name="Settings_Subscription">Suscripción</string>
     <string name="Settings_AutoLock">Bloqueo automático</string>
     <string name="Settings_AutoLock_Description">Bloquea automáticamente la aplicación después de una hora seleccionada.</string>
-    <string name="Settings_JoinUnstoppables">Unir imparables</string>
+    <string name="Settings_JoinUnstoppables">JOIN QUANTUM</string>
     <string name="Settings_Support">Soporte</string>
     <string name="Settings_VipSupport">Soporte prioritario</string>
     <string name="Settings_Donate">Donar</string>
@@ -894,7 +894,7 @@
     <string name="BackupManager_AppSettingsTitle">Ajustes de app</string>
     <string name="BackupManager_AppSettingsDescription">Idioma, moneda, Apariencia …</string>
     <!-- Privacy  -->
-    <string name="Privacy_Information">Imparable no recopila datos personales como sus balances o direcciones de billetera. Solo utilizamos datos anónimos para mejorar la aplicación.</string>
+    <string name="Privacy_Information">Quantum Wallet no recopila datos personales como sus balances o direcciones de billetera. Solo utilizamos datos anónimos para mejorar la aplicación.</string>
     <string name="ShareUiData">Compartir datos de UI</string>
     <string name="ShareUiDataDescription">Esta opción le permite desactivar el análisis y mantener su actividad totalmente privada.</string>
     <!-- Security Center -->
@@ -979,7 +979,7 @@
     <string name="SettingsTerms_UserResponsibility">Al proceder, usted reconoce que la seguridad de sus fondos y el cumplimiento legal son en última instancia su responsabilidad.</string>
     <!--Setting_Tell Friends-->
     <string name="SettingsShare_Title">Compartir</string>
-    <string name="SettingsShare_Text">Ser imparable</string>
+    <string name="SettingsShare_Text">Quantum Wallet</string>
     <!--Setting_Contact-->
     <!--Setting_Notifications-->
     <!-- Settings Launch Screen -->
@@ -1016,8 +1016,8 @@
 \n- BIP-84 (recomendado)
 \n- BIP-86 (más reciente)
 \n
-\nMientras que el monedero imparable soporta todos los 4 de ellos recomienda usar un monedero %2$s que opere en formato BIP-84. Las billeteras que operan en este formato pueden pagar las comisiones más bajas al enviar transacciones %3$s.</string>
-    <string name="ManageCoins_BchTypeDescription">Hay 2 formatos de dirección de las carteras Bitcoin Cash pueden usar para recibir pagos entrantes:\n\n- TYPE 0 (más antiguo)\n- TYPE 145 (más reciente)\n\nMientras que el monedero imparable soporta ambos se recomienda usar un monedero Bitcoin Cash que funcione en formato TYPE 145.</string>
+\nMientras que Quantum Wallet soporta todos los 4 de ellos recomienda usar un monedero %2$s que opere en formato BIP-84. Las billeteras que operan en este formato pueden pagar las comisiones más bajas al enviar transacciones %3$s.</string>
+    <string name="ManageCoins_BchTypeDescription">Hay 2 formatos de dirección de las carteras Bitcoin Cash pueden usar para recibir pagos entrantes:\n\n- TYPE 0 (más antiguo)\n- TYPE 145 (más reciente)\n\nMientras que Quantum Wallet soporta ambos se recomienda usar un monedero Bitcoin Cash que funcione en formato TYPE 145.</string>
     <string name="ManageCoins_ContractAddress">AÑADIR CONTRACTO</string>
     <!-- Experimental Feature -->
     <!-- Bitcoin Hodling -->
@@ -1117,7 +1117,7 @@
     <string name="PrivateKeys_Bip32RootKeyDescription">La clave privada maestra de la cartera. Otorga un control total sobre todas las cuentas y activos derivados.</string>
     <string name="PrivateKeys_AccountExtendedPrivateKey">Clave Privada Extendida de Cuenta</string>
     <string name="PrivateKeys_AccountExtendedPrivateKeyDescription">Otorga control total sobre Bitcoin y otros activos basados en UTXO (por ejemplo, Litecoin, Bitcoin Cash, Dash) dentro de esta cartera.</string>
-    <string name="PrivateKeys_NeverShareWarning">Nunca comparta su frase de recuperación con nadie. El equipo imparable nunca pedirá su frase de recuperación.</string>
+    <string name="PrivateKeys_NeverShareWarning">Nunca comparta su frase de recuperación con nadie. El equipo de Quantum Wallet nunca pedirá su frase de recuperación.</string>
     <string name="PrivateKeys_MoneroPrivateKey">Claves Privadas de Monero</string>
     <string name="PrivateKeys_MoneroPrivateKeyDescription">Otorga total control sobre los activos de Monero (XMR) dentro de esta cartera, incluida la capacidad de gastar fondos.</string>
     <string name="MoneroKeyType">Tipo</string>
@@ -1251,7 +1251,7 @@
     <string name="CoinPage_FastLength">Longitud rápida</string>
     <string name="CoinPage_SlowLength">Longitud lenta</string>
     <string name="CoinPage_SignalSmoothing">Suavizado de señal</string>
-    <string name="CoinPage_IndicatorsAlertText">Indicadores disponibles sólo para usuarios premium de Wallet imparables.</string>
+    <string name="CoinPage_IndicatorsAlertText">Indicadores disponibles sólo para usuarios premium de Quantum Wallet.</string>
     <string name="CoinPage_AiGeneratedText">Esta es una descripción generada por IA basada en el material de referencia proporcionado para la criptomoneda dada. Puede contener errores.</string>
     <string name="CoinPage_MarketsLabel_Verified">VERIFICADO</string>
     <string name="CoinPage_MarketsVerifiedMenu_Verified">Verificado</string>
@@ -1415,7 +1415,7 @@
     <string name="BalanceSyncError_ErrorText">Error al obtener los datos de la fuente actual. Inténtalo de nuevo más tarde.</string>
     <!--Release notes-->
     <string name="ReleaseNotes_JoinUnstoppables">ÚNETE A QUANTUMS</string>
-    <string name="ProUsersInfo_UnstoppablePass">Pase imparable</string>
+    <string name="ProUsersInfo_UnstoppablePass">Quantum Pass</string>
     <string name="ProUsersInfo_Description">Para activar estos datos, debes obtener NFT de bronce de nivel \"Coin Info+\"\n\nTambién obtendrás acceso a los datos a continuación:</string>
     <string name="ProUsersInfo_Features_DexVolume">Volumen y Rango DEX</string>
     <string name="ProUsersInfo_Features_DesLiquidity">Liquidez y rango DEX</string>
