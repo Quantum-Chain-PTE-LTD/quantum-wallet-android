@@ -195,7 +195,7 @@ private fun SettingSections(
             add {
                 HsSettingCell(
                     R.string.Settings_AppSettings,
-                    R.drawable.uw_logo_24,
+                    R.drawable.logo_quantum,
                     onClick = {
                         navController.slideFromRight(R.id.appearanceFragment)
 
@@ -225,19 +225,6 @@ private fun SettingSections(
 
     SectionUniversalLawrence {
         HsSettingCell(
-            title = if(isFDroidBuild) R.string.Settings_Support else R.string.Settings_VipSupport,
-            icon = R.drawable.ic_support_yellow_24,
-            iconTint = ComposeAppTheme.colors.jacob,
-            onClick = {
-                if (isFDroidBuild) {
-                    LinkHelper.openLinkInAppBrowser(context, viewModel.fdroidSupportLink)
-                } else {
-                    LinkHelper.openLinkInAppBrowser(context, viewModel.vipSupportLink)
-                }
-            }
-        )
-        HsDivider()
-        HsSettingCell(
             title = R.string.SettingsAddressChecker_Title,
             icon = R.drawable.ic_radar_24,
             iconTint = ComposeAppTheme.colors.jacob,
@@ -252,17 +239,6 @@ private fun SettingSections(
 
     CellUniversalLawrenceSection(
         listOf({
-            HsSettingCell(
-                R.string.SettingsAboutApp_Title,
-                R.drawable.ic_info_20,
-                showAlert = uiState.aboutAppShowAlert,
-                onClick = {
-                    navController.slideFromRight(R.id.aboutAppFragment)
-
-                    stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.AboutApp))
-                }
-            )
-        }, {
             HsSettingCell(
                 R.string.Settings_RateUs,
                 R.drawable.star_24,
@@ -280,22 +256,6 @@ private fun SettingSections(
                     shareAppLink(uiState.appWebPageLink, context)
 
                     stat(page = StatPage.Settings, event = StatEvent.Open(StatPage.TellFriends))
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Settings_Faq,
-                R.drawable.message_24,
-                onClick = {
-                    navController.slideFromRight(R.id.faqListFragment)
-                }
-            )
-        }, {
-            HsSettingCell(
-                R.string.Guides_Title,
-                R.drawable.book_24,
-                onClick = {
-                    navController.slideFromRight(R.id.academyFragment)
                 }
             )
         })

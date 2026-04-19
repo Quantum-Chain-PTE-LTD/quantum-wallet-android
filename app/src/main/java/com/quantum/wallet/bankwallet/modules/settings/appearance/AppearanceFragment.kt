@@ -3,37 +3,22 @@ package com.quantum.wallet.bankwallet.modules.settings.appearance
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -46,26 +31,18 @@ import com.quantum.wallet.bankwallet.core.stats.StatEvent
 import com.quantum.wallet.bankwallet.core.stats.StatPage
 import com.quantum.wallet.bankwallet.core.stats.stat
 import com.quantum.wallet.bankwallet.ui.compose.ComposeAppTheme
-import com.quantum.wallet.bankwallet.ui.compose.Select
-import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryTransparent
 import com.quantum.wallet.bankwallet.uiv3.components.menu.MenuGroup
 import com.quantum.wallet.bankwallet.uiv3.components.menu.MenuItemX
-import com.quantum.wallet.bankwallet.ui.compose.components.ButtonPrimaryYellow
 import com.quantum.wallet.bankwallet.ui.compose.components.CellUniversalLawrenceSection
 import com.quantum.wallet.bankwallet.ui.compose.components.HeaderText
 import com.quantum.wallet.bankwallet.ui.compose.components.HsSwitch
 import com.quantum.wallet.bankwallet.ui.compose.components.RowUniversal
-import com.quantum.wallet.bankwallet.ui.compose.components.TextImportantWarning
 import com.quantum.wallet.bankwallet.ui.compose.components.VSpacer
 import com.quantum.wallet.bankwallet.ui.compose.components.body_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_grey
-import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_jacob
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead1_leah
 import com.quantum.wallet.bankwallet.ui.compose.components.subhead2_grey
-import com.quantum.wallet.bankwallet.ui.extensions.BottomSheetHeader
 import com.quantum.wallet.bankwallet.uiv3.components.HSScaffold
-import com.quantum.wallet.bankwallet.uiv3.components.bottomsheet.BottomSheetContent
-import kotlinx.coroutines.launch
 
 class AppearanceFragment : BaseComposeFragment() {
 
@@ -76,22 +53,14 @@ class AppearanceFragment : BaseComposeFragment() {
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppearanceScreen(navController: NavController) {
     val viewModel = viewModel<AppearanceViewModel>(factory = AppearanceModule.Factory())
     val uiState = viewModel.uiState
 
-    var selectedAppIcon by remember { mutableStateOf<AppIcon?>(null) }
-
-    var openThemeSelector by rememberSaveable { mutableStateOf(false) }
     var openLaunchPageSelector by rememberSaveable { mutableStateOf(false) }
     var openBalanceValueSelector by rememberSaveable { mutableStateOf(false) }
     var openPriceChangeIntervalSelector by rememberSaveable { mutableStateOf(false) }
-
-    val scope = rememberCoroutineScope()
-    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
-    var showBottomSheet by remember { mutableStateOf(false) }
 
     HSScaffold(
         title = stringResource(R.string.Settings_AppSettings),
@@ -104,18 +73,6 @@ fun AppearanceScreen(navController: NavController) {
                 .navigationBarsPadding(),
         ) {
             VSpacer(height = 12.dp)
-            CellUniversalLawrenceSection(
-                listOf {
-                    MenuItemWithDialog(
-                        R.string.Settings_Theme,
-                        value = uiState.selectedTheme.title.getString(),
-                        onClick = { openThemeSelector = true }
-                    )
-                }
-            )
-
-            VSpacer(32.dp)
-
             CellUniversalLawrenceSection(
                 buildList {
                     add {
@@ -287,28 +244,9 @@ fun AppearanceScreen(navController: NavController) {
                 )
             )
 
-            VSpacer(24.dp)
-            HeaderText(text = stringResource(id = R.string.Appearance_AppIcon))
-            AppIconSection(uiState.appIconOptions) {
-                scope.launch {
-                    selectedAppIcon = it
-                    showBottomSheet = true
-                }
-            }
-
             VSpacer(32.dp)
         }
         //Dialogs
-        if (openThemeSelector) {
-            MenuGroup(
-                title = stringResource(R.string.Settings_Theme),
-                items = uiState.themeOptions.options.map {
-                    MenuItemX(it.title.getString(), it == uiState.themeOptions.selected, it)
-                },
-                onDismissRequest = { openThemeSelector = false },
-                onSelectItem = { viewModel.onEnterTheme(it) }
-            )
-        }
         if (openLaunchPageSelector) {
             MenuGroup(
                 title = stringResource(R.string.Settings_LaunchScreen),
@@ -340,30 +278,6 @@ fun AppearanceScreen(navController: NavController) {
             )
         }
 
-        if (showBottomSheet) {
-            BottomSheetContent(
-                onDismissRequest = {
-                    showBottomSheet = false
-                },
-                sheetState = sheetState
-            ) {
-                AppCloseWarningBottomSheet(
-                    onCloseClick = {
-                        scope.launch {
-                            sheetState.hide()
-                            showBottomSheet = false
-                        }
-                    },
-                    onChangeClick = {
-                        selectedAppIcon?.let { viewModel.onEnterAppIcon(it) }
-                        scope.launch {
-                            sheetState.hide()
-                            showBottomSheet = false
-                        }
-                    }
-                )
-            }
-        }
     }
 }
 
@@ -393,121 +307,6 @@ fun SettingUniversalCell(
             content = value
         )
     }
-}
-
-@Composable
-private fun AppCloseWarningBottomSheet(
-    onCloseClick: () -> Unit,
-    onChangeClick: () -> Unit
-) {
-    BottomSheetHeader(
-        iconPainter = painterResource(id = R.drawable.ic_attention_24),
-        title = stringResource(id = R.string.Alert_TitleWarning),
-        iconTint = ColorFilter.tint(ComposeAppTheme.colors.jacob),
-        onCloseClick = onCloseClick
-    ) {
-        TextImportantWarning(
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp),
-            text = stringResource(R.string.Appearance_Warning_CloseApplication)
-        )
-
-        ButtonPrimaryYellow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 24.dp, end = 24.dp, top = 20.dp),
-            title = stringResource(id = R.string.Button_Change),
-            onClick = onChangeClick
-        )
-
-        ButtonPrimaryTransparent(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 12.dp),
-            title = stringResource(id = R.string.Button_Cancel),
-            onClick = onCloseClick
-        )
-        VSpacer(20.dp)
-    }
-}
-
-@Composable
-private fun AppIconSection(appIconOptions: Select<AppIcon>, onAppIconSelect: (AppIcon) -> Unit) {
-    Column(
-        modifier = Modifier
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(16.dp))
-            .background(ComposeAppTheme.colors.lawrence)
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
-    ) {
-        val rows = appIconOptions.options.chunked(3)
-        rows.forEach { row ->
-            AppIconsRow(row, appIconOptions.selected, onAppIconSelect)
-        }
-
-    }
-}
-
-@Composable
-private fun AppIconsRow(
-    chunk: List<AppIcon?>,
-    selected: AppIcon,
-    onAppIconSelect: (AppIcon) -> Unit
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 14.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        for (i in 0 until 3) {
-            val appIcon = chunk.getOrNull(i)
-            if (appIcon != null) {
-                IconBox(
-                    appIcon.icon,
-                    appIcon.title.getString(),
-                    appIcon == selected
-                ) { onAppIconSelect(appIcon) }
-            } else {
-                // Invisible element to preserve space
-                Spacer(modifier = Modifier.size(60.dp))
-            }
-        }
-    }
-}
-
-@Composable
-private fun IconBox(
-    icon: Int,
-    name: String,
-    selected: Boolean,
-    onAppIconSelect: () -> Unit
-) {
-    Column(
-        modifier = Modifier.clickable(
-            interactionSource = remember { MutableInteractionSource() },
-            indication = null,
-            onClick = { onAppIconSelect() }
-        ),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            modifier = Modifier.size(60.dp),
-            painter = painterResource(icon),
-            contentDescription = null,
-        )
-        Box(
-            Modifier
-                .height(6.dp)
-                .background(ComposeAppTheme.colors.red50)
-        )
-        if (selected) {
-            subhead1_jacob(name)
-        } else {
-            subhead1_leah(name)
-        }
-    }
-
 }
 
 @Composable
