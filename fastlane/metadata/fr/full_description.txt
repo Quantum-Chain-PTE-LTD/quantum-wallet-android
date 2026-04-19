@@ -42,4 +42,4 @@ CARACTÉRISTIQUES DU WALLET :
 
 - Entièrement Open Source >> L'application de portefeuille la plus transparente construite à ce jour. La totalité du processus de production de 4 ans de l'application est ouvertement accessible en ligne avec 100% de son code pour quiconque peut évaluer ou réutiliser d'autres projets. Vérifié et vérifié par des tiers.
 
-Soyez impardonnable !
+Soyez Quantum !

@@ -1,8 +1,8 @@
-Monedero imparable se construye intencionalmente como una herramienta de gestión descentralizada para criptomonedas.
+Quantum Wallet se construye intencionalmente como una herramienta de gestión descentralizada para criptomonedas.
 
 It is engineered to serve privacy-conscious individuals looking to manage and invest in cryptocurrencies in a sovereign and professional manner.
 
-Imparable se construye teniendo en cuenta lo siguiente:
+Quantum Wallet se construye teniendo en cuenta lo siguiente:
 
 - El capital debe ser libre >> Está construido para proporcionar a los usuarios un control genuinamente independiente sobre su capital.
 
@@ -10,7 +10,7 @@ Imparable se construye teniendo en cuenta lo siguiente:
 
 - El capital debe ser privado >> No tiene fugas de datos privados, no tiene medios para rastrear usuarios, y toma medidas extra para asegurar la privacidad en múltiples capas.
 
-Si lo anterior rima bien contigo entonces Imparable es para ti! Y estamos aquí para concentrarnos en sus necesidades únicas y servirle de la mejor manera posible.
+Si lo anterior rima bien contigo entonces Quantum Wallet es para ti! Y estamos aquí para concentrarnos en sus necesidades únicas y servirle de la mejor manera posible.
 
 FUNCIONES DE WALLEJ:
 
@@ -42,4 +42,4 @@ FUNCIONES DE WALLEJ:
 
 - Totalmente Open Source >> La aplicación de cartera más transparente construida hasta la fecha. Todo el proceso de producción de 4 años de la aplicación es abiertamente accesible en línea junto con el 100% de su código para que cualquiera evalúe o reutilice en otros proyectos. Verificado y auditado por terceros.
 
-¡Ser imparable!
+¡Sé Quantum!

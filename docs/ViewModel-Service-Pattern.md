@@ -35,9 +35,9 @@ Services extend `ServiceState<T>` and manage a specific domain of state.
 ### Structure
 
 ```kotlin
-package io.horizontalsystems.bankwallet.modules.feature
+package com.quantum.wallet.bankwallet.modules.feature
 
-import io.horizontalsystems.bankwallet.core.ServiceState
+import com.quantum.wallet.bankwallet.core.ServiceState
 
 class FeatureService(
     // Dependencies injected via constructor
@@ -146,10 +146,10 @@ ViewModels extend `ViewModelUiState<T>` and orchestrate multiple services.
 ### Structure
 
 ```kotlin
-package io.horizontalsystems.bankwallet.modules.feature
+package com.quantum.wallet.bankwallet.modules.feature
 
 import androidx.lifecycle.viewModelScope
-import io.horizontalsystems.bankwallet.core.ViewModelUiState
+import com.quantum.wallet.bankwallet.core.ViewModelUiState
 import kotlinx.coroutines.launch
 
 class FeatureViewModel(

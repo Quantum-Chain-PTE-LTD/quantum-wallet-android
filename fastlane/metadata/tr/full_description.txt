@@ -42,4 +42,4 @@ CÜZDAN ÖZELLIKLERI:
 
 - Tamamen Açık Kaynak >> Bugüne kadar oluşturulmuş en şeffaf cüzdan uygulaması. Uygulamanın 4 yıllık üretim sürecinin tamamı, herkesin değerlendirebilmesi veya başka projelerde yeniden kullanabilmesi için kodunun %100'ü ile birlikte çevrimiçi olarak açık bir şekilde erişilebilir durumdadır. Üçüncü taraflarca doğrulanmış ve denetlenmiştir.
 
-Durdurulamaz Ol!
+Quantum Wallet!
