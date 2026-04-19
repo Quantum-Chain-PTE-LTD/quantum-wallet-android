@@ -92,37 +92,37 @@
 # ============================================================
 # App: entities and storage — used by Room and Gson
 # ============================================================
--keep class io.horizontalsystems.bankwallet.entities.** { *; }
--keep class io.horizontalsystems.bankwallet.core.storage.** { *; }
+-keep class com.quantum.wallet.bankwallet.entities.** { *; }
+-keep class com.quantum.wallet.bankwallet.core.storage.** { *; }
 
 # ============================================================
 # App: backup data classes — deserialized from JSON via Gson
 # ============================================================
--keep class io.horizontalsystems.bankwallet.modules.backuplocal.BackupLocalModule { *; }
--keep class io.horizontalsystems.bankwallet.modules.backuplocal.BackupLocalModule$** { *; }
--keep class io.horizontalsystems.bankwallet.modules.backuplocal.fullbackup.BackupProvider { *; }
--keep class io.horizontalsystems.bankwallet.modules.backuplocal.fullbackup.BackupProvider$** { *; }
+-keep class com.quantum.wallet.bankwallet.modules.backuplocal.BackupLocalModule { *; }
+-keep class com.quantum.wallet.bankwallet.modules.backuplocal.BackupLocalModule$** { *; }
+-keep class com.quantum.wallet.bankwallet.modules.backuplocal.fullbackup.BackupProvider { *; }
+-keep class com.quantum.wallet.bankwallet.modules.backuplocal.fullbackup.BackupProvider$** { *; }
 
 # ============================================================
 # App: EVM label provider — JSON API response models
 # ============================================================
--keep class io.horizontalsystems.bankwallet.core.providers.EvmLabelProvider$** { *; }
+-keep class com.quantum.wallet.bankwallet.core.providers.EvmLabelProvider$** { *; }
 
 # ============================================================
 # App: pin storage (Room entity with encrypted fields)
 # ============================================================
--keep class io.horizontalsystems.bankwallet.modules.pin.core.** { *; }
+-keep class com.quantum.wallet.bankwallet.modules.pin.core.** { *; }
 
 # ============================================================
 # App: pro features storage
 # ============================================================
--keep class io.horizontalsystems.bankwallet.modules.profeatures.storage.** { *; }
+-keep class com.quantum.wallet.bankwallet.modules.profeatures.storage.** { *; }
 
 # ============================================================
 # App: chart indicator settings (Room entity)
 # ============================================================
--keep class io.horizontalsystems.bankwallet.modules.chart.ChartIndicatorSetting { *; }
--keep class io.horizontalsystems.bankwallet.modules.chart.ChartIndicatorSettingsDao { *; }
+-keep class com.quantum.wallet.bankwallet.modules.chart.ChartIndicatorSetting { *; }
+-keep class com.quantum.wallet.bankwallet.modules.chart.ChartIndicatorSettingsDao { *; }
 
 # ============================================================
 # Kotlin Coroutines

@@ -48,7 +48,7 @@ android {
         resValue("string", "appTwitterLink", "https://x.com/qntmchain")
         resValue("string", "appTelegramLink", "https://t.me/+XF1OapBYfu1iMzg0")
         resValue("string", "reportEmail", "contact@quantumcha.in")
-        resValue("string", "releaseNotesUrl", "https://api.github.com/repos/horizontalsystems/unstoppable-wallet-android/releases/tags/")
+        resValue("string", "releaseNotesUrl", "")
         resValue("string", "accountsBackupFileSalt", "quantumwallet")
 
         buildConfigField("boolean", "FDROID_BUILD", "false")
@@ -131,12 +131,12 @@ android {
             resValue("string", "bscscanKey", "R396MSJNCKX2YK4EIMP3EWYAW21NSVMXRN")
             resValue("string", "otherScanKey", "FU7CYEXQEUSMXJJF8MZR6BNRMP9XT8S9CP")
             resValue("string", "is_release", "false")
-            resValue("string", "guidesUrl", "https://raw.githubusercontent.com/horizontalsystems/blockchain-crypto-guides/v1.2/index.json")
-            resValue("string", "eduUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/refs/tags/v1.4/src/edu.json")
-            resValue("string", "faqUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/master/src/faq.json")
+            resValue("string", "guidesUrl", "")
+            resValue("string", "eduUrl", "")
+            resValue("string", "faqUrl", "")
             resValue("string", "coinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/coins.json")
             resValue("string", "providerCoinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/provider.coins.json")
-            resValue("string", "marketApiBaseUrl", "https://api-dev.blocksdecoded.com")
+            resValue("string", "marketApiBaseUrl", "https://api-dev.blocksdecoded.com") // TODO: replace with Quantum dev API URL
             resValue("string", "marketApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "quantumChainApiBaseUrl", "https://api.quantumapi.io")
             resValue("integer", "quantumChainApiVersion", "1")
@@ -153,7 +153,7 @@ android {
             resValue("string", "chainalysisApiKey", "928bb256db73f1cb93e1b3366a145d9fbe06e28581c8b665b82ad70bbfef1db4")
             resValue("string", "hashDitBaseUrl", "https://service.hashdit.io/v2/hashdit/")
             resValue("string", "hashDitApiKey", "aGMkgODYiUFtTYrSRcEZsIfPHeASOlGYXClJZNWF")
-            resValue("string", "uswapApiBaseUrl", "https://swap-dev.unstoppable.money/api/v1/")
+            resValue("string", "uswapApiBaseUrl", "")
         }
 
         release {
@@ -166,12 +166,12 @@ android {
             resValue("string", "bscscanKey", "FQ2HSNNEHVG71U96P1TF3WF9RTF6AF5MRA,G6K8VZDWYSJHTCRURRITFZ2ZWV48GRGTZQ,R396MSJNCKX2YK4EIMP3EWYAW21NSVMXRN,8QW2JNMPHPUPAACFGXZ3A5PVQY6PBCJPEG")
             resValue("string", "otherScanKey", "Y855XHV4XKUC9DTRM2ZQG8XAQ96EJV221Q,43DEJEEMA1P81YAU555A1TECRY5FPIWCFH")
             resValue("string", "is_release", "true")
-            resValue("string", "guidesUrl", "https://raw.githubusercontent.com/horizontalsystems/blockchain-crypto-guides/v1.2/index.json")
-            resValue("string", "eduUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/refs/tags/v1.4/src/edu.json")
-            resValue("string", "faqUrl", "https://raw.githubusercontent.com/horizontalsystems/Unstoppable-Wallet-Website/master/src/faq.json")
+            resValue("string", "guidesUrl", "")
+            resValue("string", "eduUrl", "")
+            resValue("string", "faqUrl", "")
             resValue("string", "coinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/coins.json")
             resValue("string", "providerCoinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/provider.coins.json")
-            resValue("string", "marketApiBaseUrl", "https://api.blocksdecoded.com")
+            resValue("string", "marketApiBaseUrl", "https://api.blocksdecoded.com") // TODO: replace with Quantum production API URL
             resValue("string", "marketApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "quantumChainApiBaseUrl", "https://api.quantumapi.io")
             resValue("integer", "quantumChainApiVersion", "1")
@@ -188,7 +188,7 @@ android {
             resValue("string", "chainalysisApiKey", "928bb256db73f1cb93e1b3366a145d9fbe06e28581c8b665b82ad70bbfef1db4")
             resValue("string", "hashDitBaseUrl", "https://service.hashdit.io/v2/hashdit/")
             resValue("string", "hashDitApiKey", "aGMkgODYiUFtTYrSRcEZsIfPHeASOlGYXClJZNWF")
-            resValue("string", "uswapApiBaseUrl", "https://swap.unstoppable.money/api/v1/")
+            resValue("string", "uswapApiBaseUrl", "")
         }
     }
 
