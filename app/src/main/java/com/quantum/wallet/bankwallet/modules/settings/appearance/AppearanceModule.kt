@@ -31,26 +31,8 @@ object AppearanceModule {
 
 }
 
-enum class AppIcon(val icon: Int, val titleText: String, val isDeprecated: Boolean = false) : WithTranslatableTitle {
-    Main(R.drawable.launcher_main_preview, "Main"),
-    Dark(R.drawable.launcher_dark_preview, "Dark"),
-    Mono(R.drawable.launcher_mono_preview, "Mono"),
-    Ball8(R.drawable.launcher_8ball_preview, "8ball"),
-    Monero(R.drawable.launcher_monero_preview, "monero"),
-    ZCash(R.drawable.launcher_zcash_preview, "ZCash"),
-    Pepe(R.drawable.launcher_pepe_preview, "Pepe"),
-    Doge(R.drawable.launcher_doge_preview, "Doge"),
-    Punk(R.drawable.launcher_punk_preview, "Punk"),
-    Ape(R.drawable.launcher_ape_preview, "#1874"),
-    Plflag(R.drawable.launcher_plflag_preview, "Plflag"),
-    Sinwar(R.drawable.launcher_sinwar_preview, "Sinwar"),
-    Yeschad(R.drawable.launcher_yeschad_preview, "Yeschad"),
-    Gigachad(R.drawable.launcher_gigachad_preview, "Gigachad"),
-    //deprecated icons with manifest aliases should stay in app for 2 releases before removal
-    //remove deprecated below in 0.47
-    Leo(R.drawable.launcher_leo_preview, "Leo", true),
-    Mustang(R.drawable.launcher_mustang_preview, "Mustang", true),
-    Yak(R.drawable.launcher_yak_preview, "Yak", true);
+enum class AppIcon(val icon: Int, val titleText: String) : WithTranslatableTitle {
+    Main(R.drawable.launcher_main_preview, "Main");
 
     override val title: TranslatableString
         get() = TranslatableString.PlainString(titleText)
@@ -58,12 +40,11 @@ enum class AppIcon(val icon: Int, val titleText: String, val isDeprecated: Boole
     val launcherName: String
         get() = "${App.instance.packageName}.${this.name}LauncherAlias"
 
-
     companion object {
         private val map = values().associateBy(AppIcon::name)
         private val titleMap = values().associateBy(AppIcon::titleText)
 
-        fun getActiveIcons(): List<AppIcon> = entries.filter { !it.isDeprecated }
+        fun getActiveIcons(): List<AppIcon> = entries
         fun fromString(type: String?): AppIcon? = map[type]
         fun fromTitle(title: String?): AppIcon? = titleMap[title]
     }
