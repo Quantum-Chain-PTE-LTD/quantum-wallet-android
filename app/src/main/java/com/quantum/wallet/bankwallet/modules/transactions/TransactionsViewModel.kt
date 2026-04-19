@@ -261,6 +261,7 @@ data class TransactionViewItem(
                 BlockchainType.Tron -> R.drawable.logo_chain_tron_trx_32
                 BlockchainType.Ton -> R.drawable.logo_chain_ton_trx_32
                 BlockchainType.Stellar -> R.drawable.logo_chain_stellar_trx_32
+                BlockchainType.QuantumChain -> R.drawable.logo_chain_quantum_trx_24
                 else -> null
             }
         }

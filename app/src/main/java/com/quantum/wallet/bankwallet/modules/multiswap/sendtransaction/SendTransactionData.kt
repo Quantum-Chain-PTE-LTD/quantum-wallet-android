@@ -82,4 +82,9 @@ sealed class SendTransactionData {
         val memo: String?,
     ) : SendTransactionData()
 
+    data class Quantum(
+        val transactionData: com.quantum.quantumkit.models.TransactionData,
+        val gasLimit: Long?,
+    ) : SendTransactionData()
+
 }

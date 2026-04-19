@@ -17,6 +17,15 @@
         android:id="@+id/sendEvmNonceSettingsFragment"
         android:name="com.quantum.wallet.bankwallet.modules.send.evm.settings.SendEvmNonceSettingsFragment" />
     <fragment
+        android:id="@+id/sendQuantumConfirmationFragment"
+        android:name="com.quantum.wallet.bankwallet.modules.send.quantum.confirmation.SendQuantumConfirmationFragment" />
+    <fragment
+        android:id="@+id/sendQuantumSettingsFragment"
+        android:name="com.quantum.wallet.bankwallet.modules.send.quantum.settings.SendQuantumSettingsFragment" />
+    <fragment
+        android:id="@+id/sendQuantumNonceSettingsFragment"
+        android:name="com.quantum.wallet.bankwallet.modules.send.quantum.settings.SendQuantumNonceSettingsFragment" />
+    <fragment
         android:id="@+id/filterCoinFragment"
         android:name="com.quantum.wallet.bankwallet.modules.transactions.FilterCoinFragment" />
     <fragment

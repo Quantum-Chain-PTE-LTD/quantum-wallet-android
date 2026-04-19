@@ -229,6 +229,29 @@ class SendFragment : BaseFragment() {
                     }
 
 
+                    BlockchainType.QuantumChain -> {
+                        val adapter = App.adapterManager.getAdapterForWallet<com.quantum.wallet.bankwallet.core.ISendQuantumAdapter>(wallet) ?: throw IllegalArgumentException("SendQuantumAdapter is null")
+
+                        val sendQuantumViewModel by viewModels<com.quantum.wallet.bankwallet.modules.send.quantum.SendQuantumViewModel> {
+                            com.quantum.wallet.bankwallet.modules.send.quantum.SendQuantumModule.Factory(wallet, address, hideAddress, adapter)
+                        }
+
+                        setContent {
+                            com.quantum.wallet.bankwallet.modules.send.quantum.SendQuantumScreen(
+                                title = title,
+                                navController = findNavController(),
+                                amountInputModeViewModel = amountInputModeViewModel,
+                                viewModel = sendQuantumViewModel,
+                                address = address,
+                                wallet = wallet,
+                                amount = amount,
+                                hideAddress = hideAddress,
+                                riskyAddress = riskyAddress,
+                                sendEntryPointDestId = sendEntryPointDestId
+                            )
+                        }
+                    }
+
                     else -> {}
                 }
             } catch (t: Throwable) {

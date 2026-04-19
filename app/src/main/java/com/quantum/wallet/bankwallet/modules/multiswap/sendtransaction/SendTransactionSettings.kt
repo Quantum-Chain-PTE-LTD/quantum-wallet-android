@@ -12,4 +12,5 @@ sealed class SendTransactionSettings {
     class Zcash : SendTransactionSettings()
     class Monero : SendTransactionSettings()
     class Solana : SendTransactionSettings()
+    object Quantum : SendTransactionSettings()
 }

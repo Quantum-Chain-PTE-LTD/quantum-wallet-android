@@ -12,4 +12,5 @@ sealed class SendTransactionResult {
     object Ton : SendTransactionResult()
     data class Zcash(val transactionHash: String?) : SendTransactionResult()
     object Monero : SendTransactionResult()
+    data class Quantum(val fullTransaction: com.quantum.quantumkit.models.FullTransaction) : SendTransactionResult()
 }

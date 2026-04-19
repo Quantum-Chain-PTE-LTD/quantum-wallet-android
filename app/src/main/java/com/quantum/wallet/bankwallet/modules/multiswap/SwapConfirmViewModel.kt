@@ -315,6 +315,7 @@ class SwapConfirmViewModel(
             is SendTransactionResult.Evm -> result.fullTransaction.transaction.hash.toHexString()
             is SendTransactionResult.Btc -> result.transactionRecord?.transactionHash
             is SendTransactionResult.Zcash -> result.transactionHash
+            is SendTransactionResult.Quantum -> result.fullTransaction.transaction.hashString
             else -> null
         }
 
