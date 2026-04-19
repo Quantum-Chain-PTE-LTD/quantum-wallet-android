@@ -1,4 +1,4 @@
-package io.horizontalsystems.pin
+package com.quantum.wallet.pin
 
 import org.junit.Test
 

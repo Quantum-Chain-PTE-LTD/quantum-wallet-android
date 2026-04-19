@@ -1,4 +1,4 @@
-package io.horizontalsystems.pin
+package com.quantum.wallet.pin
 
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
