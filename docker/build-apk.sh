@@ -20,7 +20,7 @@ else
 fi
 
 ####################################
-DOCKER_IMAGE="horizontalsystems/android-release-build"
+DOCKER_IMAGE="TODO-replace-with-quantum-wallet-docker-image"
 GIT_REPO="https://github.com/Quantum-Chain-PTE-LTD/quantum-wallet-android"
 WORK_DIR="$PWD/app"
 TAG=$1

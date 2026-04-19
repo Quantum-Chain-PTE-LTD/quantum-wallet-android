@@ -59,7 +59,7 @@ KEYSTORE_PASSWORD: Keystore password<br>
 
 Example:
 ```
-./build-apk.sh 0.18.0 ~/Documents/Keystore/Apk_HorSys/horsys Keystore_Psw
+./build-apk.sh 0.18.0 ~/Documents/Keystore/Apk_Quantum/quantum Keystore_Psw
 ```
 
 #### 7.2 Verify apk file is reproducible from source code

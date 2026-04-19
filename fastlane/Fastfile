@@ -16,7 +16,7 @@ platform :android do
         app: "1:308085819273:android:1b039e927925b879a00358",
         service_credentials_file: "service-account.json",
         release_notes: "Author: #{commit[:author]}, changes: #{commit[:message]}",
-        groups: "horsysteam",
+        groups: "quantumteam",
         apk_path: "app/build/outputs/apk/ci/debug/app-ci-debug.apk"
       )
   end
@@ -32,7 +32,7 @@ platform :android do
         app: "1:308085819273:android:3c060bb15aa35d79a00358",
         service_credentials_file: "service-account.json",
         release_notes: "F-Droid Build - Author: #{commit[:author]}, changes: #{commit[:message]}",
-        groups: "horsysteam",
+        groups: "quantumteam",
         apk_path: "app/build/outputs/apk/fdroidCi/debug/app-fdroidCi-debug.apk"
       )
     end
@@ -48,7 +48,7 @@ platform :android do
         app: "1:308085819273:android:d1451c165f07056ea00358",
         service_credentials_file: "service-account.json",
         release_notes: "Author: #{commit[:author]}, changes: #{commit[:message]}",
-        groups: "horsysteam",
+        groups: "quantumteam",
         apk_path: "app/build/outputs/apk/ci/release/app-ci-release.apk"
       )
   end
