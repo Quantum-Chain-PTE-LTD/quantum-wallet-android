@@ -9,7 +9,9 @@ import com.quantum.wallet.bankwallet.core.supports
 import com.quantum.wallet.bankwallet.entities.Account
 import com.quantum.wallet.bankwallet.entities.Wallet
 import io.horizontalsystems.ethereumkit.core.AddressValidator
+import io.horizontalsystems.marketkit.models.Blockchain
 import io.horizontalsystems.marketkit.models.BlockchainType
+import io.horizontalsystems.marketkit.models.Coin
 import io.horizontalsystems.marketkit.models.FullCoin
 import io.horizontalsystems.marketkit.models.Token
 import io.horizontalsystems.marketkit.models.TokenType
@@ -35,7 +37,22 @@ class FullCoinsProvider(
         val tokenQueries = allowedBlockchainTypes
             .map { it.nativeTokenQueries }
             .flatten()
-        val supportedNativeTokens = marketKit.tokens(tokenQueries)
+        val supportedNativeTokens = marketKit.tokens(tokenQueries).toMutableList()
+
+        // Add hardcoded QUANTUM native token if MarketKit doesn't return it
+        if (allowedBlockchainTypes.contains(BlockchainType.QuantumChain) &&
+            supportedNativeTokens.none { it.blockchainType == BlockchainType.QuantumChain }
+        ) {
+            supportedNativeTokens.add(
+                Token(
+                    coin = Coin("quantum-chain", "Quantum", "QUANTUM"),
+                    blockchain = Blockchain(BlockchainType.QuantumChain, "Quantum Chain", null),
+                    type = TokenType.Native,
+                    decimals = 18
+                )
+            )
+        }
+
         val activeTokens = activeWallets.map { it.token }
         predefinedTokens = activeTokens + supportedNativeTokens
     }

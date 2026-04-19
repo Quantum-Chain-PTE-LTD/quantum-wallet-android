@@ -14,7 +14,11 @@ import com.quantum.wallet.bankwallet.entities.AccountOrigin
 import com.quantum.wallet.bankwallet.entities.AccountType
 import com.quantum.wallet.bankwallet.entities.Wallet
 import com.quantum.wallet.bankwallet.modules.enablecoin.restoresettings.BirthdayHeightConfig
+import io.horizontalsystems.marketkit.models.Blockchain
 import io.horizontalsystems.marketkit.models.BlockchainType
+import io.horizontalsystems.marketkit.models.Coin
+import io.horizontalsystems.marketkit.models.Token
+import io.horizontalsystems.marketkit.models.TokenType
 
 class RestoreViewModel: ViewModelUiState<RestoreViewModel.UiState>() {
     private val marketKit = App.marketKit
@@ -96,7 +100,23 @@ class RestoreViewModel: ViewModelUiState<RestoreViewModel.UiState>() {
             .map { it.nativeTokenQueries }
             .flatten()
 
-        val tokens = marketKit.tokens(tokenQueries)
+        val nativeTokens = marketKit.tokens(tokenQueries).toMutableList()
+
+        // Add hardcoded QUANTUM native token if MarketKit doesn't return it
+        if (allowedBlockchainTypes.contains(BlockchainType.QuantumChain) &&
+            nativeTokens.none { it.blockchainType == BlockchainType.QuantumChain }
+        ) {
+            nativeTokens.add(
+                Token(
+                    coin = Coin("quantum-chain", "Quantum", "QUANTUM"),
+                    blockchain = Blockchain(BlockchainType.QuantumChain, "Quantum Chain", null),
+                    type = TokenType.Native,
+                    decimals = 18
+                )
+            )
+        }
+
+        val tokens = nativeTokens
             .filter { it.supports(accountType) }
             .sortedBy { it.type.order }
 

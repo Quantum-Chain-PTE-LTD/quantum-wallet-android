@@ -35,12 +35,26 @@ class AddTokenService(
         BlockchainType.Optimism,
         BlockchainType.Base,
         BlockchainType.ZkSync,
-        BlockchainType.Solana
+        BlockchainType.Solana,
+        BlockchainType.QuantumChain
     )
 
-    val blockchains = marketKit
-        .blockchains(blockchainTypes.map { it.uid })
-        .sortedBy { it.type.order }
+    val blockchains: List<Blockchain>
+
+    init {
+        val marketKitBlockchains = marketKit
+            .blockchains(blockchainTypes.map { it.uid })
+            .toMutableList()
+
+        // Add hardcoded Quantum Chain blockchain if MarketKit doesn't return it
+        if (marketKitBlockchains.none { it.type == BlockchainType.QuantumChain }) {
+            marketKitBlockchains.add(
+                Blockchain(BlockchainType.QuantumChain, "Quantum Chain", null)
+            )
+        }
+
+        blockchains = marketKitBlockchains.sortedBy { it.type.order }
+    }
 
     val accountType = accountManager.activeAccount?.type
 

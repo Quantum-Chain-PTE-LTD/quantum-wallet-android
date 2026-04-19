@@ -103,7 +103,8 @@ class AddressHandlerFactory(
             BlockchainType.ZkSync,
             BlockchainType.Gnosis,
             BlockchainType.Fantom,
-            BlockchainType.ArbitrumOne -> {
+            BlockchainType.ArbitrumOne,
+            BlockchainType.QuantumChain -> {
                 domainAddressHandlers.add(AddressHandlerEns(blockchainType, EnsResolverHolder.resolver))
             }
 

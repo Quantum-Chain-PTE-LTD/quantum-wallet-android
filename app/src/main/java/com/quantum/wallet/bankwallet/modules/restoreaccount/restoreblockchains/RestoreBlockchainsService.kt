@@ -24,7 +24,9 @@ import com.quantum.wallet.bankwallet.modules.enablecoin.blockchaintokens.Blockch
 import com.quantum.wallet.bankwallet.modules.enablecoin.restoresettings.RestoreSettingsService
 import io.horizontalsystems.marketkit.models.Blockchain
 import io.horizontalsystems.marketkit.models.BlockchainType
+import io.horizontalsystems.marketkit.models.Coin
 import io.horizontalsystems.marketkit.models.Token
+import io.horizontalsystems.marketkit.models.TokenType
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 import kotlinx.coroutines.CoroutineScope
@@ -97,7 +99,23 @@ class RestoreBlockchainsService(
             .map { it.nativeTokenQueries }
             .flatten()
 
-        tokens = marketKit.tokens(tokenQueries)
+        val nativeTokens = marketKit.tokens(tokenQueries).toMutableList()
+
+        // Add hardcoded QUANTUM native token if MarketKit doesn't return it
+        if (allowedBlockchainTypes.contains(BlockchainType.QuantumChain) &&
+            nativeTokens.none { it.blockchainType == BlockchainType.QuantumChain }
+        ) {
+            nativeTokens.add(
+                Token(
+                    coin = Coin("quantum-chain", "Quantum", "QUANTUM"),
+                    blockchain = Blockchain(BlockchainType.QuantumChain, "Quantum Chain", null),
+                    type = TokenType.Native,
+                    decimals = 18
+                )
+            )
+        }
+
+        tokens = nativeTokens
             .filter { it.supports(accountType) }
             .sortedBy { it.type.order }
     }
