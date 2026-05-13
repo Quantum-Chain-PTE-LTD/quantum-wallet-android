@@ -8,11 +8,25 @@ pluginManagement {
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    val localProperties = java.util.Properties().apply {
+        val file = rootProject.projectDir.resolve("local.properties")
+        if (file.exists()) {
+            file.inputStream().use { load(it) }
+        }
+    }
+
     repositories {
         google()
         mavenCentral()
         mavenLocal()
         maven { url = uri("https://jitpack.io") }
+        maven {
+            url = uri("s3://quantum-maven-repo")
+            credentials(AwsCredentials::class.java) {
+                accessKey = localProperties.getProperty("aws.accessKeyId") ?: System.getenv("AWS_ACCESS_KEY_ID")
+                secretKey = localProperties.getProperty("aws.secretKey") ?: System.getenv("AWS_SECRET_ACCESS_KEY")
+            }
+        }
     }
 }
 

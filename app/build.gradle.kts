@@ -33,8 +33,8 @@ android {
         applicationId = "com.quantum.wallet.bankwallet"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
-        versionCode = 165
-        versionName = "0.48.1"
+        versionCode = 11
+        versionName = "0.48.3"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf("de", "es", "en", "fa", "fr", "ko", "pt", "pt-rBR", "ru", "tr", "zh")
@@ -114,7 +114,7 @@ android {
             dimension = "distribution"
             applicationIdSuffix = ".appcenter"
             versionCode = System.getenv("BUILD_NUMBER")?.toIntOrNull() ?: defaultConfig.versionCode
-            signingConfig = signingConfigs.getByName("appCenter")
+            signingConfig = signingConfigs.getByName("release")
             resValue("string", "uswapApiKey", uswapApiKeyAndroid)
             resValue("string", "oneInchPartnerFeeAddress", oneInchFeeAddressAndroid)
         }
@@ -138,7 +138,7 @@ android {
             resValue("string", "providerCoinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/provider.coins.json")
             resValue("string", "marketApiBaseUrl", "https://api-dev.blocksdecoded.com") // TODO: replace with Quantum dev API URL
             resValue("string", "marketApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
-            resValue("string", "quantumChainApiBaseUrl", "https://api.quantumapi.io")
+            resValue("string", "quantumChainApiBaseUrl", "https://4fldi7jb6b.execute-api.ap-southeast-1.amazonaws.com/v1/market-kit")
             resValue("integer", "quantumChainApiVersion", "1")
             resValue("string", "quantumChainApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "openSeaApiKey", "bfbd6061a33e455c8581b594774fecb3")
@@ -173,7 +173,7 @@ android {
             resValue("string", "providerCoinsJsonUrl", "https://raw.githubusercontent.com/Quantum-Chain-PTE-LTD/cryptocurrencies/master/provider.coins.json")
             resValue("string", "marketApiBaseUrl", "https://api.blocksdecoded.com") // TODO: replace with Quantum production API URL
             resValue("string", "marketApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
-            resValue("string", "quantumChainApiBaseUrl", "https://api.quantumapi.io")
+            resValue("string", "quantumChainApiBaseUrl", "https://4fldi7jb6b.execute-api.ap-southeast-1.amazonaws.com/v1/market-kit")
             resValue("integer", "quantumChainApiVersion", "1")
             resValue("string", "quantumChainApiKey", "IQf1uAjkthZp1i2pYzkXFDom")
             resValue("string", "openSeaApiKey", "bfbd6061a33e455c8581b594774fecb3")
