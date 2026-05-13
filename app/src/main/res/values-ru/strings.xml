@@ -294,8 +294,6 @@
     <string name="Market_Sorting_LowestCap">Наименьший кап.</string>
     <string name="Market_Filters_Select">Выбрать %d</string>
     <!--Vaults-->
-    <string name="Market_Vaults_WantToUnlockPremium">Исследуйте лучшие доходности от DeFi-стейкинга - всё в одном месте.</string>
-    <string name="Market_Vaults_UnlockPremium">Разблокировать премиум</string>
     <string name="Market_Vaults_Sorting_APY">Наибольшее APY</string>
     <string name="Market_Vaults_Sorting_TVL">Наивысший ТВЛ</string>
     <string name="Market_Vaults_Filter_AllAssets">Все активы</string>
@@ -414,8 +412,6 @@
     <string name="Send_Address_ErrorMessage_PhishingDetected_Description">Обнаружен фишинговый адрес. Отправка средств приведёт к потере денег.</string>
     <string name="Send_Address_ErrorMessage_BlacklistDetected_Description">Адрес находится в чёрном списке. Средства могут быть заморожены.</string>
     <string name="Send_Address_ErrorMessage_SanctionDetected_Description">Адрес находится под санкциями. Перевод может быть заблокирован.</string>
-    <string name="AddressEnter_NeedSubscription_Title">Внимание!</string>
-    <string name="AddressEnter_NeedSubscription_Content">Защита Secure Send отключена. Есть риск отправить средства на небезопасный адрес и потерять деньги.</string>
     <string name="AddressEnter_Safe_Title">Безопасный</string>
     <string name="AddressEnter_Safe_Content">Адрес проверен. Фишинга, чёрных списков и санкций не обнаружено - можно отправлять.</string>
     <string name="Send_RiskyAddress">Рискованный адрес!</string>
@@ -790,7 +786,6 @@
     <string name="Settings_LaunchScreen">Экран запуска</string>
     <string name="Settings_LaunchScreen_Tip">Выберите, на каком экране откроется приложение по умолчанию.</string>
     <string name="Settings_AppSettings">Настройки интерфейса</string>
-    <string name="Settings_Subscription">Подписка</string>
     <string name="Settings_AutoLock">Автоблокировка</string>
     <string name="Settings_AutoLock_Description">Автоматически блокирует приложение по истечении выбранного времени.</string>
     <string name="Settings_JoinUnstoppables">Присоединиться к QUANTUMs</string>
@@ -820,9 +815,6 @@
     <string name="SettingsAddressChecker_PyusdBlacklistDescription">Предоставляет возможность проверить правильность адреса кошелька в черном списке PYUSD, выданного PayPal. Средства, хранящиеся в черном списке, могут быть заморожены и неиспользованы, как правило, по юридическим соображениям или соображениям безопасности. Этот инструмент помогает обеспечить безопасные и соответствующие транзакции с PYUSD.</string>
     <string name="SettingsAddressChecker_InvalidAddress">Введенный вами адрес, похоже, недействителен. Пожалуйста, проверьте наличие опечаток или форматирования и повторите попытку.</string>
     <!--Banners-->
-    <string name="SettingsBanner_Premium">Премиум</string>
-    <string name="SettingsBanner_PremiumBannerDescription">Откройте новые возможности с Премиум-доступом!</string>
-    <string name="SettingsBanner_PremiumTryFee">Попробовать БЕСПЛАТНО</string>
     <string name="SettingsBanner_GameDescription">Пройдите тесты, выполните задачи и заработайте токены!</string>
     <string name="SettingsBanner_BePartOfTheFuture">Поддержите настоящую финансовую приватность</string>
     <string name="SettingsBanner_SupportTheProject">Помогите нам оставаться независимыми!</string>
@@ -845,10 +837,6 @@
     <string name="SettingsBanner_DonateEveryBitOfSupportMatters">Каждый вклад имеет значение</string>
     <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">Поддерживая QUANTUM кошелёк, вы помогаете нам расти, улучшать и оставаться независимыми.</string>
     <!--Setting Subscription -->
-    <string name="SettingsSubscription_Active">Активно</string>
-    <string name="SettingsSubscription_GetPremium">Получите премиум</string>
-    <string name="SettingsSubscription_RestorePurchase">Восстановить покупку</string>
-    <string name="SettingsSubscription_ManageSubscription">Управление подпиской</string>
     <string name="Period_Days">%s дня</string>
     <!--Premium Screens-->
     <string name="Appearance_SendScreen">ОТПРАВИТЬ ЭКРАН</string>

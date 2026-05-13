@@ -38,12 +38,16 @@ import com.quantum.quantumkit.models.TransactionData
 import io.horizontalsystems.marketkit.models.BlockchainType
 import io.horizontalsystems.marketkit.models.TokenQuery
 import io.horizontalsystems.marketkit.models.TokenType
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.rx2.await
+import kotlinx.coroutines.withContext
 import java.math.BigDecimal
 import java.math.BigInteger
 
@@ -79,6 +83,7 @@ class SendTransactionServiceQuantum(
     override val sendTransactionSettingsFlow = _sendTransactionSettingsFlow.asStateFlow()
 
     private var transactionData: TransactionData? = null
+    private var userGasLimit: Long? = null
     private var gasLimit: Long? = null
     private var recommendedGasPrice: Long? = null
     private var userGasPrice: Long? = null
@@ -88,6 +93,15 @@ class SendTransactionServiceQuantum(
     private var sendable = false
     private var loading = true
     private var fields = listOf<DataField>()
+
+    // Private scope owns all network I/O (gas price + estimateGas), mirroring
+    // `EvmFeeService.coroutineScope`. This decouples the work from the caller's
+    // dispatcher (typically Main via `viewModelScope.launch`) — RxJava2 Singles
+    // returned by the kit run synchronously on the subscribing thread, so any
+    // call originating on Main would otherwise crash with
+    // NetworkOnMainThreadException.
+    private val feeScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    private var feeJob: Job? = null
 
     private val effectiveGasPrice: Long?
         get() = userGasPrice ?: recommendedGasPrice
@@ -102,14 +116,17 @@ class SendTransactionServiceQuantum(
     )
 
     override fun start(coroutineScope: CoroutineScope) {
-        coroutineScope.launch(Dispatchers.Default) {
+        // Prefetch recommended gas price on our own scope (Default dispatcher)
+        // so we never block whichever thread invoked `start`.
+        feeScope.launch {
             try {
                 recommendedGasPrice = gasPriceProvider.gasPriceSingle().await()
+                recompute()
             } catch (_: Throwable) {
                 // will retry on setSendTransactionData
             }
         }
-        coroutineScope.launch(Dispatchers.Default) {
+        feeScope.launch {
             nonceService.start()
         }
         coroutineScope.launch {
@@ -135,81 +152,127 @@ class SendTransactionServiceQuantum(
 
     fun setGasPrice(gasPrice: Long) {
         userGasPrice = gasPrice
-        recalculateFee()
+        recompute()
     }
 
     fun resetGasPrice() {
         userGasPrice = null
-        recalculateFee()
+        recompute()
     }
 
-    private fun recalculateFee() {
-        val limit = gasLimit ?: return
-        val price = effectiveGasPrice ?: return
+    /**
+     * Schedules a recompute of gas limit + fee on [feeScope]. Cancels any
+     * in-flight job to avoid stale results racing the latest input.
+     *
+     * Network calls (`gasPriceSingle`, `estimateGas`) execute here — never on
+     * the caller's thread — matching how `EvmFeeService` does its work in a
+     * private `Dispatchers.Default` scope.
+     */
+    private fun recompute() {
+        feeJob?.cancel()
+        feeJob = feeScope.launch {
+            val txData = transactionData ?: return@launch
 
-        estimatedFee = limit.toBigInteger() * price.toBigInteger()
-        feeAmountData = baseCoinService.amountData(estimatedFee!!, false)
+            loading = true
+            emitState()
 
-        val balance = quantumKit.accountState?.balance ?: BigInteger.ZERO
-        val txData = transactionData
-        if (txData != null && txData.value + estimatedFee!! > balance) {
-            cautions = cautionViewItemFactory.cautionViewItems(
-                listOf(),
-                listOf(FeeSettingsError.InsufficientBalance)
-            )
-            sendable = false
-        } else {
-            cautions = listOf()
-            sendable = true
+            try {
+                if (recommendedGasPrice == null) {
+                    recommendedGasPrice = gasPriceProvider.gasPriceSingle().await()
+                }
+                val gasPrice = GasPrice.Legacy(
+                    effectiveGasPrice ?: error("No gas price available")
+                )
+
+                val balance = quantumKit.accountState?.balance ?: BigInteger.ZERO
+
+                // Mirror EvmCommonGasDataService / EvmFeeService:
+                //  • When sending the full balance (no input data, value == balance),
+                //    estimateGas with the real value would always fail with
+                //    "insufficient funds for gas * price + value". Use a stub value
+                //    of 1 wei for estimation, then deduct the fee from the value.
+                //  • Try estimateGas with gasPrice first; fall back without gasPrice
+                //    if the node rejects it (e.g. LowerThanBaseGasLimit).
+                //  • Surcharge gas by 10% only when input is non-empty (contract call),
+                //    matching EvmFeeModule.surcharged.
+                val sendingMax = txData.input.isEmpty() && txData.value == balance && balance > BigInteger.ZERO
+                val estimateData = if (sendingMax) {
+                    com.quantum.quantumkit.models.TransactionData(txData.to, BigInteger.ONE, txData.input)
+                } else {
+                    txData
+                }
+
+                val limit = userGasLimit ?: gasLimit ?: run {
+                    val estimated = try {
+                        quantumKit.estimateGas(estimateData, gasPrice).await()
+                    } catch (e: CancellationException) {
+                        throw e
+                    } catch (_: Throwable) {
+                        quantumKit.estimateGas(estimateData, null).await()
+                    }
+                    if (txData.input.isNotEmpty()) {
+                        estimated + estimated / 10
+                    } else {
+                        estimated
+                    }
+                }
+                gasLimit = limit
+
+                estimatedFee = limit.toBigInteger() * gasPrice.legacyGasPrice.toBigInteger()
+
+                // When sending max, deduct fee from value so the tx fits the balance.
+                val effectiveTxData = if (sendingMax) {
+                    val adjustedValue = balance - estimatedFee!!
+                    if (adjustedValue <= BigInteger.ZERO) {
+                        cautions = cautionViewItemFactory.cautionViewItems(
+                            listOf(),
+                            listOf(FeeSettingsError.InsufficientBalance)
+                        )
+                        sendable = false
+                        feeAmountData = baseCoinService.amountData(estimatedFee!!, txData.input.isNotEmpty())
+                        loading = false
+                        emitState()
+                        return@launch
+                    }
+                    com.quantum.quantumkit.models.TransactionData(txData.to, adjustedValue, txData.input)
+                } else {
+                    txData
+                }
+                transactionData = effectiveTxData
+
+                feeAmountData = baseCoinService.amountData(estimatedFee!!, txData.input.isNotEmpty())
+
+                if (effectiveTxData.value + estimatedFee!! > balance) {
+                    cautions = cautionViewItemFactory.cautionViewItems(
+                        listOf(),
+                        listOf(FeeSettingsError.InsufficientBalance)
+                    )
+                    sendable = false
+                } else {
+                    cautions = listOf()
+                    sendable = true
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                cautions = cautionViewItemFactory.cautionViewItems(listOf(), listOf(e))
+                sendable = false
+            }
+
+            loading = false
+            emitState()
         }
-
-        emitState()
     }
 
     override suspend fun setSendTransactionData(data: SendTransactionData) {
         check(data is SendTransactionData.Quantum)
 
         transactionData = data.transactionData
-        loading = true
-        emitState()
-
-        try {
-            if (recommendedGasPrice == null) {
-                recommendedGasPrice = gasPriceProvider.gasPriceSingle().await()
-            }
-            val gasPrice = GasPrice.Legacy(effectiveGasPrice!!)
-
-            val estimated = if (data.gasLimit != null) {
-                data.gasLimit
-            } else {
-                quantumKit.estimateGas(data.transactionData, gasPrice).await()
-            }
-
-            // Add 20% buffer to estimated gas
-            val bufferedGasLimit = (estimated * 120) / 100
-            gasLimit = bufferedGasLimit
-            estimatedFee = bufferedGasLimit.toBigInteger() * gasPrice.legacyGasPrice.toBigInteger()
-
-            feeAmountData = baseCoinService.amountData(estimatedFee!!, false)
-            cautions = listOf()
-
-            val balance = quantumKit.accountState?.balance ?: BigInteger.ZERO
-            if (data.transactionData.value + estimatedFee!! > balance) {
-                cautions = cautionViewItemFactory.cautionViewItems(
-                    listOf(),
-                    listOf(FeeSettingsError.InsufficientBalance)
-                )
-                sendable = false
-            } else {
-                sendable = true
-            }
-        } catch (e: Throwable) {
-            cautions = cautionViewItemFactory.cautionViewItems(listOf(), listOf(e))
-            sendable = false
-        }
-
-        loading = false
-        emitState()
+        userGasLimit = data.gasLimit
+        // Invalidate previous estimate so the new transactionData triggers a
+        // fresh `estimateGas` call when `userGasLimit` is null.
+        gasLimit = data.gasLimit
+        recompute()
     }
 
     override suspend fun sendTransaction(mevProtectionEnabled: Boolean): SendTransactionResult.Quantum {
@@ -218,8 +281,12 @@ class SendTransactionServiceQuantum(
         val limit = gasLimit ?: throw Exception("No gas limit")
         val nonce = nonceService.state.dataOrNull?.nonce
 
-        val fullTransaction = quantumKitWrapper
-            .sendSingle(txData, gasPrice, limit, nonce).await()
+        // Force IO dispatcher so callers on Main (e.g. swap flow) can't
+        // trigger NetworkOnMainThreadException through the kit's RxJava chain.
+        val fullTransaction = withContext(Dispatchers.IO) {
+            quantumKitWrapper
+                .sendSingle(txData, gasPrice, limit, nonce).await()
+        }
         return SendTransactionResult.Quantum(fullTransaction)
     }
 

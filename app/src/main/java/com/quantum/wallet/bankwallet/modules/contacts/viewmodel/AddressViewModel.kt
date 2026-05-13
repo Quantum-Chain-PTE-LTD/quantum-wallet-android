@@ -55,12 +55,23 @@ class AddressViewModel(
                 BlockchainType.Tron,
                 BlockchainType.Ton,
                 BlockchainType.Stellar,
+                BlockchainType.QuantumChain,
             )
             val definedBlockchainTypes = definedAddresses?.map { it.blockchain.type } ?: listOf()
-            val availableBlockchainUids =
-                allBlockchainTypes.filter { !definedBlockchainTypes.contains(it) }.map { it.uid }
+            val availableBlockchainTypes =
+                allBlockchainTypes.filter { !definedBlockchainTypes.contains(it) }
+            val availableBlockchainUids = availableBlockchainTypes.map { it.uid }
 
-            marketKit.blockchains(availableBlockchainUids).sortedBy { it.type.order }
+            val blockchains = marketKit.blockchains(availableBlockchainUids).toMutableList()
+
+            // Add hardcoded Quantum Chain blockchain if MarketKit doesn't return it
+            if (availableBlockchainTypes.contains(BlockchainType.QuantumChain) &&
+                blockchains.none { it.type == BlockchainType.QuantumChain }
+            ) {
+                blockchains.add(Blockchain(BlockchainType.QuantumChain, "Quantum Chain", null))
+            }
+
+            blockchains.sortedBy { it.type.order }
         } else {
             listOf()
         }

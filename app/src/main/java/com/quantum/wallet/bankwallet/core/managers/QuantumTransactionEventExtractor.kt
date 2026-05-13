@@ -88,7 +88,7 @@ class QuantumTransactionEventExtractor {
         blockchainType: BlockchainType,
         tokenInfo: TokenInfo?
     ): TransactionValue {
-        val query = TokenQuery(blockchainType, TokenType.Eip20(tokenAddress.hex))
+        val query = TokenQuery(blockchainType, TokenType.Qrc20(tokenAddress.hex))
         val token = App.coinManager.getToken(query)
 
         return when {

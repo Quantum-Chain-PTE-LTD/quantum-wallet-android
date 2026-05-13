@@ -277,8 +277,6 @@
     <string name="Market_Sorting_LowestCap">가장 낮은 시가총액</string>
     <string name="Market_Filters_Select">%d 선택</string>
     <!--Vaults-->
-    <string name="Market_Vaults_WantToUnlockPremium">최고의 DeFi 스테이킹 수익률을 한곳에서 확인하세요.</string>
-    <string name="Market_Vaults_UnlockPremium">프리미엄 잠금 해제</string>
     <string name="Market_Vaults_Sorting_APY">최고 APY</string>
     <string name="Market_Vaults_Sorting_TVL">최고 TVL</string>
     <string name="Market_Vaults_Filter_AllAssets">모든 자산</string>
@@ -385,7 +383,6 @@
     <string name="Send_Address_ErrorMessage_PhishingDetected_Description">입력한 주소가 사기성일 수 있습니다. 사기꾼들은 종종 처음과 마지막 문자를 변경합니다. 손실을 방지하기 위해 진행하기 전에 전체 주소를 주의 깊게 확인하세요.</string>
     <string name="Send_Address_ErrorMessage_BlacklistDetected_Description">입력한 주소가 블랙리스트에 등록된 것으로 표시되어 있습니다. 이 주소로의 거래는 손실이나 기타 위험을 초래할 수 있습니다. 수신자 정보를 진행하기 전에 확인하세요.</string>
     <string name="Send_Address_ErrorMessage_SanctionDetected_Description">입력한 주소가 제재 대상으로 표시되어 있습니다. 이 주소로의 거래는 손실이나 기타 위험을 초래할 수 있습니다. 수신자 정보를 진행하기 전에 확인하세요.</string>
-    <string name="AddressEnter_NeedSubscription_Title">주목!</string>
     <string name="AddressEnter_Safe_Title">안전함</string>
     <string name="Send_RiskyAddress">위험한 주소!</string>
     <string name="Send_RiskyAddress_AlertText">고위험 주소로 자금을 보내려고 합니다. 진행하면 손실이나 기타 보안 위험이 발생할 수 있습니다. 계속 진행하면 잠재적 위험을 수락하는 것입니다. 정말로 진행하시겠습니까?</string>
@@ -664,7 +661,6 @@
     <string name="Settings_RateUs">앱 평가</string>
     <string name="Settings_LaunchScreen">시작 화면</string>
     <string name="Settings_AppSettings">디자인</string>
-    <string name="Settings_Subscription">구독</string>
     <string name="Settings_AutoLock">자동 잠금</string>
     <string name="Settings_JoinUnstoppables">Be QUANTUM</string>
     <string name="Settings_Donate">후원하기</string>
@@ -678,14 +674,8 @@
     <string name="SettingsSecurity_AutoLock_After1Hour">1시간</string>
     <!--Address Checker-->
     <!--Banners-->
-    <string name="SettingsBanner_Premium">프리미엄</string>
-    <string name="SettingsBanner_PremiumBannerDescription">프리미엄 기능으로 경험을 업그레이드하세요!</string>
-    <string name="SettingsBanner_PremiumTryFee">업그레이드</string>
     <!--Why Donate Page-->
     <!--Setting Subscription -->
-    <string name="SettingsSubscription_Active">활성</string>
-    <string name="SettingsSubscription_RestorePurchase">구매 복원</string>
-    <string name="SettingsSubscription_ManageSubscription">구독 관리</string>
     <string name="Period_Days">%s일</string>
     <!--Premium Screens-->
     <string name="Appearance_MarketsTab">마켓 탭</string>

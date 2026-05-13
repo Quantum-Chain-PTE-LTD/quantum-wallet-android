@@ -114,7 +114,7 @@ class QuantumAccountManager(
                         if (eventInstance !is TransferEventInstance) continue
 
                         if (eventInstance.to == address) {
-                            val tokenType = TokenType.Eip20(eventInstance.contractAddress.hex)
+                            val tokenType = TokenType.Qrc20(eventInstance.contractAddress.hex)
 
                             if (decoration.fromAddress == address) {
                                 foundTokens.add(FoundToken(tokenType, eventInstance.tokenInfo))
@@ -210,7 +210,7 @@ class QuantumAccountManager(
         val dataProvider = DataProvider(quantumKit)
 
         val requests = newTokenInfos.map { tokenInfo ->
-            val contractAddress = (tokenInfo.type as? TokenType.Eip20)?.let {
+            val contractAddress = (tokenInfo.type as? TokenType.Qrc20)?.let {
                 try {
                     Address(it.address)
                 } catch (ex: Exception) {

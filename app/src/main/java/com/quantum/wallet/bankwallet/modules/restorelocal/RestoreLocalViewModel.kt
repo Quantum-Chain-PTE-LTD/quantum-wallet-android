@@ -54,7 +54,7 @@ class RestoreLocalViewModel(
         fileName?.let { name ->
             return@lazy name
                 .replace(".json", "")
-                .replace("UW_Backup_", "")
+                .replace("QW_Backup_", "")
                 .replace("_", " ")
         }
         accountFactory.getNextAccountName()

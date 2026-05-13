@@ -292,8 +292,6 @@
     <string name="Market_Sorting_LowestCap">市值由低到高</string>
     <string name="Market_Filters_Select">選擇 %d</string>
     <!--Vaults-->
-    <string name="Market_Vaults_WantToUnlockPremium">探索最好的 DeFi 标记返回，全部在一个地方。</string>
-    <string name="Market_Vaults_UnlockPremium">解锁高级版</string>
     <string name="Market_Vaults_Sorting_APY">最大APY</string>
     <string name="Market_Vaults_Sorting_TVL">最高TVL</string>
     <string name="Market_Vaults_Filter_AllAssets">所有资产</string>
@@ -412,8 +410,6 @@
     <string name="Send_Address_ErrorMessage_PhishingDetected_Description">您輸入的地址可能是欺詐性的。詐騙者通常會更改首尾字符。在繼續之前請仔細驗證完整地址，以避免損失。</string>
     <string name="Send_Address_ErrorMessage_BlacklistDetected_Description">您輸入的地址被標記為黑名單。向此地址進行交易可能導致損失或其他風險。繼續之前請驗證接收者的詳細信息。</string>
     <string name="Send_Address_ErrorMessage_SanctionDetected_Description">您輸入的地址被標記為受制裁。向此地址進行交易可能導致損失或其他風險。繼續之前請驗證接收者的詳細信息。</string>
-    <string name="AddressEnter_NeedSubscription_Title">注意！</string>
-    <string name="AddressEnter_NeedSubscription_Content">安全发送已关闭。您的转账可能会转到一个危险的地址，资金可能会丢失。</string>
     <string name="AddressEnter_Safe_Title">安全</string>
     <string name="AddressEnter_Safe_Content">地址已检查。未找到网络钓鱼、黑名单或制裁。可以安全使用。</string>
     <string name="Send_RiskyAddress">風險地址！</string>
@@ -787,7 +783,6 @@
     <string name="Settings_LaunchScreen">启动屏幕</string>
     <string name="Settings_LaunchScreen_Tip">选择默认打开哪个屏幕。</string>
     <string name="Settings_AppSettings">外观</string>
-    <string name="Settings_Subscription">訂閱</string>
     <string name="Settings_AutoLock">自动锁定</string>
     <string name="Settings_AutoLock_Description">在选定时间后自动锁定应用程序。</string>
     <string name="Settings_JoinUnstoppables">Be QUANTUM</string>
@@ -817,9 +812,6 @@
     <string name="SettingsAddressChecker_PyusdBlacklistDescription">提供一种方法来验证钱包地址是否是由 PayPal 发行的 PYUSD 黑名单上的。 在黑名单上的地址持有的资金可能被冻结和无法使用，主要是出于法律或安全考虑。 这个工具有助于确保交易更安全和符合客户关系管理系统。</string>
     <string name="SettingsAddressChecker_InvalidAddress">您输入的地址似乎是无效的。请重新检查轮胎或格式问题，然后重试。</string>
     <!--Banners-->
-    <string name="SettingsBanner_Premium">高級版</string>
-    <string name="SettingsBanner_PremiumBannerDescription">使用高級版功能升級您的體驗！</string>
-    <string name="SettingsBanner_PremiumTryFee">免費試用</string>
     <string name="SettingsBanner_GameDescription">通过测试，完成任务，赚取代币！</string>
     <string name="SettingsBanner_BePartOfTheFuture">成为私人融资未来的一部分</string>
     <string name="SettingsBanner_SupportTheProject">支持项目！</string>
@@ -842,10 +834,6 @@
     <string name="SettingsBanner_DonateEveryBitOfSupportMatters">每一点支持都很重要。</string>
     <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">通过支持Quantum Wallet，您可以帮助我们成长、改善和保持独立。</string>
     <!--Setting Subscription -->
-    <string name="SettingsSubscription_Active">已啟用</string>
-    <string name="SettingsSubscription_GetPremium">成为付费会员</string>
-    <string name="SettingsSubscription_RestorePurchase">恢復購買</string>
-    <string name="SettingsSubscription_ManageSubscription">管理訂閱</string>
     <string name="Period_Days">%s 天</string>
     <!--Premium Screens-->
     <string name="Appearance_SendScreen">已发送</string>

@@ -206,6 +206,23 @@ class CoinOverviewViewModel(
                         )
                     }
 
+                    is TokenType.Qrc20 -> {
+                        val inWallet =
+                            canAddToWallet && activeWallets.any { it.token == token }
+                        items.add(
+                            TokenVariant(
+                                value = tokenType.address.shorten(),
+                                copyValue = tokenType.address,
+                                imgUrl = token.blockchainType.imageUrl,
+                                explorerUrl = token.blockchain.eip20TokenUrl(tokenType.address),
+                                name = token.blockchain.name,
+                                token = token,
+                                canAddToWallet = canAddToWallet,
+                                inWallet = inWallet
+                            )
+                        )
+                    }
+
                     is TokenType.Spl -> {
                         val inWallet =
                             canAddToWallet && activeWallets.any { it.token == token }

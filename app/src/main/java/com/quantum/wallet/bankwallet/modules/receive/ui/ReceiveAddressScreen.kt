@@ -53,8 +53,6 @@ import androidx.core.graphics.drawable.toBitmap
 import io.github.alexzhirkevich.qrose.options.QrBallShape
 import io.github.alexzhirkevich.qrose.options.QrErrorCorrectionLevel
 import io.github.alexzhirkevich.qrose.options.QrFrameShape
-import io.github.alexzhirkevich.qrose.options.QrLogoPadding
-import io.github.alexzhirkevich.qrose.options.QrLogoShape
 import io.github.alexzhirkevich.qrose.options.QrPixelShape
 import io.github.alexzhirkevich.qrose.options.roundCorners
 import io.github.alexzhirkevich.qrose.rememberQrCodePainter
@@ -287,20 +285,9 @@ fun ReceiveAddressScreen(
 
 @Composable
 private fun QrCodeImage(address: String) {
-    val logoPainter: Painter =
-        adaptiveIconPainterResource(
-            id = R.mipmap.launcher_main,
-            fallbackDrawable = R.drawable.launcher_main_preview
-        )
     val qrcodePainter: Painter =
         rememberQrCodePainter(address) {
             errorCorrectionLevel = QrErrorCorrectionLevel.MediumHigh
-            logo {
-                painter = logoPainter
-                padding = QrLogoPadding.Natural(.3f)
-                shape = QrLogoShape.roundCorners(0.8f)
-                size = 0.2f
-            }
 
             shapes {
                 ball = QrBallShape.roundCorners(.25f)

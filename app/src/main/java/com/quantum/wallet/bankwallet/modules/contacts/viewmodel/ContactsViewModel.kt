@@ -27,7 +27,7 @@ class ContactsViewModel(
         get() = repository.asJsonString
 
     val backupFileName: String
-        get() = "UW_Contacts_${System.currentTimeMillis() / 1000}.json"
+        get() = "QW_Contacts_${System.currentTimeMillis() / 1000}.json"
 
     init {
         viewModelScope.launch {

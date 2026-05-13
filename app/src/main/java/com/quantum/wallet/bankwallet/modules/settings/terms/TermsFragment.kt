@@ -125,7 +125,7 @@ fun TermsScreen(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = 24.dp),
-                        title = stringResource(R.string.Button_Next),
+                        title = stringResource(R.string.Button_IAgree),
                         onClick = { viewModel.onAgreeClick() },
                         enabled = viewModel.buttonEnabled
                     )

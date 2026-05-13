@@ -293,8 +293,6 @@
     <string name="Market_Sorting_LowestCap">Menor capitalização</string>
     <string name="Market_Filters_Select">Selecionado %d</string>
     <!--Vaults-->
-    <string name="Market_Vaults_WantToUnlockPremium">Explore os melhores retornos no DeFi, tudo em um só lugar.</string>
-    <string name="Market_Vaults_UnlockPremium">Desbloquear Premium</string>
     <string name="Market_Vaults_Sorting_APY">Maior APY</string>
     <string name="Market_Vaults_Sorting_TVL">Maior TVL</string>
     <string name="Market_Vaults_Filter_AllAssets">Todas as mídias</string>
@@ -413,8 +411,6 @@
     <string name="Send_Address_ErrorMessage_PhishingDetected_Description">O endereço que você digitou pode ser fraudulento. Os golpistas frequentemente alteram os primeiros e últimos caracteres. Verifique o endereço completo com atenção antes de prosseguir para evitar perdas.</string>
     <string name="Send_Address_ErrorMessage_BlacklistDetected_Description">O endereço digitado está marcado na lista negra. As transações para este endereço podem levar a perda ou outros riscos. Por favor, verifique os dados do destinatário antes de prosseguir.</string>
     <string name="Send_Address_ErrorMessage_SanctionDetected_Description">O endereço que você digitou está marcado como sancionado. As transações para este endereço podem levar a perda ou outros riscos. Por favor, verifique os dados do destinatário antes de prosseguir.</string>
-    <string name="AddressEnter_NeedSubscription_Title">Atenção!</string>
-    <string name="AddressEnter_NeedSubscription_Content">O envio seguro está desativado. A sua transferência pode ir para um endereço de risco e o dinheiro pode ser perdido.</string>
     <string name="AddressEnter_Safe_Title">Segura</string>
     <string name="AddressEnter_Safe_Content">Endereço verificado. Nenhum phishing, lista negra ou sanções foram encontradas. É seguro de usar.</string>
     <string name="Send_RiskyAddress">Endereço Arriscado!</string>
@@ -788,7 +784,6 @@
     <string name="Settings_LaunchScreen">Tela Inicial</string>
     <string name="Settings_LaunchScreen_Tip">Escolha em qual tela o aplicativo será aberto por padrão.</string>
     <string name="Settings_AppSettings">Aparência</string>
-    <string name="Settings_Subscription">Assinatura</string>
     <string name="Settings_AutoLock">Auto-Bloqueio</string>
     <string name="Settings_AutoLock_Description">Bloqueia automaticamente o aplicativo após um tempo selecionado.</string>
     <string name="Settings_JoinUnstoppables">Seja QUANTUM</string>
@@ -818,9 +813,6 @@
     <string name="SettingsAddressChecker_PyusdBlacklistDescription">Fornece uma maneira de verificar se um endereço de carteira está na lista negra por PYUSD, emitido pelo PayPal. Os fundos mantidos em endereços na lista negra podem ser congelados e inutilizáveis, normalmente devido a questões legais ou de segurança. Esta ferramenta ajuda a garantir transações mais seguras e compatíveis com o PYUSD.</string>
     <string name="SettingsAddressChecker_InvalidAddress">O endereço digitado parece ser inválido. Por favor, verifique se há erros de digitação ou problemas de formatação e tente novamente.</string>
     <!--Banners-->
-    <string name="SettingsBanner_Premium">Prêmio</string>
-    <string name="SettingsBanner_PremiumBannerDescription">Melhore a sua experiência com recursos Premium!</string>
-    <string name="SettingsBanner_PremiumTryFee">Teste GRÁTIS</string>
     <string name="SettingsBanner_GameDescription">Passe pelos testes, complete as tarefas e ganhe tokens!</string>
     <string name="SettingsBanner_BePartOfTheFuture">Faça parte do futuro das finanças privadas</string>
     <string name="SettingsBanner_SupportTheProject">Apoie o Projeto!</string>
@@ -843,10 +835,6 @@
     <string name="SettingsBanner_DonateEveryBitOfSupportMatters">Todos os apoios são importantes.</string>
     <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">Ao apoiar Quantum Wallet, você nos ajuda a crescer, melhorar e permanecer independente.</string>
     <!--Setting Subscription -->
-    <string name="SettingsSubscription_Active">Ativo</string>
-    <string name="SettingsSubscription_GetPremium">Obter Premium</string>
-    <string name="SettingsSubscription_RestorePurchase">Restaurar Compra</string>
-    <string name="SettingsSubscription_ManageSubscription">Gerenciar Assinatura</string>
     <string name="Period_Days">%s dias</string>
     <!--Premium Screens-->
     <string name="Appearance_SendScreen">ENVIAR TELA</string>

@@ -6,6 +6,8 @@ import com.quantum.wallet.bankwallet.core.customCoinUid
 import com.quantum.wallet.bankwallet.entities.Account
 import com.quantum.wallet.bankwallet.entities.EnabledWallet
 import com.quantum.wallet.bankwallet.entities.Wallet
+import io.horizontalsystems.marketkit.models.Blockchain
+import io.horizontalsystems.marketkit.models.BlockchainType
 import io.horizontalsystems.marketkit.models.Coin
 import io.horizontalsystems.marketkit.models.Token
 import io.horizontalsystems.marketkit.models.TokenQuery
@@ -14,6 +16,17 @@ class WalletStorage(
     private val marketKit: MarketKitWrapper,
     private val storage: IEnabledWalletStorage,
 ) : IWalletStorage {
+
+    private val quantumChainBlockchain = Blockchain(
+        type = BlockchainType.QuantumChain,
+        name = "Quantum Chain",
+        eip3091url = null,
+    )
+
+    private fun fallbackBlockchain(blockchainType: BlockchainType): Blockchain? = when (blockchainType) {
+        BlockchainType.QuantumChain -> quantumChainBlockchain
+        else -> null
+    }
 
     override fun wallets(account: Account): List<Wallet> {
         val enabledWallets = storage.enabledWallets(account.id)
@@ -33,7 +46,9 @@ class WalletStorage(
 
             if (enabledWallet.coinName != null && enabledWallet.coinCode != null && enabledWallet.coinDecimals != null) {
                 val coinUid = tokenQuery.customCoinUid
-                val blockchain = blockchains.firstOrNull { it.uid == tokenQuery.blockchainType.uid } ?: return@mapNotNull null
+                val blockchain = blockchains.firstOrNull { it.uid == tokenQuery.blockchainType.uid }
+                    ?: fallbackBlockchain(tokenQuery.blockchainType)
+                    ?: return@mapNotNull null
 
                 val token = Token(
                     coin = Coin(

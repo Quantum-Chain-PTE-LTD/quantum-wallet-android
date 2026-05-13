@@ -212,6 +212,7 @@ class AdapterFactory(
                 else -> getEip20Adapter(wallet, tokenType.address)
             }
         }
+        is TokenType.Qrc20 -> getQip20Adapter(wallet, tokenType.address)
         is TokenType.Spl -> getSplAdapter(wallet, tokenType.address)
         is TokenType.Jetton -> getJettonAdapter(wallet, tokenType.address)
         is TokenType.Asset -> getStellarAssetAdapter(wallet, tokenType.code, tokenType.issuer)

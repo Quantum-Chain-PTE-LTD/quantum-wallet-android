@@ -71,6 +71,9 @@ class AddTokenService(
             BlockchainType.Solana -> {
                 AddSolanaTokenBlockchainService.getInstance(blockchain, App.appConfigProvider.solanaJupiterApiKey)
             }
+            BlockchainType.QuantumChain -> {
+                AddQuantumTokenBlockchainService.getInstance(blockchain)
+            }
             else -> AddEvmTokenBlockchainService.getInstance(blockchain)
         }
 

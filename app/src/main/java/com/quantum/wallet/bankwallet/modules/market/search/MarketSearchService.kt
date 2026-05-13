@@ -1,6 +1,7 @@
 package com.quantum.wallet.bankwallet.modules.market.search
 
 import com.quantum.wallet.bankwallet.core.managers.MarketKitWrapper
+import io.horizontalsystems.marketkit.models.BlockchainType
 import io.horizontalsystems.marketkit.models.FullCoin
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,7 +41,13 @@ class MarketSearchService(private val marketKit: MarketKitWrapper) {
         results = if (query.isBlank()) {
             listOf()
         } else {
-            marketKit.fullCoins(query)
+            marketKit.fullCoins(query).filter { fullCoin ->
+                // Exclude the Quantum Chain native coin and coins whose tokens
+                // exist exclusively on the Quantum Chain blockchain.
+                fullCoin.coin.uid != "quantum-chain" &&
+                    (fullCoin.tokens.isEmpty() ||
+                        fullCoin.tokens.any { it.blockchainType != BlockchainType.QuantumChain })
+            }
         }
     }
 

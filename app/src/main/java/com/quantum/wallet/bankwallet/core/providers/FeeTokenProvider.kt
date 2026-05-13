@@ -13,6 +13,7 @@ class FeeTokenProvider(
     fun feeTokenData(token: Token): Pair<Token, String>? {
         val tokenQuery = when (token.type) {
             is TokenType.Eip20,
+            is TokenType.Qrc20,
             is TokenType.Spl,
             is TokenType.Jetton,
             is TokenType.Asset,

@@ -940,7 +940,7 @@
     <string name="Settings_BaseCurrency">Base Currency</string>
     <string name="Settings_Language">Language</string>
     <string name="Settings_Theme">Theme</string>
-    <string name="Settings_Terms">Security Terms</string>
+    <string name="Settings_Terms">Terms</string>
     <string name="Settings_Privacy">Privacy</string>
     <string name="Settings_ShareThisWallet">Tell Friends</string>
     <string name="Settings_InfoTitleWithVersion" translatable="false">Quantum Wallet %s</string>
@@ -1170,8 +1170,11 @@
 
     <!--Setting_Terms-->
 
-    <string name="SettingsTerms_Backup">Securely back up the recovery phrase for each wallet. It\'s the only way to regain access to your funds if the app is deleted or malfunctions. No one can restore it for you.</string>
-    <string name="SettingsTerms_DisablingPin">Disabling your smartphone\'s unlock PIN (or passcode) wipes all wallets from the app. You\'ll need your recovery phrases to restore access.</string>
+    <string name="SettingsTerms_Backup">Securely backup recovery phrases for each wallet. It\'s the only way to regain access to funds if the app malfunctions.</string>
+    <string name="SettingsTerms_PrivateKeys">The wallet recovery phrases are randomly generated on the device during setup and are not stored elsewhere.</string>
+    <string name="SettingsTerms_DisablingPin">Disabling unlock PIN (code) on the smartphone deletes all wallets from the app. Recovery phrases will be needed to restore access to funds.</string>
+    <string name="SettingsTerms_JailBraking">Jailbreaking (rooting), using outdated OS, and installing apps from unknown sources may endanger the safety of funds.</string>
+    <string name="SettingsTerms_Bugs">There may be undiscovered software issues in the code powering this app which may cause the app to malfunction.</string>
     <string name="SettingsTerms_PrivacyNotice">The app doesn\'t spy or collect data about your balances or transactions - we don\'t even know how many people use it. It only tracks anonymous usage patterns (pages opened, buttons tapped) to improve usability. You can turn this off in Settings → Privacy</string>
     <string name="SettingsTerms_WeNotHoldingYourAssets">We do not hold your assets, access your private keys, or execute transactions on your behalf. The app does not provide brokerage, exchange, custody, escrow, or money-transmission services. All transactions are initiated, signed, and broadcast directly by you to public blockchain networks.</string>
     <string name="SettingsTerms_MonetizationDisclosure">As part of its monetization model, the app earns small commissions from DEX swaps executed within the wallet. This helps us stay independent, open source, and free of VC money.</string>

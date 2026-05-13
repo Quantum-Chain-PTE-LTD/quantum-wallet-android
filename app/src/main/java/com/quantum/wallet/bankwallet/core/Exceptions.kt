@@ -92,20 +92,10 @@ sealed class EvmAddressError : Throwable() {
 val Throwable.convertedError: Throwable
     get() = when (this) {
         is JsonRpc.ResponseError.RpcError -> {
-            if (error.message.contains("insufficient funds for transfer") || error.message.contains(
-                    "gas required exceeds allowance"
-                )
-            ) {
-                EvmError.InsufficientBalanceWithFee
-            } else if (error.message.contains("max fee per gas less than block base fee") ||
-                error.message.contains("fee cap less than block base fee")
-            ) {
-                EvmError.LowerThanBaseGasLimit
-            } else if (error.message.contains("execution reverted")) {
-                EvmError.ExecutionReverted(error.message)
-            } else {
-                EvmError.RpcError(error.message)
-            }
+            convertRpcErrorMessage(error.message)
+        }
+        is com.quantum.quantumkit.api.jsonrpc.JsonRpc.ResponseError.RpcError -> {
+            convertRpcErrorMessage(error.message)
         }
         is AddressValidator.AddressValidationException -> {
             EvmAddressError.InvalidAddress
@@ -128,3 +118,20 @@ val Throwable.convertedError: Throwable
         }
         else -> this
     }
+
+private fun convertRpcErrorMessage(message: String): Throwable {
+    return if (message.contains("insufficient funds for transfer") ||
+        message.contains("insufficient funds for gas") ||
+        message.contains("gas required exceeds allowance")
+    ) {
+        EvmError.InsufficientBalanceWithFee
+    } else if (message.contains("max fee per gas less than block base fee") ||
+        message.contains("fee cap less than block base fee")
+    ) {
+        EvmError.LowerThanBaseGasLimit
+    } else if (message.contains("execution reverted")) {
+        EvmError.ExecutionReverted(message)
+    } else {
+        EvmError.RpcError(message)
+    }
+}

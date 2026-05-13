@@ -254,6 +254,8 @@ class App : CoreApp(), WorkConfiguration.Provider, ImageLoaderFactory {
             hsApiBaseUrl = appConfig.marketApiBaseUrl,
             hsApiKey = appConfig.marketApiKey,
             newsApiKey = appConfig.newsApiKey,
+            qcApiBaseUrl = appConfig.quantumChainApiBaseUrl,
+            qcApiKey = appConfig.quantumChainApiKey,
         )
 
         priceManager = PriceManager(localStorage)

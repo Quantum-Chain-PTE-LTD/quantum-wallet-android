@@ -173,7 +173,9 @@ fun TokenBalanceScreen(
                 }
             }
 
-            if (uiState.balanceViewItem?.isWatchAccount == true) {
+            if (uiState.balanceViewItem?.isWatchAccount == true &&
+                uiState.balanceViewItem.wallet.token.blockchainType != BlockchainType.QuantumChain
+            ) {
                 add(
                     MenuItem(
                         icon = R.drawable.ic_balance_chart_24,
@@ -804,20 +806,22 @@ private fun ButtonsRow(
     onClickReceive: () -> Unit
 ) {
     BalanceButtonsGroup {
-        BalanceActionButton(
-            variant = ButtonVariant.Primary,
-            icon = R.drawable.ic_balance_chart_24,
-            title = stringResource(R.string.Coin_Chart),
-            enabled = !viewItem.wallet.token.isCustom,
-            onClick = {
-                val coinUid = viewItem.wallet.coin.uid
-                val arguments = CoinFragment.Input(coinUid)
+        if (viewItem.wallet.token.blockchainType != BlockchainType.QuantumChain) {
+            BalanceActionButton(
+                variant = ButtonVariant.Primary,
+                icon = R.drawable.ic_balance_chart_24,
+                title = stringResource(R.string.Coin_Chart),
+                enabled = !viewItem.wallet.token.isCustom,
+                onClick = {
+                    val coinUid = viewItem.wallet.coin.uid
+                    val arguments = CoinFragment.Input(coinUid)
 
-                navController.slideFromRight(R.id.coinFragment, arguments)
+                    navController.slideFromRight(R.id.coinFragment, arguments)
 
-                stat(page = StatPage.TokenPage, event = StatEvent.OpenCoin(coinUid))
-            },
-        )
+                    stat(page = StatPage.TokenPage, event = StatEvent.OpenCoin(coinUid))
+                },
+            )
+        }
         BalanceActionButton(
             variant = ButtonVariant.Secondary,
             icon = R.drawable.ic_arrow_down_24,

@@ -55,7 +55,7 @@ class QuantumTransactionsAdapter(
 
     override val additionalTokenQueries: List<TokenQuery>
         get() = quantumKit.getTagTokenContractAddresses().map { address ->
-            TokenQuery(quantumKitWrapper.blockchainType, TokenType.Eip20(address))
+            TokenQuery(quantumKitWrapper.blockchainType, TokenType.Qrc20(address))
         }
 
     override suspend fun getTransactions(
@@ -110,7 +110,8 @@ class QuantumTransactionsAdapter(
 
     private fun coinTagName(token: Token) = when (val type = token.type) {
         TokenType.Native -> TransactionTag.QVM_COIN
-        is TokenType.Eip20 -> type.address
+        is TokenType.Qrc20 -> type.address.lowercase()
+        is TokenType.Eip20 -> type.address.lowercase()
         else -> ""
     }
 
@@ -144,7 +145,13 @@ class QuantumTransactionsAdapter(
         }
 
         if (!address.isNullOrBlank()) {
-            add(listOf("from_$address", "to_$address"))
+            val lower = address.lowercase()
+            add(listOf("from_$lower", "to_$lower"))
         }
+    }.also { filters ->
+        android.util.Log.i(
+            "QuantumTxAdapter",
+            "getFilters token=${token?.coin?.code} type=$transactionType filters=$filters"
+        )
     }
 }

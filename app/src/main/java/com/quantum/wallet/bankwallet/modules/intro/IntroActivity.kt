@@ -60,7 +60,7 @@ private fun SplashScreen() {
     ) {
         Image(
             modifier = Modifier.size(200.dp),
-            painter = painterResource(R.drawable.logo_quantum),
+            painter = painterResource(R.drawable.ic_company_logo),
             contentDescription = null,
         )
     }

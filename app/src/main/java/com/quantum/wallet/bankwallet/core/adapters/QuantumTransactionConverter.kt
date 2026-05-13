@@ -206,7 +206,7 @@ class QuantumTransactionConverter(
     }
 
     private fun getQip20Value(tokenAddress: Address, amount: BigInteger, negative: Boolean, tokenInfo: TokenInfo? = null): TransactionValue {
-        val query = TokenQuery(quantumKitWrapper.blockchainType, TokenType.Eip20(tokenAddress.hex))
+        val query = TokenQuery(quantumKitWrapper.blockchainType, TokenType.Qrc20(tokenAddress.hex))
         val token = coinManager.getToken(query)
 
         return when {

@@ -10,8 +10,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -610,27 +612,67 @@ private fun copyAddressAndShowSuccess(
 }
 
 @Composable
-fun BalanceActionButton(
+fun RowScope.BalanceActionButton(
     variant: ButtonVariant = ButtonVariant.Primary,
     @DrawableRes icon: Int,
     title: String,
     enabled: Boolean = true,
     onClick: () -> Unit
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+    val backgroundColor: Color
+    val contentColor: Color
+    val disabledBackgroundColor: Color
+    val disabledContentColor: Color
+
+    when (variant) {
+        ButtonVariant.Primary -> {
+            backgroundColor = ComposeAppTheme.colors.jacob
+            contentColor = ComposeAppTheme.colors.lawrence
+            disabledBackgroundColor = ComposeAppTheme.colors.blade
+            disabledContentColor = ComposeAppTheme.colors.andy
+        }
+        ButtonVariant.Secondary -> {
+            backgroundColor = ComposeAppTheme.colors.leah
+            contentColor = ComposeAppTheme.colors.lawrence
+            disabledBackgroundColor = ComposeAppTheme.colors.blade
+            disabledContentColor = ComposeAppTheme.colors.andy
+        }
+    }
+
+    androidx.compose.material.Button(
+        modifier = Modifier
+            .weight(1f)
+            .height(52.dp),
+        shape = RoundedCornerShape(16.dp),
+        onClick = onClick,
+        enabled = enabled,
+        contentPadding = PaddingValues(horizontal = 12.dp),
+        elevation = null,
+        colors = androidx.compose.material.ButtonDefaults.buttonColors(
+            backgroundColor = backgroundColor,
+            contentColor = contentColor,
+            disabledBackgroundColor = disabledBackgroundColor,
+            disabledContentColor = disabledContentColor,
+        ),
     ) {
-        HSIconButton(
-            variant = variant,
-            icon = painterResource(icon),
-            enabled = enabled,
-            onClick = onClick
-        )
-        VSpacer(8.dp)
-        caption_grey(
-            text = title,
-            maxLines = 1
-        )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Icon(
+                modifier = Modifier.size(20.dp),
+                painter = painterResource(icon),
+                contentDescription = null,
+            )
+            androidx.compose.foundation.layout.Spacer(modifier = Modifier.size(6.dp))
+            Text(
+                text = title,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                style = ComposeAppTheme.typography.captionSB,
+            )
+        }
     }
 }
 

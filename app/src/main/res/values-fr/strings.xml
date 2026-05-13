@@ -293,8 +293,6 @@
     <string name="Market_Sorting_LowestCap">Casquette la plus basse</string>
     <string name="Market_Filters_Select">Sélectionnez %d</string>
     <!--Vaults-->
-    <string name="Market_Vaults_WantToUnlockPremium">Explorez les meilleurs retours de staking DeFI, tous en un seul endroit.</string>
-    <string name="Market_Vaults_UnlockPremium">Débloquer Premium</string>
     <string name="Market_Vaults_Sorting_APY">Meilleur APY</string>
     <string name="Market_Vaults_Sorting_TVL">TVL le plus haut</string>
     <string name="Market_Vaults_Filter_AllAssets">Toutes les ressources</string>
@@ -413,8 +411,6 @@
     <string name="Send_Address_ErrorMessage_PhishingDetected_Description">L\'adresse que vous avez saisie peut être frauduleuse. Les fraudeurs modifient souvent les premiers et les derniers caractères. Vérifiez soigneusement l\'adresse complète avant de procéder à la perte.</string>
     <string name="Send_Address_ErrorMessage_BlacklistDetected_Description">L\'adresse que vous avez saisie est marquée comme étant sur la liste noire. Les transactions à cette adresse peuvent entraîner des pertes ou d\'autres risques. Veuillez vérifier les coordonnées du destinataire avant de continuer.</string>
     <string name="Send_Address_ErrorMessage_SanctionDetected_Description">L\'adresse que vous avez saisie est marquée comme sanctionnée. Les transactions à cette adresse peuvent entraîner des pertes ou d\'autres risques. Veuillez vérifier les coordonnées du destinataire avant de continuer.</string>
-    <string name="AddressEnter_NeedSubscription_Title">Attention !</string>
-    <string name="AddressEnter_NeedSubscription_Content">L\'envoi sécurisé est désactivé. Votre transfert peut aller à une adresse risquée et les fonds peuvent être perdus.</string>
     <string name="AddressEnter_Safe_Title">Sûr</string>
     <string name="AddressEnter_Safe_Content">Adresse vérifiée. Aucune hameçonnage, liste noire ou sanctions trouvées. Elle est sécurisée à utiliser.</string>
     <string name="Send_RiskyAddress">Adresse risquée !</string>
@@ -788,7 +784,6 @@
     <string name="Settings_LaunchScreen">Lancer l\'écran</string>
     <string name="Settings_LaunchScreen_Tip">Choisissez l\'écran sur lequel l\'application s\'ouvre par défaut.</string>
     <string name="Settings_AppSettings">Apparence</string>
-    <string name="Settings_Subscription">Abonnement</string>
     <string name="Settings_AutoLock">Verrouillage automatique</string>
     <string name="Settings_AutoLock_Description">Verrouille automatiquement l\'application après une heure sélectionnée.</string>
     <string name="Settings_JoinUnstoppables">Rejoindre QUANTUMs</string>
@@ -818,9 +813,6 @@
     <string name="SettingsAddressChecker_PyusdBlacklistDescription">Fournit un moyen de vérifier si une adresse de portefeuille est blacklistée par PYUSD, émise par PayPal. Les fonds détenus à des adresses sur liste noire peuvent être gelés et inutilisables, généralement en raison de préoccupations d\'ordre juridique ou de sécurité. Cet outil aide à assurer des transactions plus sûres et conformes avec PYUSD.</string>
     <string name="SettingsAddressChecker_InvalidAddress">L\'adresse que vous avez saisie semble non valide. Veuillez vérifier les fautes de frappe ou les problèmes de formatage et réessayez.</string>
     <!--Banners-->
-    <string name="SettingsBanner_Premium">Premium</string>
-    <string name="SettingsBanner_PremiumBannerDescription">Améliorez votre expérience avec les fonctionnalités Premium!</string>
-    <string name="SettingsBanner_PremiumTryFee">Essayez GRATUITEMENT</string>
     <string name="SettingsBanner_GameDescription">Passez des tests, complétez des tâches et gagnez des jetons !</string>
     <string name="SettingsBanner_BePartOfTheFuture">Faire partie de l\'avenir de la finance privée</string>
     <string name="SettingsBanner_SupportTheProject">Soutenez le projet !</string>
@@ -843,10 +835,6 @@
     <string name="SettingsBanner_DonateEveryBitOfSupportMatters">Tous les éléments de soutien sont importants.</string>
     <string name="SettingsBanner_DonateBySupportingUnstoppableWalletYouHelpGrow">En prenant en charge Quantum Wallet, vous nous aidez à grandir, améliorer et rester indépendant.</string>
     <!--Setting Subscription -->
-    <string name="SettingsSubscription_Active">Actif</string>
-    <string name="SettingsSubscription_GetPremium">Devenez Premium</string>
-    <string name="SettingsSubscription_RestorePurchase">Restaurer l\'achat</string>
-    <string name="SettingsSubscription_ManageSubscription">Gérer l\'abonnement</string>
     <string name="Period_Days">%s jours</string>
     <!--Premium Screens-->
     <string name="Appearance_SendScreen">ENVOYER L\'ÉCRAN</string>

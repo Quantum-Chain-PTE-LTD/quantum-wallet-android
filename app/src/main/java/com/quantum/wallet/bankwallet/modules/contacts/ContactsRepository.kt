@@ -33,7 +33,7 @@ class ContactsRepository(
     private val logger = AppLogger("contacts")
 
     private val file: File
-        get() = File(App.instance.filesDir, "UW_Contacts.json")
+        get() = File(App.instance.filesDir, "QW_Contacts.json")
 
     val contacts: List<Contact>
         get() = contactsMap.map { it.value }.sortedBy { it.name }.toList()

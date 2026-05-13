@@ -73,7 +73,8 @@ class FullCoinsProvider(
             val customFullCoins = customTokens
                 .filter {
                     val type = it.type
-                    type is TokenType.Eip20 && type.address.contains(tmpQuery, true)
+                    (type is TokenType.Eip20 && type.address.contains(tmpQuery, true)) ||
+                        (type is TokenType.Qrc20 && type.address.contains(tmpQuery, true))
                 }
                 .map { it.fullCoin }
 

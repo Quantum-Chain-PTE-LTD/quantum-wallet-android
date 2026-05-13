@@ -132,6 +132,7 @@ class ManageWalletsService(
         is TokenType.Derived,
         is TokenType.AddressTyped,
         is TokenType.Eip20,
+        is TokenType.Qrc20,
         is TokenType.Spl,
         is TokenType.Jetton,
         is TokenType.Asset -> true

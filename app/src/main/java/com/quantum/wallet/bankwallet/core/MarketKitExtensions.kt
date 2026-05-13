@@ -39,6 +39,7 @@ val Token.isSupported: Boolean
 val Token.iconPlaceholder: Int
     get() = when (type) {
         is TokenType.Eip20 -> blockchainType.tokenIconPlaceholder
+        is TokenType.Qrc20 -> blockchainType.tokenIconPlaceholder
         else -> R.drawable.coin_placeholder
     }
 
@@ -55,6 +56,7 @@ val Token.protocolInfo: String
             parts.joinToString(" ")
         }
         is TokenType.Eip20,
+        is TokenType.Qrc20,
         is TokenType.Spl,
         is TokenType.Jetton -> protocolType ?: ""
         else -> ""
@@ -63,6 +65,7 @@ val Token.protocolInfo: String
 val Token.copyableTypeInfo: String?
     get() = when (val type = type) {
         is TokenType.Eip20 -> type.address
+        is TokenType.Qrc20 -> type.address
         is TokenType.Spl -> type.address
         is TokenType.Jetton -> type.address
         else -> null
@@ -92,6 +95,8 @@ val TokenQuery.protocolType: String?
                 else -> blockchainType.title
             }
         }
+
+        is TokenType.Qrc20 -> "QRC20"
 
         is TokenType.Jetton -> "JETTON"
         else -> blockchainType.title
@@ -145,7 +150,7 @@ val TokenQuery.isSupported: Boolean
             tokenType is TokenType.Native
         }
         BlockchainType.QuantumChain -> {
-            tokenType is TokenType.Native || tokenType is TokenType.Eip20
+            tokenType is TokenType.Native || tokenType is TokenType.Eip20 || tokenType is TokenType.Qrc20
         }
         is BlockchainType.Unsupported -> false
     }
@@ -177,7 +182,10 @@ val Blockchain.description: String
         else -> ""
     }
 
-fun Blockchain.eip20TokenUrl(address: String) = eip3091url?.replace("\$ref", address)
+fun Blockchain.eip20TokenUrl(address: String): String? = when (type) {
+    BlockchainType.QuantumChain -> "https://qntmscan.io/token/$address"
+    else -> eip3091url?.replace("\$ref", address)
+}
 
 fun Blockchain.jettonUrl(address: String) = "https://tonviewer.com/$address"
 fun Blockchain.assetUrl(code: String, issuer: String) = "https://stellar.expert/explorer/public/asset/$code-$issuer"

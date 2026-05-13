@@ -563,7 +563,6 @@
     <string name="Settings_RateUs">Bizi Değerlendirin</string>
     <string name="Settings_LaunchScreen">Başlangıç Ekranı</string>
     <string name="Settings_AppSettings">Görünüm</string>
-    <string name="Settings_Subscription">Abonelik</string>
     <string name="Settings_AutoLock">Otomatik kilit</string>
     <string name="Settings_JoinUnstoppables">Be QUANTUM</string>
     <string name="Settings_Donate">Bağış yapmak</string>
@@ -577,13 +576,8 @@
     <string name="SettingsSecurity_AutoLock_After1Hour">1 saat</string>
     <!--Address Checker-->
     <!--Banners-->
-    <string name="SettingsBanner_PremiumBannerDescription">Premium özelliklerle deneyiminizi yükseltin!</string>
-    <string name="SettingsBanner_PremiumTryFee">ÜCRETSİZ Deneyin</string>
     <!--Why Donate Page-->
     <!--Setting Subscription -->
-    <string name="SettingsSubscription_Active">Aktif</string>
-    <string name="SettingsSubscription_RestorePurchase">Satın Almayı Geri Yükle</string>
-    <string name="SettingsSubscription_ManageSubscription">Aboneliği Yönet</string>
     <string name="Period_Days">%s gün</string>
     <!--Premium Screens-->
     <string name="Appearance_AppIcon">UYGULAMA IKONLARI</string>

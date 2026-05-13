@@ -195,7 +195,7 @@ private fun SettingSections(
             add {
                 HsSettingCell(
                     R.string.Settings_AppSettings,
-                    R.drawable.logo_quantum,
+                    R.drawable.uw_logo_24,
                     onClick = {
                         navController.slideFromRight(R.id.appearanceFragment)
 
@@ -390,17 +390,13 @@ private fun SettingsFooter(appVersion: String, companyWebPage: String) {
         )
         Image(
             modifier = Modifier
-                .padding(top = 32.dp)
+                .padding(top = 32.dp, bottom = 32.dp)
                 .size(32.dp)
                 .clickable {
                     LinkHelper.openLinkInAppBrowser(context, companyWebPage)
                 },
             painter = painterResource(id = R.drawable.ic_company_logo),
             contentDescription = null,
-        )
-        caption_grey(
-            modifier = Modifier.padding(top = 12.dp, bottom = 32.dp),
-            text = stringResource(R.string.Settings_CompanyName),
         )
     }
 }

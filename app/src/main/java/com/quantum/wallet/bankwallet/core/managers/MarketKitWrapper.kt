@@ -6,15 +6,21 @@ import com.quantum.wallet.bankwallet.core.NoAuthTokenException
 import com.quantum.wallet.bankwallet.core.customCoinPrefix
 import io.horizontalsystems.marketkit.MarketKit
 import io.horizontalsystems.marketkit.SyncInfo
+import io.horizontalsystems.marketkit.models.Blockchain
 import io.horizontalsystems.marketkit.models.BlockchainType
 import io.horizontalsystems.marketkit.models.CoinPrice
+import io.horizontalsystems.marketkit.models.FullCoin
 import io.horizontalsystems.marketkit.models.HsPeriodType
 import io.horizontalsystems.marketkit.models.HsPointTimePeriod
 import io.horizontalsystems.marketkit.models.HsTimePeriod
 import io.horizontalsystems.marketkit.models.MarketInfo
+import io.horizontalsystems.marketkit.models.MarketOverview
 import io.horizontalsystems.marketkit.models.NftTopCollection
 import io.horizontalsystems.marketkit.models.Stock
+import io.horizontalsystems.marketkit.models.Token
 import io.horizontalsystems.marketkit.models.TokenQuery
+import io.horizontalsystems.marketkit.models.TopMovers
+import io.horizontalsystems.marketkit.models.TopPlatform
 import io.horizontalsystems.marketkit.models.Vault
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -22,11 +28,48 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.math.BigDecimal
 
+// Quantum Wallet hides Quantum Chain coins/tokens from market data so that the in-app
+// market views never reference the home blockchain. The user's own QC wallet flows
+// (balance, send, receive) do not depend on MarketKitWrapper and are unaffected.
+private val Blockchain.isQuantumChain: Boolean
+    get() = type == BlockchainType.QuantumChain
+
+private val Token.isQuantumChain: Boolean
+    get() = blockchain.isQuantumChain
+
+private val TopPlatform.isQuantumChain: Boolean
+    get() = blockchain.isQuantumChain
+
+private fun FullCoin.withoutQuantumChain(): FullCoin? {
+    val filtered = tokens.filterNot { it.isQuantumChain }
+    return when {
+        filtered.isEmpty() -> null
+        filtered.size == tokens.size -> this
+        else -> copy(tokens = filtered)
+    }
+}
+
+private fun MarketInfo.withoutQuantumChain(): MarketInfo? {
+    val filteredFullCoin = fullCoin.withoutQuantumChain() ?: return null
+    return if (filteredFullCoin === fullCoin) this else copy(fullCoin = filteredFullCoin)
+}
+
+// Synthetic Blockchain entry for Quantum Chain. MarketKit's database does not contain
+// the home blockchain, so wallet storage / lookups (e.g. WalletStorage reconstructing
+// custom QRC20 wallets, contacts, settings) fall back to this hardcoded value.
+private val quantumChainBlockchain: Blockchain = Blockchain(
+    type = BlockchainType.QuantumChain,
+    name = "Quantum Chain",
+    eip3091url = null
+)
+
 class MarketKitWrapper(
     context: Context,
     hsApiBaseUrl: String,
     hsApiKey: String,
     newsApiKey: String,
+    qcApiBaseUrl: String,
+    qcApiKey: String,
 ) {
 
     private val marketKit: MarketKit by lazy {
@@ -34,7 +77,9 @@ class MarketKitWrapper(
             context = context,
             hsApiBaseUrl = hsApiBaseUrl,
             hsApiKey = hsApiKey,
-            newsApiKey = newsApiKey
+            newsApiKey = newsApiKey,
+            qcApiBaseUrl = qcApiBaseUrl,
+            qcApiKey = qcApiKey,
         )
     }
 
@@ -46,40 +91,60 @@ class MarketKitWrapper(
     val fullCoinsUpdatedObservable: Observable<Unit>
         get() = marketKit.fullCoinsUpdatedObservable
 
-    fun topFullCoins(limit: Int = 20) = marketKit.topFullCoins(limit)
+    fun topFullCoins(limit: Int = 20): List<FullCoin> =
+        marketKit.topFullCoins(limit)
 
-    fun fullCoins(filter: String, limit: Int = 20) = marketKit.fullCoins(filter, limit)
+    fun fullCoins(filter: String, limit: Int = 20): List<FullCoin> =
+        marketKit.fullCoins(filter, limit)
 
-    fun fullCoins(coinUids: List<String>) = marketKit.fullCoins(coinUids)
+    fun fullCoins(coinUids: List<String>): List<FullCoin> =
+        marketKit.fullCoins(coinUids)
 
-    fun fullCoinsByCoinCode(coinCodes: List<String>) = marketKit.fullCoinsByCoinCodes(coinCodes)
+    fun fullCoinsByCoinCode(coinCodes: List<String>): List<FullCoin> =
+        marketKit.fullCoinsByCoinCodes(coinCodes)
 
     fun allCoins() = marketKit.allCoins()
 
-    fun token(query: TokenQuery) = marketKit.token(query)
+    fun token(query: TokenQuery): Token? = marketKit.token(query)
 
-    fun tokens(queries: List<TokenQuery>) = marketKit.tokens(queries)
+    fun tokens(queries: List<TokenQuery>): List<Token> = marketKit.tokens(queries)
 
-    fun tokens(reference: String) = marketKit.tokens(reference)
+    fun tokens(reference: String): List<Token> = marketKit.tokens(reference)
 
-    fun tokens(blockchainType: BlockchainType, filter: String, limit: Int = 20) = marketKit.tokens(blockchainType, filter, limit)
+    fun tokens(blockchainType: BlockchainType, filter: String, limit: Int = 20): List<Token> {
+        if (blockchainType == BlockchainType.QuantumChain) return emptyList()
+        return marketKit.tokens(blockchainType, filter, limit)
+    }
 
-    fun allBlockchains() = marketKit.allBlockchains()
+    fun allBlockchains(): List<Blockchain> =
+        marketKit.allBlockchains().filterNot { it.isQuantumChain }
 
-    fun blockchains(uids: List<String>) = marketKit.blockchains(uids)
+    fun blockchains(uids: List<String>): List<Blockchain> {
+        val result = marketKit.blockchains(uids).toMutableList()
+        if (BlockchainType.QuantumChain.uid in uids && result.none { it.type == BlockchainType.QuantumChain }) {
+            result.add(quantumChainBlockchain)
+        }
+        return result
+    }
 
-    fun blockchain(uid: String) = marketKit.blockchain(uid)
+    fun blockchain(uid: String): Blockchain? {
+        return marketKit.blockchain(uid)
+            ?: if (uid == BlockchainType.QuantumChain.uid) quantumChainBlockchain else null
+    }
 
-    fun marketInfosSingle(top: Int, currencyCode: String, defi: Boolean) = marketKit.marketInfosSingle(top, currencyCode, defi)
+    fun marketInfosSingle(top: Int, currencyCode: String, defi: Boolean): Single<List<MarketInfo>> =
+        marketKit.marketInfosSingle(top, currencyCode, defi).map { list -> list.mapNotNull { it.withoutQuantumChain() } }
 
     fun categoriesSingle() = marketKit.categoriesSingle()
 
-    fun advancedMarketInfosSingle(top: Int = 250, currencyCode: String) = marketKit.advancedMarketInfosSingle(top, currencyCode)
+    fun advancedMarketInfosSingle(top: Int = 250, currencyCode: String): Single<List<MarketInfo>> =
+        marketKit.advancedMarketInfosSingle(top, currencyCode).map { list -> list.mapNotNull { it.withoutQuantumChain() } }
 
     fun marketInfosSingle(coinUids: List<String>, currencyCode: String): Single<List<MarketInfo>> =
         marketKit.marketInfosSingle(coinUids.removeCustomCoins(), currencyCode)
 
-    fun marketInfosSingle(categoryUid: String, currencyCode: String) = marketKit.marketInfosSingle(categoryUid, currencyCode)
+    fun marketInfosSingle(categoryUid: String, currencyCode: String): Single<List<MarketInfo>> =
+        marketKit.marketInfosSingle(categoryUid, currencyCode).map { list -> list.mapNotNull { it.withoutQuantumChain() } }
 
     fun marketInfoOverviewSingle(
         coinUid: String,
@@ -100,7 +165,18 @@ class MarketKitWrapper(
     fun marketInfoGlobalTvlSingle(chain: String, currencyCode: String, timePeriod: HsTimePeriod) =
         marketKit.marketInfoGlobalTvlSingle(chain, currencyCode, timePeriod)
 
-    fun defiMarketInfosSingle(currencyCode: String) = marketKit.defiMarketInfosSingle(currencyCode)
+    fun defiMarketInfosSingle(currencyCode: String) =
+        marketKit.defiMarketInfosSingle(currencyCode).map { list ->
+            list.mapNotNull { info ->
+                val fullCoin = info.fullCoin
+                if (fullCoin == null) {
+                    info
+                } else {
+                    val filtered = fullCoin.withoutQuantumChain() ?: return@mapNotNull null
+                    if (filtered === fullCoin) info else info.copy(fullCoin = filtered)
+                }
+            }
+        }
 
     // Categories
 
@@ -212,15 +288,31 @@ class MarketKitWrapper(
 
     // Overview
 
-    fun marketOverviewSingle(currencyCode: String) = marketKit.marketOverviewSingle(currencyCode)
+    fun marketOverviewSingle(currencyCode: String): Single<MarketOverview> =
+        marketKit.marketOverviewSingle(currencyCode).map { overview ->
+            overview.copy(
+                topPlatforms = overview.topPlatforms.filterNot { it.isQuantumChain }
+            )
+        }
 
     fun marketGlobalSingle(currencyCode: String) = marketKit.marketGlobalSingle(currencyCode)
 
     fun topPairsSingle(currencyCode: String, page: Int, limit: Int) = marketKit.topPairsSingle(currencyCode, page, limit)
 
-    fun topMoversSingle(currencyCode: String) = marketKit.topMoversSingle(currencyCode)
+    fun topMoversSingle(currencyCode: String): Single<TopMovers> =
+        marketKit.topMoversSingle(currencyCode).map { movers ->
+            movers.copy(
+                gainers100 = movers.gainers100.mapNotNull { it.withoutQuantumChain() },
+                gainers200 = movers.gainers200.mapNotNull { it.withoutQuantumChain() },
+                gainers300 = movers.gainers300.mapNotNull { it.withoutQuantumChain() },
+                losers100 = movers.losers100.mapNotNull { it.withoutQuantumChain() },
+                losers200 = movers.losers200.mapNotNull { it.withoutQuantumChain() },
+                losers300 = movers.losers300.mapNotNull { it.withoutQuantumChain() }
+            )
+        }
 
-    fun topCoinsMarketInfosSingle(top: Int, currencyCode: String) = marketKit.topCoinsMarketInfosSingle(top, currencyCode)
+    fun topCoinsMarketInfosSingle(top: Int, currencyCode: String): Single<List<MarketInfo>> =
+        marketKit.topCoinsMarketInfosSingle(top, currencyCode).map { list -> list.mapNotNull { it.withoutQuantumChain() } }
 
     // Chart Info
 
@@ -237,8 +329,8 @@ class MarketKitWrapper(
     fun globalMarketPointsSingle(currencyCode: String, timePeriod: HsTimePeriod) =
         marketKit.globalMarketPointsSingle(currencyCode, timePeriod)
 
-    fun topPlatformsSingle(currencyCode: String) =
-        marketKit.topPlatformsSingle(currencyCode)
+    fun topPlatformsSingle(currencyCode: String): Single<List<TopPlatform>> =
+        marketKit.topPlatformsSingle(currencyCode).map { list -> list.filterNot { it.isQuantumChain } }
 
     fun topPlatformMarketCapStartTimeSingle(platform: String) =
         marketKit.topPlatformMarketCapStartTimeSingle(platform)
@@ -249,8 +341,11 @@ class MarketKitWrapper(
         periodType: HsPeriodType
     ) = marketKit.topPlatformMarketCapPointsSingle(chain, currencyCode, periodType)
 
-    fun topPlatformCoinListSingle(chain: String, currencyCode: String) =
-        marketKit.topPlatformMarketInfosSingle(chain, currencyCode)
+    fun topPlatformCoinListSingle(chain: String, currencyCode: String): Single<List<MarketInfo>> {
+        if (chain == BlockchainType.QuantumChain.uid) return Single.just(emptyList())
+        return marketKit.topPlatformMarketInfosSingle(chain, currencyCode)
+            .map { list -> list.mapNotNull { it.withoutQuantumChain() } }
+    }
 
     fun getCoinSignalsSingle(coinUids: List<String>) = marketKit.coinsSignalsSingle(coinUids)
 
